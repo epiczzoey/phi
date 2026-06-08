@@ -1,19 +1,749 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>one-pager | week-1 · engineering | phi</title>
-    <link rel="stylesheet" href="../../../src/styles.css" />
-  </head>
-  <body>
-    <div class="page">
-      <p class="breadcrumb">
-        <a href="../../../">phi</a> / week-1 / engineering / one-pager
-      </p>
-      <h1 class="page-title">one-pager</h1>
-      <p class="page-status">status: coming soon</p>
-      <a class="back-link" href="../../../">← back to phi</a>
-    </div>
-  </body>
-</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>모래시계 </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="36d69aa4-f6df-8000-82e1-d7103aea4bcf" class="page sans"><header><h1 class="page-title" dir="auto">모래시계 </h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="36d69aa4-f6df-80b3-88de-e3060d6f623d" class=""><mark class="highlight-orange">Gap Analysis</mark></h1></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8079-bcd9-c68f921f8594" class=""><strong>전체 비교 요약</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8013-a3c0-d9d240db09db" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-800a-bb7b-fe8a0d04d35b"><th id="oinN" class="simple-table-header-color simple-table-header"><strong>비교 항목</strong></th><th id="l`lq" class="simple-table-header-color simple-table-header"><strong>나의 CT note</strong></th><th id="Wo[h" class="simple-table-header-color simple-table-header"><strong>AI 답변</strong></th><th id="W{Lw" class="simple-table-header-color simple-table-header" style="width:104.37847900390625px"><strong>Gap 성격</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f9-b651-cf00aa7eff18"><td id="oinN" class="">분해안</td><td id="l`lq" class="">모래시계의 물리적 구조와 작동 원리를 중심으로 분해</td><td id="Wo[h" class="">목적 → 시스템 → 수치화 가능한 요소로 계층화</td><td id="W{Lw" class="" style="width:104.37847900390625px">빠뜨려서 생긴 차이</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8011-b007-fe69875bf785"><td id="oinN" class="">패턴 인식</td><td id="l`lq" class="">동력원, 입력, 출력, 상태제어 등 핵심 패턴을 짧게 정리</td><td id="Wo[h" class="">반복 패턴, 변화 패턴, 관계 패턴을 표로 확장</td><td id="W{Lw" class="" style="width:104.37847900390625px">관점이 달라서 생긴 차이</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-800c-9979-c1d712497f6d"><td id="oinN" class="">추상화</td><td id="l`lq" class="">에너지, A→B 이동, 완료, 제어 중심으로 추상화</td><td id="Wo[h" class="">제한된 자원, 상태 변화, 진행률, 완료 조건 중심으로 추상화</td><td id="W{Lw" class="" style="width:104.37847900390625px">관점이 달라서 생긴 차이</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8038-b6a8-d7e0b675535e"><td id="oinN" class="">플로우차트</td><td id="l`lq" class="">A 시작 → B 완료 → 멈춤 → 다시시작 구조</td><td id="Wo[h" class="">대기, 작동, 일시정지, 완료, 재설정, 오류 상태로 확장</td><td id="W{Lw" class="" style="width:104.37847900390625px">빠뜨려서 생긴 차이</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f9-afcc-fc227dd04d98"><td id="oinN" class="">UI 적용 가능성</td><td id="l`lq" class="">추상화 개념은 있으나 UI 속성으로는 덜 명시됨</td><td id="Wo[h" class="">UI 상태, 조건, 속성, 피드백 구조로 변환</td><td id="W{Lw" class="" style="width:104.37847900390625px">빠뜨려서 생긴 차이</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80e5-9979-fab94664d1ff" class="bulleted-list"><li style="list-style-type:disc">분해단계<div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80c2-a85e-d33b78696502" class="bulleted-list"><li style="list-style-type:circle">고수준 목적 <code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80a0-9ba5-c89a1da8e334" class="bulleted-list"><li style="list-style-type:square">고수준의 목적은 측정과 사용자가 인식 가능하게 표시 하는 것을 추가하면 완성도가 더 높아짐 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8087-848c-f130515ddb45" class="bulleted-list"><li style="list-style-type:circle">중수준 구조 <code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8008-b678-f18a9a73c67c" class="bulleted-list"><li style="list-style-type:square">항목을 기능으로 그룹핑 하면 문서 퀄이 올라간다 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80b1-a6f1-ccb680585d1b" class="bulleted-list"><li style="list-style-type:circle">저수준 요소 <mark class="highlight-blue"><code>빠뜨림</code></mark><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-801b-9de2-ddde14fbdf19" class="bulleted-list"><li style="list-style-type:square">저수준 요소에는 문장 뿐 아니라 숫자나 단위로 측정 가능한 값이 들어 가야한다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80fa-a0bc-d9048e1bd21a" class="bulleted-list"><li style="list-style-type:circle"><strong>고수준은 목적, 중수준은 구조. 저수준은 요소 로 생각하면 명확하다. </strong></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8091-99dd-d8eef9b5f80e" class="bulleted-list"><li style="list-style-type:disc">패턴인식 단계<div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8028-ad65-d8c2c33afce3" class="bulleted-list"><li style="list-style-type:circle">동력원 <code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8044-b7c6-de3f1aad3510" class="bulleted-list"><li style="list-style-type:square">나는 물리적 입출력을, AI는 상태 변화와 UI 피드백을 보았다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80f7-81c9-e99574a3e44e" class="bulleted-list"><li style="list-style-type:circle">입력/출력 <code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80c3-8b70-f47fe0bbe6b8" class="bulleted-list"><li style="list-style-type:square">이 둘을 연결해 입력 → 상태변화 → 출력 표시로 정리가 가능 하다 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8011-bdcb-ecbb921b76ae" class="bulleted-list"><li style="list-style-type:circle">상태제어 <code>빠뜨림</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80ec-b8e3-dabec05e169d" class="bulleted-list"><li style="list-style-type:square">나의 상태제어의 아이디어는 좋지만 플로우 조건으로는 연결성이 부족하다. <div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8085-a4ce-fc5afeaa4039" class="bulleted-list"><li style="list-style-type:disc">if/else 조건으로 구체화 해야 한다. </li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80d1-a920-c9d53695bc56" class="bulleted-list"><li style="list-style-type:circle">변수관계 <mark class="highlight-blue"><code>빠뜨림</code></mark><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8044-8207-d03973a27797" class="bulleted-list"><li style="list-style-type:square">변수 목록을 관계 문장으로 변경하면 패턴인식이 더 강해진다. </li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8004-8778-ca008197a945" class="bulleted-list"><li style="list-style-type:disc">추상화 단계<div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80ea-93e5-c9457d4a9d67" class="bulleted-list"><li style="list-style-type:circle">핵심모델 <code>관점차이</code> <div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-800e-a0e5-eb21d53c8ba5" class="bulleted-list"><li style="list-style-type:square">나의 모델은 매우 간결하며 시각적 프로토타입에 적합하다. AI 모델은 디지털 UI 설계로 확장하기 좋다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80a3-9ec9-e5565a6f5b0e" class="bulleted-list"><li style="list-style-type:circle">물리요소 변환 <code>관점차이</code> <div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-803a-b6a9-e317ad2613c3" class="bulleted-list"><li style="list-style-type:square">사용자 모델은 “에너지”의 은유가 강하고, AI 모델은 구현 가능한 속성명이 강하다. 프로젝트 목적이 UI 라면 AI 식 프로퍼티가 더 유리. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-804d-9c17-ec29396f6236" class="bulleted-list"><li style="list-style-type:circle">방향성 <code>관점차이</code> <div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80c8-81f8-c8943ee90fc2" class="bulleted-list"><li style="list-style-type:square">나는 공간적 방향을 다양하게 실험해 좋은 확장성을 보임. AI는 방향을 제거해 더 일반화 함 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8093-9b09-cac293ef3a10" class="bulleted-list"><li style="list-style-type:circle">상태 <mark class="highlight-blue"><code>빠뜨림</code></mark> <code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-806c-8821-d956d4de89fa" class="bulleted-list"><li style="list-style-type:square">사용자의 상태는 핵심만 있다. <div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80f1-aac1-dd6e7b0e2c5e" class="bulleted-list"><li style="list-style-type:disc">UI플로우차트 에서는 대기와 오류같은 보조 상태가 필요하다. </li></ul></div></li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8072-81ff-c52300797955" class="bulleted-list"><li style="list-style-type:disc">플로우 차트 단계<div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8094-81b5-c6fa7051ca80" class="bulleted-list"><li style="list-style-type:circle">기본 흐름<code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80a4-8888-c73140d06d2a" class="bulleted-list"><li style="list-style-type:square">나의 흐름은 원형 반복 구조를 잘 잡았다. </li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8021-9362-c28bc10b0bd4" class="bulleted-list"><li style="list-style-type:square">AI는 시스템이 실행될 때 필요한 판단 단계를 더 세분화 했다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80cc-99a3-c89a3edd1f7b" class="bulleted-list"><li style="list-style-type:circle">조건분기 <mark class="highlight-blue"><code>빠뜨림</code></mark><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80f2-acab-c7f6f8faf133" class="bulleted-list"><li style="list-style-type:square">플로우차트의 유의사항에 맞추려면 조건을 명확한 if/else 문장으로 바꾸는 작업이 필요하다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8055-9c3d-dfaac97ac6b2" class="bulleted-list"><li style="list-style-type:circle">상태제어<mark class="highlight-blue"><code>빠뜨림</code></mark><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-802f-85bc-c67856522d0f" class="bulleted-list"><li style="list-style-type:square">멈춤이 왜 발생하는지, 멈춘 뒤 어떤 선택지가 있는지 명시하면 더 설계가 가능한 플로우가 된다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-800c-8b6a-c0788796fc0f" class="bulleted-list"><li style="list-style-type:circle">프로토타입 연결 <code>관점차이</code><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80d6-af18-fb6a321f6b7a" class="bulleted-list"><li style="list-style-type:square">나는 일관성이 좋다. 다음단계에서는 UI 화면 요소와 상호작용 조건을 연결 해야 한다. </li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h1 id="36d69aa4-f6df-8017-aeda-cdaa0055c281" class=""><mark class="highlight-orange">Takeaway</mark></h1></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8096-aa47-c7ba5610a337" class="bulleted-list"><li style="list-style-type:disc">요소를 기능 별로 그룹핑 해보기 </li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-80ad-86b9-f27df20a5d9a" class="bulleted-list"><li style="list-style-type:disc">특정 가능한 단위까지 쪼개 보기 </li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-809a-aa9c-cf016fc9216e" class="bulleted-list"><li style="list-style-type:disc">상태를 명확하게 정의하고</li></ul></div><div style="display:contents" dir="auto"><ul id="36d69aa4-f6df-8064-9b46-ec7e66dffdbf" class="bulleted-list"><li style="list-style-type:disc">조건을 명확하게 정의하기 (if/else) </li></ul></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8063-9405-fe66fa7a7fe1" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-8018-9c8f-f7472352a950"><div style="width:100%"><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-801e-ac33-c9926c269509" class="">사용자의 CT note는 모래시계의 핵심을 잘 잡고 있다. 특히 <strong>중력, 구멍, 모래량, 이동, 완료, 다시시작</strong>이라는 핵심 요소를 발견했고, 이를 <strong>A에서 B로 이동하는 에너지</strong>라는 형태로 추상화한 점이 좋다.</p></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80db-ad76-c0549a99b523" class="">AI 답변과의 차이는 주로 정답과 오답의 차이가 아니라, <strong>구조화 정도와 적용 범위의 차이</strong>다. 사용자의 답변은 관찰과 직관이 강하고, AI 답변은 문서화와 UI 시스템 적용에 더 적합하도록 정리되어 있다.</p></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80f0-9ea0-e299555e48f7" class="">따라서 보완 방향은 다음 한 문장으로 정리할 수 있다.</p></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8045-9221-fd4b2f44be6e" class="">사용자의 A→B 이동 모델을 유지하되, 이를 <code>자원량</code>, <code>상태</code>, <code>전환 규칙</code>, <code>완료 조건</code>, <code>피드백</code>, <code>제어 입력</code>으로 확장하면 디지털 UI 시스템 설계에 사용할 수 있는 CT 모델이 된다.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-809f-a315-ec95c09cc4e8" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="36d69aa4-f6df-80ea-a1e6-d36330f26833"/></div><div style="display:contents" dir="auto"><blockquote id="36d69aa4-f6df-80a1-9851-e3ef7852b193" class="quote-large"><mark class="highlight-blue"><strong>아래는 나의 노트와 AI 답변을 비교한 첨부입니다.</strong></mark></blockquote></div><div style="display:contents" dir="auto"><h1 id="36d69aa4-f6df-8042-afa7-de7650118a49" class=""><strong>분해안 Gap Analysis</strong></h1></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8003-80a0-c9b40ca6fd6b" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8046-a650-e01d33079d78" class=""><strong>나의 시도</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80eb-87d0-f4b8d67b41d3" class="">사용자는 모래시계를 다음과 같이 분해했다.</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-806f-9eaa-d49ce53b0ecd" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8092-810a-e5c97c3f2b94"><th id="{QlF" class="simple-table-header-color simple-table-header"><strong>수준</strong></th><th id="ylS:" class="simple-table-header-color simple-table-header" style="width:575.0000152587891px"><strong>CT note의 핵심 내용</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8020-bd27-ebbe0e41955e"><td id="{QlF" class="">고수준</td><td id="ylS:" class="" style="width:575.0000152587891px">시간을 측정하는 도구</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8000-96d6-fb049ba5ca0f"><td id="{QlF" class="">중수준</td><td id="ylS:" class="" style="width:575.0000152587891px">중력, 모래 크기, 유리병 크기, 구멍 크기, 투명한 그릇, 대칭 구조, 외부 힘</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80fb-b2b0-ca77a3b07f9e"><td id="{QlF" class="">저수준</td><td id="ylS:" class="" style="width:575.0000152587891px">세로로 긴 형태, 막힌 구조, 좁은 구멍, 모래의 반복 이동, 곡선 형태, 구멍 크기</td></tr></div></tbody></table></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-80d1-8058-d9d8bbd72e8f"><div style="width:100%"><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8076-956b-c4560903327c" class="">모래시계가 <strong>중력으로 인해 위에서 아래로 물체가 이동한다는 점</strong>, <strong>그릇·모래·구멍의 크기가 시간 측정에 영향을 준다는 점</strong>, <strong>투명성과 대칭성이 필요하다는 점</strong>을 포착하고 있다.  </p></div></div></figure></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8066-bc73-f458a9291007" class=""><strong>AI 답변과의 차이</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-80ab-8b17-ee5b63790124" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8027-a0e2-c50f74ae5611"><th id="=PXB" class="simple-table-header-color simple-table-header" style="width:176.00000762939453px"><strong>AI의 분해 방식</strong></th><th id="][ax" class="simple-table-header-color simple-table-header" style="width:582.0000152587891px"><strong>설명</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80d3-a6b0-fbab1f39462d"><td id="=PXB" class="" style="width:176.00000762939453px">모래 저장 시스템</td><td id="][ax" class="" style="width:582.0000152587891px">위쪽 저장부, 아래쪽 저장부, 유리 두께, 부피</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8000-9122-cf79c990f065"><td id="=PXB" class="" style="width:176.00000762939453px">모래 이동 시스템</td><td id="][ax" class="" style="width:582.0000152587891px">중력, 구멍 지름, 목 부분 길이, 모래 입자 크기</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80cf-ae3a-e023eec70d23"><td id="=PXB" class="" style="width:176.00000762939453px">시간 조절 시스템</td><td id="][ax" class="" style="width:582.0000152587891px">목표 시간, 총 모래량, 초당 낙하량, 시간 오차</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80cf-a29a-d738abdbfe6b"><td id="=PXB" class="" style="width:176.00000762939453px">상태 표시 시스템</td><td id="][ax" class="" style="width:582.0000152587891px">남은 모래 높이, 쌓인 모래 높이, 눈금</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80d2-be47-e0890fff2060"><td id="=PXB" class="" style="width:176.00000762939453px">반복 사용 시스템</td><td id="][ax" class="" style="width:582.0000152587891px">대칭 구조, 받침, 누출률, 반복 사용 횟수</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-80bc-a554-cb2aef22f56b" class=""><strong>Gap 분석</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-806c-b9b8-f519fd488a31" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-806a-9736-c911dacc605d"><th id="ga&lt;=" class="simple-table-header-color simple-table-header" style="width:252.00001525878906px"><strong>차이 지점</strong></th><th id="\u^e" class="simple-table-header-color simple-table-header" style="width:165.00000762939453px"><strong>Gap 성격</strong></th><th id="YVwj" class="simple-table-header-color simple-table-header" style="width:523.0104370117188px"><strong>해석</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8074-a211-eb21c63ab0b2"><td id="ga&lt;=" class="" style="width:252.00001525878906px">사용자는 물리적 특징을 잘 찾았지만 시스템 단위로 묶지는 않았다</td><td id="\u^e" class="" style="width:165.00000762939453px">빠뜨려서 생긴 차이</td><td id="YVwj" class="" style="width:523.0104370117188px"><strong>개별 요소는 잘 관찰했지만, 이를 기능별 하위 시스템으로 재조직하는 단계가 부족했다</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-807d-914f-dbe067a6e6fe"><td id="ga&lt;=" class="" style="width:252.00001525878906px">저수준 요소가 일부는 수치화되지 않았다</td><td id="\u^e" class="" style="width:165.00000762939453px">빠뜨려서 생긴 차이</td><td id="YVwj" class="" style="width:523.0104370117188px"><strong>“곡선 형태”, “부피가 없는 점” 등은 좋은 관찰이지만, CT 저수준에서는 mm, g, cm³, 초 같은 측정 단위로 바꾸면 더 명확해진다</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8045-ab44-d498a6a73a93"><td id="ga&lt;=" class="" style="width:252.00001525878906px">사용자는 “왜 대칭이어야 하는가?”처럼 질문형 사고를 남겼다</td><td id="\u^e" class="" style="width:165.00000762939453px">관점이 달라서 생긴 차이</td><td id="YVwj" class="" style="width:523.0104370117188px"><strong>AI는 완성된 구조로 정리했지만, 사용자의 질문형 메모는 탐구 과정이 드러난다는 장점이 있다</strong></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8021-afa6-e2f524493dca" class=""><strong>보완 방향</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-805b-8e0a-ec99a76ce5a6" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8021-98ce-eb9d39e7d4a4"><th id="RIwN" class="simple-table-header-color simple-table-header"><strong>기존 표현</strong></th><th id="}Z;{" class="simple-table-header-color simple-table-header"><strong>보완 표현</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80cb-aa2e-dd56cab03700"><td id="RIwN" class="">구멍의 크기</td><td id="}Z;{" class="">구멍 지름: mm</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8083-8433-fb573966ea32"><td id="RIwN" class="">그릇의 크기</td><td id="}Z;{" class="">저장부 부피: cm³</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-805e-921d-f7aa7a57b821"><td id="RIwN" class="">모래의 크기</td><td id="}Z;{" class="">모래 입자 평균 지름: mm</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8086-ba0c-d1f324c334fd"><td id="RIwN" class="">동일한 시간이 필요해서 대칭</td><td id="}Z;{" class="">상하 저장부 부피 차이: cm³, 대칭 오차: mm</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8051-81e7-ece794747d1b"><td id="RIwN" class="">모래가 쌓이는 것을 볼 수 있어야 함</td><td id="}Z;{" class="">투명도: %, 관찰 가능 각도: °</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="36d69aa4-f6df-809c-bbf5-e51c36fcea35" class=""><strong>패턴 인식 Gap Analysis</strong></h1></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8021-ae70-faeb735b8ea4" class=""><strong>나의 시도</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8087-b717-e185a4364a7c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80cf-98f4-f31abb16382e"><th id="lMRJ" class="simple-table-header-color simple-table-header"><strong>항목</strong></th><th id="uMXb" class="simple-table-header-color simple-table-header"><strong>사용자 CT note</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80d7-92d3-d5ef1dbcb202"><td id="lMRJ" class="">동력원</td><td id="uMXb" class="">중력</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80eb-b46c-ffe01ac56f3a"><td id="lMRJ" class="">입력 방식</td><td id="uMXb" class="">모래가 들어간다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80ec-9d0d-ceae320e776c"><td id="lMRJ" class="">출력 방식</td><td id="uMXb" class="">모래가 쌓인다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8066-8c16-de0eaf938827"><td id="lMRJ" class="">상태 제어</td><td id="uMXb" class="">외부의 힘으로 멈춘다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-803a-a08c-e0d1ce5b45b5"><td id="lMRJ" class="">구조</td><td id="uMXb" class="">이동 완료 지점이 존재</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-805d-9759-fc6db1753ac1"><td id="lMRJ" class="">변수</td><td id="uMXb" class="">구멍의 크기, 모래의 양, 재료 모래</td></tr></div></tbody></table></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-80be-b3ef-e2d87abf1b8b"><div style="width:100%"><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-807c-95d3-da7cd3bfe128" class="">모래시계를 <strong>입력-출력-동력원-제어-구조</strong> 관점으로 바라보았다.  </p></div></div></figure></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-800d-9882-ebbd191537c9" class=""><strong>AI 답변과의 차이</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80c5-8b4a-c878e2d94c60" class="">AI 답변은 패턴을 다음처럼 관계 중심으로 정리했다.</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8003-b303-fe9049c43c44" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-806b-8479-dc16f7adb7f8"><th id="_=em" class="simple-table-header-color simple-table-header"><strong>AI의 패턴</strong></th><th id="]IWa" class="simple-table-header-color simple-table-header"><strong>설명</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-808a-ad84-f2e931c57243"><td id="_=em" class="">모래량 ↑ → 측정 시간 ↑</td><td id="]IWa" class="">자원량과 시간의 양의 관계</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-800d-93a2-f28ea03a7c20"><td id="_=em" class="">낙하 속도 ↑ → 측정 시간 ↓</td><td id="]IWa" class="">속도와 시간의 반비례 관계</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80ee-891b-df29275596b4"><td id="_=em" class="">구멍 지름 ↑ → 낙하 속도 ↑</td><td id="]IWa" class="">구조 변수와 흐름 속도의 관계</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80a4-b5f6-fca9a15b60a9"><td id="_=em" class="">위쪽 모래 ↓ → 남은 시간 ↓</td><td id="]IWa" class="">상태 변화와 남은 시간의 관계</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8076-9844-f3c419bb3bb8"><td id="_=em" class="">아래쪽 모래 ↑ → 지난 시간 ↑</td><td id="]IWa" class="">상태 변화와 경과 시간의 관계</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80a1-a107-dd544425b579"><td id="_=em" class="">뒤집기 → 반복</td><td id="]IWa" class="">재사용 패턴</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8021-93fe-c26276ac9fc2" class=""><strong>Gap 분석</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8084-b4e6-df5c705422f5" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8063-b755-fd58b79b0229"><th id="dFbe" class="simple-table-header-color simple-table-header" style="width:181.00000762939453px"><strong>차이 지점</strong></th><th id="WJLk" class="simple-table-header-color simple-table-header"><strong>Gap 성격</strong></th><th id="aoYf" class="simple-table-header-color simple-table-header" style="width:467.00001525878906px"><strong>해석</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8089-a94d-c91f15dd4354"><td id="dFbe" class="" style="width:181.00000762939453px">사용자는 구성 요소의 역할을 잘 찾았다</td><td id="WJLk" class="">관점이 달라서 생긴 차이</td><td id="aoYf" class="" style="width:467.00001525878906px">사용자는 시스템 구성 관점, AI는 변수 간 관계 관점으로 패턴을 정리했다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8048-a827-df6c5a5262b2"><td id="dFbe" class="" style="width:181.00000762939453px">변수 간 관계가 명시적으로 표현되지 않았다</td><td id="WJLk" class="">빠뜨려서 생긴 차이</td><td id="aoYf" class="" style="width:467.00001525878906px">“구멍의 크기”, “모래의 양”을 찾았지만, 이것이 시간과 어떤 관계를 갖는지까지는 덜 정리되었다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8078-820d-dd6a0e92db98"><td id="dFbe" class="" style="width:181.00000762939453px">“상태 제어 = 외부 힘으로 멈춘다”는 표현이 다소 좁다</td><td id="WJLk" class="">몰라서 생긴 차이</td><td id="aoYf" class="" style="width:467.00001525878906px">상태 제어는 멈춤뿐 아니라 시작, 일시정지, 재시작, 완료 판단까지 포함할 수 있다</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8040-ba1e-f2f732b97e84" class="">보완방향</h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8036-ba04-dcc8e28f8400" class="">패턴 인식은 단순히 요소를 나열하는 것보다 <strong>반복적으로 나타나는 관계</strong>를 쓰면 더 강해진다.</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-80dd-b779-ec247f95cea3" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80dd-96e8-c8fb1b4d8244"><th id="yt^w" class="simple-table-header-color simple-table-header"><strong>사용자 표현</strong></th><th id="lQxf" class="simple-table-header-color simple-table-header" style="width:514.0000152587891px"><strong>패턴 인식형 표현</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8076-9598-cebb845917f5"><td id="yt^w" class="">구멍의 크기</td><td id="lQxf" class="" style="width:514.0000152587891px">구멍이 클수록 낙하 속도가 빨라진다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809c-9ab3-ce419a5f0b27"><td id="yt^w" class="">모래의 양</td><td id="lQxf" class="" style="width:514.0000152587891px">모래가 많을수록 측정 시간이 길어진다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8026-b9b8-c5ec16a288d2"><td id="yt^w" class="">모래가 쌓인다</td><td id="lQxf" class="" style="width:514.0000152587891px">아래쪽 누적량이 증가할수록 지난 시간이 증가한다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80ed-8dc6-ce646e0b135f"><td id="yt^w" class="">외부의 힘으로 멈춘다</td><td id="lQxf" class="" style="width:514.0000152587891px">외부 입력이 시스템 상태를 바꾼다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80b6-a37b-cced67c28ae9"><td id="yt^w" class="">이동 완료 지점 존재</td><td id="lQxf" class="" style="width:514.0000152587891px">도착 지점에 도달하면 완료 상태가 된다</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="36d69aa4-f6df-80d4-ad95-f4624694d0d9" class=""><strong>추상화 Gap Analysis</strong></h1></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-80c6-b13e-d26199300c2b" class=""><strong>사용자의 시도</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80a0-b65f-cfee79d60845" class="">사용자는 추상화 단계에서 모래시계의 물리적 요소를 다음과 같이 바꾸었다.</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8033-b0c2-d3572b7b8238" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-807d-a907-d6ddb2a63f2d"><th id="Hick" class="simple-table-header-color simple-table-header"><strong>물리 요소</strong></th><th id="b\Rg" class="simple-table-header-color simple-table-header"><strong>사용자 추상화</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8091-a34f-da421b28f2ca"><td id="Hick" class="">모래의 양</td><td id="b\Rg" class="">에너지의 크기</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8051-aec8-da7010deddf5"><td id="Hick" class="">위에서 아래로 이동</td><td id="b\Rg" class="">A → 이동 → B</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8063-acf1-eac8223015e9"><td id="Hick" class="">모래 이동</td><td id="b\Rg" class="">힘의 방향으로 이동</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80ba-b776-e1fd6876e913"><td id="Hick" class="">모래가 모두 이동</td><td id="b\Rg" class="">에너지의 양이 소진됨</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809c-8a20-d3d65dd92f8e"><td id="Hick" class="">하단 누적 모래</td><td id="b\Rg" class="">도착한 에너지</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8098-8f22-da9f2ed80115"><td id="Hick" class="">시스템 상태</td><td id="b\Rg" class="">멈춤, 완료, 다시시작</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80a1-ba77-dc9fc51765a2"><td id="Hick" class=""></td><td id="b\Rg" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80d0-950f-eb912791a73b" class="">사용자의 최종 한 줄 요약은 **“일정한 에너지가 A에서 출발해서 B에 도착”**이다</p></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-80c8-af0b-e5a2f028cc84" class=""><strong>AI 답변과의 차이</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-80ce-8b72-e9a721823feb" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-805e-b0f8-ea093d1c8b98"><th id="XwGa" class="simple-table-header-color simple-table-header"><strong>AI 추상화 요소</strong></th><th id="WcFY" class="simple-table-header-color simple-table-header"><strong>설명</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-807e-83cf-ebd596218be4"><td id="XwGa" class="">제한된 자원</td><td id="WcFY" class="">모래, 시간, 에너지, 포인트 등으로 확장 가능</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-804e-8554-fa26cb5f6b7c"><td id="XwGa" class="">상태 변화</td><td id="WcFY" class="">시작 상태에서 완료 상태로 변화</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809e-8bf9-c1479a79ac4e"><td id="XwGa" class="">변화 규칙</td><td id="WcFY" class="">일정한 속도 또는 조건에 따른 변화</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8092-9ffd-ed71ed385314"><td id="XwGa" class="">진행 상태</td><td id="WcFY" class="">현재 얼마나 진행되었는지</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80e6-a306-c7cf3adac8bc"><td id="XwGa" class="">완료 조건</td><td id="WcFY" class="">100%, 0, 도착, 소진 등</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80b3-a1ec-f79324909f23"><td id="XwGa" class="">피드백 표시</td><td id="WcFY" class="">사용자가 상태를 인식하는 UI 표현</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8045-977e-f6db8cda6a0e" class=""><strong>Gap 분석</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8052-975d-d48b5a9374f6" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8045-af75-f1a551d645e3"><th id="Lmq]" class="simple-table-header-color simple-table-header"><strong>차이 지점</strong></th><th id="NKKd" class="simple-table-header-color simple-table-header"><strong>Gap 성격</strong></th><th id=";Vwi" class="simple-table-header-color simple-table-header"><strong>해석</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f6-8c75-f7e2daeb0c93"><td id="Lmq]" class="">사용자는 모래를 “에너지”로 추상화했다</td><td id="NKKd" class="">관점이 달라서 생긴 차이</td><td id=";Vwi" class="">에너지는 좋은 추상화지만, UI 시스템에서는 “자원”이 더 넓게 적용될 수 있다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8003-985c-f47166ff7b8f"><td id="Lmq]" class="">A→B 이동 구조를 명확히 잡았다</td><td id="NKKd" class="">강점</td><td id=";Vwi" class="">방향, 출발, 도착, 완료를 잘 추상화했다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-804d-8c44-ce9e6fdf4290"><td id="Lmq]" class="">진행률과 사용자 피드백 개념이 약하다</td><td id="NKKd" class="">빠뜨려서 생긴 차이</td><td id=";Vwi" class="">UI로 확장하려면 사용자가 무엇을 보고 상태를 이해하는지까지 포함해야 한다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809c-a496-ef881de6eb70"><td id="Lmq]" class="">“제어 = 이동하지 못함”으로 좁게 정의했다</td><td id="NKKd" class="">몰라서 생긴 차이</td><td id=";Vwi" class="">제어는 이동을 막는 것뿐 아니라 시작, 일시정지, 재개, 리셋, 완료 처리까지 포함한다</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-805d-bc99-fe8b12c2d116" class=""><strong>보완 방향</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80d2-a11b-da612253317e" class="">사용자의 추상화는 A→B 이동 구조가 강하다. 여기에 UI 설계 관점을 더하면 다음처럼 발전할 수 있다.</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8005-8e8e-ce8d33e97f80" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8037-a1c1-c611d670fc16"><th id="r\:E" class="simple-table-header-color simple-table-header"><strong>사용자 추상화</strong></th><th id="{ycg" class="simple-table-header-color simple-table-header"><strong>확장된 추상화</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-801c-ac9f-f6c3c5e65c52"><td id="r\:E" class="">에너지의 크기</td><td id="{ycg" class="">제한된 자원량</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80fc-8f04-ddfa4533d79a"><td id="r\:E" class="">A에서 출발</td><td id="{ycg" class="">시작 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8053-ba8b-d35a00f01654"><td id="r\:E" class="">B에 도착</td><td id="{ycg" class="">완료 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809c-9491-fb6fe49f3670"><td id="r\:E" class="">힘의 방향으로 이동</td><td id="{ycg" class="">규칙에 따른 상태 변화</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809a-af07-e501ab619d37"><td id="r\:E" class="">에너지 소진</td><td id="{ycg" class="">완료 조건 충족</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-807e-94f4-da1d765ac071"><td id="r\:E" class="">이동하지 못함</td><td id="{ycg" class="">일시정지 또는 오류 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8049-b11e-d1ed9a4a1d6f"><td id="r\:E" class="">다시시작</td><td id="{ycg" class="">초기 상태로 재설정</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="36d69aa4-f6df-8061-a330-de47eeda0db3" class=""><strong>플로우차트 Gap Analysis</strong></h1></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-808b-985c-f158d761d31a" class=""><strong>사용자의 시도</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8096-be1e-fc691a25eb54" class="">사용자의 플로우차트는 다음 구조를 갖고 있다.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-8024-9574-defa89cabb4d"><div style="width:100%"><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80cc-b6bb-d11f7404ac14" class="">A 시작 → B 완료<br/>↑        ↓<br/>└ 다시시작</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80d7-8a01-eaf54fd15159" class="">또한 중간에 <strong>“멈춤”</strong> 상태가 있고, 멈춤은 <strong>경계가 없어져 이동을 막는 상태</strong>로 표현되어 있다. 사용자의 플로우차트 문서에는 “일정한 에너지가 A에서 출발해서 B에 도착”이라는 추상화 모델이 그대로 적용되어 있다.  </p></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8013-9f3a-fde8a8bf0d3a" class=""><strong>AI 답변과의 차이</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80c1-8c51-e782e7675ac8" class="">AI는 플로우차트를 다음 상태로 확장했다.</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8018-b4de-c63fa15122ae" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80c0-aa69-c2fd8609e394"><th id="y&gt;DM" class="simple-table-header-color simple-table-header"><strong>상태</strong></th><th id="ICed" class="simple-table-header-color simple-table-header"><strong>의미</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8016-bd6b-faf6fa50f3f9"><td id="y&gt;DM" class="">대기</td><td id="ICed" class="">아직 시작하지 않은 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-804c-b60b-d063ed4c376f"><td id="y&gt;DM" class="">작동</td><td id="ICed" class="">자원이 변화하는 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80d1-bba7-dd2878ba0968"><td id="y&gt;DM" class="">일시정지</td><td id="ICed" class="">변화가 멈췄지만 진행값은 유지되는 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-806d-9039-ee02b590ea5a"><td id="y&gt;DM" class="">완료</td><td id="ICed" class="">완료 조건에 도달한 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f2-adac-cf49b0e9f597"><td id="y&gt;DM" class="">재설정</td><td id="ICed" class="">초기 상태로 되돌리는 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8087-94d6-dca638e3f342"><td id="y&gt;DM" class="">오류</td><td id="ICed" class="">정상 작동이 불가능한 상태</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8026-8b52-fa2fc234c463" class=""><strong>Gap 분석</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-80c1-8372-fe5f7b8b30ba" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80a9-9f0e-c94e8708e291"><th id="@UHJ" class="simple-table-header-color simple-table-header"><strong>차이 지점</strong></th><th id="MLBN" class="simple-table-header-color simple-table-header"><strong>Gap 성격</strong></th><th id="kLiU" class="simple-table-header-color simple-table-header"><strong>해석</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8049-9ee5-f062481e2780"><td id="@UHJ" class="">사용자의 플로우는 핵심 구조가 단순하고 명확하다</td><td id="MLBN" class="">강점</td><td id="kLiU" class="">A 시작, B 완료, 다시시작이라는 순환 구조가 잘 보인다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8017-8a1f-d61b08450f04"><td id="@UHJ" class="">조건 분기가 부족하다</td><td id="MLBN" class="">빠뜨려서 생긴 차이</td><td id="kLiU" class="">If/Else 흐름에서는 “언제 멈추는가”, “언제 완료되는가”, “언제 다시 시작하는가”가 조건으로 표현되어야 한다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80b2-b2fc-f707f209ad9b"><td id="@UHJ" class="">“멈춤”의 원인이 모호하다</td><td id="MLBN" class="">빠뜨려서 생긴 차이</td><td id="kLiU" class="">사용자가 멈춘 것인지, 시스템 오류인지, 자원이 부족한 것인지 구분해야 한다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8077-a67d-c08b413e497e"><td id="@UHJ" class="">UI 상태가 덜 세분화되어 있다</td><td id="MLBN" class="">빠뜨려서 생긴 차이</td><td id="kLiU" class="">인터페이스 설계에서는 대기, 작동, 일시정지, 완료, 오류를 분리하면 화면 설계가 쉬워진다</td></tr></div></tbody></table></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-8056-a7e3-d91e85a9e153"><div style="width:100%"><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80c1-94d8-c2d7b1e11c85" class="">대기<br/>↓<br/>If 시작 신호 입력<br/>↓<br/>작동<br/>↓<br/>If 완료 조건 충족 → 완료<br/>Else if 사용자가 멈춤 → 일시정지<br/>Else if 오류 발생 → 오류<br/>Else → 작동 유지<br/>↓<br/>If 다시시작 → 재설정 → 대기</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8069-9417-fb1ab2543893" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-809b-8826-dc6cc8428505" class=""><strong>가장 중요한 차이 5가지</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-8042-b2a3-d9c41d8c6acc" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f1-8b8f-ea14d1461400"><th id="kQlV" class="simple-table-header-color simple-table-header" style="width:54.00000762939453px"><strong>번호</strong></th><th id="TD&lt;]" class="simple-table-header-color simple-table-header"><strong>차이</strong></th><th id="hLDX" class="simple-table-header-color simple-table-header"><strong>차이 유형</strong></th><th id="O[ko" class="simple-table-header-color simple-table-header"><strong>의미</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8074-b4f8-ffd9fb373382"><td id="kQlV" class="" style="width:54.00000762939453px">1</td><td id="TD&lt;]" class="">사용자는 물리적 특징을 잘 관찰했지만, 시스템 단위로 묶는 구조화가 약했다</td><td id="hLDX" class="">빠뜨려서 생긴 차이</td><td id="O[ko" class="">관찰에서 시스템 설계로 넘어가는 연결이 필요하다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8018-823f-e3c5c81b572a"><td id="kQlV" class="" style="width:54.00000762939453px">2</td><td id="TD&lt;]" class="">패턴 인식에서 요소는 찾았지만, 변수 간 관계가 덜 드러났다</td><td id="hLDX" class="">빠뜨려서 생긴 차이</td><td id="O[ko" class="">“무엇이 있다”보다 “무엇이 변하면 무엇이 변한다”가 중요하다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8008-a101-f2b52af0a67d"><td id="kQlV" class="" style="width:54.00000762939453px">3</td><td id="TD&lt;]" class="">에너지 추상화는 좋지만, UI 적용에는 자원·상태·피드백 개념이 더 유리하다</td><td id="hLDX" class="">관점이 달라서 생긴 차이</td><td id="O[ko" class="">에너지는 물리적이고, 자원은 디지털 시스템까지 확장 가능하다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-805f-8303-f41dc9df8c31"><td id="kQlV" class="" style="width:54.00000762939453px">4</td><td id="TD&lt;]" class="">제어를 “멈춤” 중심으로 보았지만, UI에서는 시작·중지·재개·완료·오류까지 제어에 포함된다</td><td id="hLDX" class="">몰라서 생긴 차이</td><td id="O[ko" class="">상태 제어의 범위를 넓게 이해할 필요가 있다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8019-9847-e4ad847f4619"><td id="kQlV" class="" style="width:54.00000762939453px">5</td><td id="TD&lt;]" class="">플로우차트가 순환 구조는 좋지만 If/Else 조건이 부족했다</td><td id="hLDX" class="">빠뜨려서 생긴 차이</td><td id="O[ko" class="">조건 분기를 넣으면 실제 인터페이스 설계에 바로 사용할 수 있다</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-8014-9af1-fef0e2c3f040" class=""><strong>사용자 시도의 강점</strong></h2></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-809a-a41c-e3ec63e7fe03" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80b9-93ad-dade31271ac0"><th id="FFSo" class="simple-table-header-color simple-table-header"><strong>강점</strong></th><th id="Q}pj" class="simple-table-header-color simple-table-header" style="width:502.00001525878906px"><strong>설명</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809a-adee-e031e340d47e"><td id="FFSo" class="">핵심 구조를 빠르게 잡았다</td><td id="Q}pj" class="" style="width:502.00001525878906px">“A에서 B로 이동한다”는 구조는 추상화의 중심이 될 수 있다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8045-8d53-cf3fab9b5a44"><td id="FFSo" class="">물리적 원인을 잘 관찰했다</td><td id="Q}pj" class="" style="width:502.00001525878906px">중력, 구멍, 모래량, 투명성, 대칭성을 잘 포착했다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8051-b4d2-f20894283935"><td id="FFSo" class="">추상화 방향이 명확했다</td><td id="Q}pj" class="" style="width:502.00001525878906px">모래를 에너지로 바꾸며 물리적 실체에서 벗어나려는 시도가 있었다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80ed-a079-c337b2211df2"><td id="FFSo" class="">플로우차트가 간결했다</td><td id="Q}pj" class="" style="width:502.00001525878906px">시작, 완료, 다시시작의 큰 흐름이 잘 보인다</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8021-bc50-fbafbfae1c1b"><td id="FFSo" class="">질문형 메모가 좋다</td><td id="Q}pj" class="" style="width:502.00001525878906px">“왜 대칭이어야 하는가?”, “곡선 형태가 많은 이유?” 같은 질문은 분석을 더 깊게 만든다</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8074-91ce-fcd01487e1db" class=""><strong>개선하면 좋은 지점</strong></p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-809a-b7e3-e614745e01c5" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80fa-94b2-df79fb297fab"><th id="Y`fB" class="simple-table-header-color simple-table-header"><strong>개선 지점</strong></th><th id="AR\d" class="simple-table-header-color simple-table-header"><strong>보완 방법</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f9-832b-c8e5f05b39ef"><td id="Y`fB" class="">분해 단계</td><td id="AR\d" class="">요소를 기능별 시스템으로 묶기</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-809d-bf6f-d3d1d6f7b3d9"><td id="Y`fB" class="">저수준 단계</td><td id="AR\d" class="">관찰 표현을 측정 가능한 단위로 바꾸기</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8087-a1b3-c838ea1c9fe1"><td id="Y`fB" class="">패턴 인식</td><td id="AR\d" class="">변수 간 관계를 화살표나 조건문으로 표현하기</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8044-b920-ed8b3df3f59e"><td id="Y`fB" class="">추상화</td><td id="AR\d" class="">에너지뿐 아니라 자원, 상태, 전환, 피드백 개념 추가하기</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80a7-8cd3-e3397d9d12f5"><td id="Y`fB" class="">플로우차트</td><td id="AR\d" class="">If/Else 조건과 상태 전이를 명확히 쓰기</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-80c1-84d5-e0c4b032d01e" class=""><strong>최종 보완 모델</strong></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-80bb-96b0-ceeb5d98b696"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="36d69aa4-f6df-805f-8025-f35764031c26" class=""><strong>사용자 모델을 살린 보완 문장</strong></h2></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8087-baae-f841909929ab" class=""><strong>일정한 자원이 A 상태에서 출발해 규칙에 따라 B 상태로 이동하거나 변환되며, 그 변화량을 통해 사용자는 진행 상태와 완료 여부를 인식한다.</strong></p></div></div></figure></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-806b-af07-d56c5cb35ce0" class=""><strong>UI 시스템용 보완 모델</strong></p></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-800f-b5b7-d479160ad445" class="">
+</p></div><div style="display:contents" dir="ltr"><table id="36d69aa4-f6df-80da-933e-eaab042e6f90" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8099-bc45-d6bb3816d10b"><th id="Dt^P" class="simple-table-header-color simple-table-header"><strong>속성</strong></th><th id="LsI~" class="simple-table-header-color simple-table-header"><strong>의미</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8079-a5d4-c82a23086998"><td id="Dt^P" class="">resource-amount</td><td id="LsI~" class="">시스템이 보유한 전체 자원량</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80f4-acff-fe8b2fdf0749"><td id="Dt^P" class="">start-state</td><td id="LsI~" class="">자원이 출발하는 초기 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8064-b9f5-dd945a93daed"><td id="Dt^P" class="">target-state</td><td id="LsI~" class="">자원이 도달해야 하는 완료 상태</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-80ba-8414-fe7247b8e8ab"><td id="Dt^P" class="">transition-rule</td><td id="LsI~" class="">자원이 이동하거나 변화하는 규칙</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8068-a6cb-fc4d4f9d76e3"><td id="Dt^P" class="">progress-value</td><td id="LsI~" class="">현재 진행 정도</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8041-a6e6-d0fb3b7ace8a"><td id="Dt^P" class="">control-input</td><td id="LsI~" class="">시작, 멈춤, 재시작 같은 사용자 조작</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-8062-9f57-e62df3b09402"><td id="Dt^P" class="">completion-condition</td><td id="LsI~" class="">완료로 판단하는 조건</td></tr></div><div style="display:contents" dir="ltr"><tr id="36d69aa4-f6df-806c-851a-e072dc0744fa"><td id="Dt^P" class="">feedback-display</td><td id="LsI~" class="">진행 상태를 사용자에게 보여주는 방식</td></tr></div></tbody></table></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="36d69aa4-f6df-8023-adf9-c056829d3ed3"><div style="width:100%"><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-809c-93bb-cb52b3c9d3f6" class="">대기 상태<br/>↓<br/>If 시작 입력 발생<br/>↓<br/>자원 확인<br/>↓<br/>If 자원 있음 → 작동 상태<br/>Else → 오류 상태<br/>↓<br/>작동 중<br/>↓<br/>If 완료 조건 충족 → 완료 상태<br/>Else if 사용자 멈춤 → 일시정지 상태<br/>Else if 오류 발생 → 오류 상태<br/>Else → 작동 유지<br/>↓<br/>If 다시시작 입력 → 재설정 상태<br/>↓<br/>대기 상태</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="36d69aa4-f6df-8086-9852-f3e4c0d8e526" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
