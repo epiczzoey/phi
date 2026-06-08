@@ -1,0 +1,113 @@
+export const studies = [
+  {
+    id: "week-1",
+    title: "week-1",
+    tracks: [
+      {
+        id: "hdi",
+        title: "hdi",
+        items: [
+          {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./week-1/hdi/prototype/",
+            status: "ready"
+          },
+          {
+            id: "one-pager",
+            title: "one-pager",
+            type: "page",
+            href: "./week-1/hdi/one-pager/",
+            status: "ready"
+          },
+          {
+            id: "cot-note",
+            title: "cot-note",
+            type: "page",
+            href: "./week-1/hdi/cot-note/",
+            status: "ready"
+          }
+        ]
+      },
+      {
+        id: "engineering",
+        title: "engineering",
+        items: [
+          {
+            id: "prototype-a",
+            title: "prototype-a",
+            type: "external",
+            href: "https://energy-orbit.vercel.app/",
+            status: "ready"
+          },
+          {
+            id: "prototype-b",
+            title: "prototype-b",
+            type: "external",
+            href: "https://energy-vessel.vercel.app/",
+            status: "ready"
+          },
+          {
+            id: "prototype-c",
+            title: "prototype-c",
+            type: "external",
+            href: "https://threshold-field.vercel.app/",
+            status: "ready"
+          },
+          {
+            id: "one-pager",
+            title: "one-pager",
+            type: "page",
+            href: "./week-1/engineering/one-pager/",
+            status: "ready"
+          },
+          {
+            id: "cot-note",
+            title: "cot-note",
+            type: "page",
+            href: "./week-1/engineering/cot-note/",
+            status: "ready"
+          }
+        ]
+      },
+      {
+        id: "aesthetic-literacy",
+        title: "aesthetic-literacy",
+        items: [
+          {
+            id: "coming-soon",
+            title: "coming-soon",
+            type: "placeholder",
+            href: "",
+            status: "empty"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "week-2",
+    title: "week-2",
+    tracks: [
+      {
+        id: "hdi",
+        title: "hdi",
+        status: "empty",
+        items: []
+      },
+      {
+        id: "engineering",
+        title: "engineering",
+        status: "empty",
+        items: []
+      },
+      {
+        id: "aesthetic-literacy",
+        title: "aesthetic-literacy",
+        status: "empty",
+        items: []
+      }
+    ]
+  }
+];

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>phi</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <div class="root">
+      <header class="site-header">
+        <h1 class="site-title">phi</h1>
+        <p class="site-desc">weekly study archive</p>
+      </header>
+      <main id="tree">
+        <!-- JS가 비활성화된 경우 기본 fallback -->
+        <noscript>
+          <section class="week">
+            <h2 class="week-title">week-1</h2>
+            <div class="track">
+              <div class="track-header"><span class="branch">└─</span><span class="track-name">hdi</span></div>
+              <ul class="item-list">
+                <li class="item-row"><span class="branch">├─</span><span class="item-name">prototype</span><a class="btn-open" href="./week-1/hdi/prototype/">open</a></li>
+                <li class="item-row"><span class="branch">├─</span><span class="item-name">one-pager</span><a class="btn-open" href="./week-1/hdi/one-pager/">open</a></li>
+                <li class="item-row"><span class="branch">└─</span><span class="item-name">cot-note</span><a class="btn-open" href="./week-1/hdi/cot-note/">open</a></li>
+              </ul>
+            </div>
+            <div class="track">
+              <div class="track-header"><span class="branch">└─</span><span class="track-name">engineering</span></div>
+              <ul class="item-list">
+                <li class="item-row"><span class="branch">├─</span><span class="item-name">prototype-a</span><a class="btn-open is-external" href="https://energy-orbit.vercel.app/" target="_blank" rel="noopener noreferrer">open</a></li>
+                <li class="item-row"><span class="branch">├─</span><span class="item-name">prototype-b</span><a class="btn-open is-external" href="https://energy-vessel.vercel.app/" target="_blank" rel="noopener noreferrer">open</a></li>
+                <li class="item-row"><span class="branch">├─</span><span class="item-name">prototype-c</span><a class="btn-open is-external" href="https://threshold-field.vercel.app/" target="_blank" rel="noopener noreferrer">open</a></li>
+                <li class="item-row"><span class="branch">├─</span><span class="item-name">one-pager</span><a class="btn-open" href="./week-1/engineering/one-pager/">open</a></li>
+                <li class="item-row"><span class="branch">└─</span><span class="item-name">cot-note</span><a class="btn-open" href="./week-1/engineering/cot-note/">open</a></li>
+              </ul>
+            </div>
+            <div class="track">
+              <div class="track-header"><span class="branch">└─</span><span class="track-name">aesthetic-literacy</span></div>
+              <ul class="item-list">
+                <li class="item-row"><span class="branch">└─</span><span class="item-name">coming-soon</span><span class="btn-disabled">empty</span></li>
+              </ul>
+            </div>
+          </section>
+        </noscript>
+      </main>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
