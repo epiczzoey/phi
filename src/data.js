@@ -5,7 +5,7 @@ export const studies = [
     tracks: [
       {
         id: "hdi",
-        title: "hdi",
+        title: "hid",
         items: [
           {
             id: "prototype",
@@ -91,8 +91,8 @@ export const studies = [
     title: "week-2",
     tracks: [
       {
-        id: "hdi",
-        title: "hdi",
+        id: "hid",
+        title: "hid",
         status: "empty",
         items: []
       },
