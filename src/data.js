@@ -93,8 +93,15 @@ export const studies = [
       {
         id: "hid",
         title: "HID",
-        status: "empty",
-        items: []
+        items: [
+          {
+            id: "one-pager",
+            title: "one-pager",
+            type: "page",
+            href: "./week-2/hid/one-pager/",
+            status: "ready"
+          }
+        ]
       },
       {
         id: "engineering",

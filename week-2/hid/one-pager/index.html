@@ -1,0 +1,745 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HID 수업 2주차 1pager</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="37c69aa4-f6df-80f8-a748-e4502bd92fd6" class="page sans"><header><h1 class="page-title" dir="auto"><strong>HID 수업 2주차 1pager</strong></h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="37c69aa4-f6df-806f-81e7-d5f3d131fa93" class="">문제정의</h1></div><div style="display:contents" dir="auto"><p id="37c69aa4-f6df-80e0-a1f2-e24318f22069" class="">
+</p></div><div style="display:contents" dir="auto"><p id="37c69aa4-f6df-80f5-b507-e915b5a83ac3" class="">사용자는 LLM에게 여러 조건이 포함된 작업을 맡기지만, 채팅 UX에서는 조건과 결과가 선형 대화 안에 흩어져 있어, 답변이 조건을 제대로 반영했는지 직접 읽고 검수해야 한다.</p></div><div style="display:contents" dir="auto"><p id="37c69aa4-f6df-80c7-ab6b-febffe763dd9" class="">즉, 핵심은 **“조건 반영 여부를 사용자가 직접 대조해야 하는 부담”**입니다.</p></div><div style="display:contents" dir="auto"><p id="37c69aa4-f6df-8015-a3ff-ef418cb03eb4" class=""><strong>조건 입력 → 답변 생성 → 조건 검수 → 추가 요청</strong>이 모두 긴 대화 흐름 안에서 선형적으로 쌓이기 때문입니다.</p></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-805c-9a64-e4e969d907a8" class="">사용자 </h2></div><div style="display:contents" dir="auto"><ul id="37c69aa4-f6df-80c1-ad5b-de1fbe7c29dc" class="bulleted-list"><li style="list-style-type:disc">LLM을 활용하여 <strong>여러 조건이 포함된 작업을 요청</strong>하는 사용자. </li></ul></div><div style="display:contents" dir="auto"><ul id="37c69aa4-f6df-802c-bdfc-f157306c181a" class="bulleted-list"><li style="list-style-type:disc">이 사용자는 목적, 형식, 포함할 내용, 제외할 내용 등을 포함해 작업 결과물을 얻는다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37c69aa4-f6df-80db-8c88-f919e56f9340" class="bulleted-list"><li style="list-style-type:disc">LLM과 최소한의 핑퐁으로 만족하는 결과를 얻고자 한다. </li></ul></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-80d0-83cc-c5bdc617be25" class="">페인포인트 </h2></div><div style="display:contents" dir="auto"><ul id="37d69aa4-f6df-8040-8db7-c0d65218301d" class="bulleted-list"><li style="list-style-type:disc">누락된 조건이 있으면 다시 추가 요청을 해야 하고, 이때 기존 답변이 바뀌지 않도록 “다른 건 건드리지 말고 이 조건만 추가해줘”처럼 다시 설명해야 한다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37d69aa4-f6df-8014-86bf-dd9efbb84f6a" class="bulleted-list"><li style="list-style-type:disc">이 과정에서 사용자는 AI에게 일을 맡겼음에도 결과를 계속 검수하고 통제해야 하는 부담을 느낀다.</li></ul></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-80eb-a42f-d056b5308436" class="">사용자의 목표</h2></div><div style="display:contents" dir="auto"><ul id="37c69aa4-f6df-8077-b189-ea20d5822c85" class="bulleted-list"><li style="list-style-type:disc">LLM에게 여러 조건이 포함된 작업을 요청했을 때, 사용자는 자신이 입력한 목적, 형식, 포함할 내용, 제외할 내용이 빠짐없이 반영된 결과물을 얻고 싶다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37e69aa4-f6df-80d4-a851-dcee1eae8cb3" class="bulleted-list"><li style="list-style-type:disc">답변 전체를 처음부터 다시 읽지 않아도, 각 조건이 어디에 반영되었는지 빠르게 확인하고 싶다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37e69aa4-f6df-8035-9d02-e07821193b9f" class="bulleted-list"><li style="list-style-type:disc">누락된 조건이 있을 경우에는 기존 답변 전체를 다시 수정하지 않고, 필요한 부분만 추가하거나 변경하고 싶다.</li></ul></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-80f4-802a-c98d12d58e86" class="">핵심 마찰 정의</h2></div><div style="display:contents" dir="auto"><ul id="37e69aa4-f6df-80c4-8aaa-c154c2759d48" class="bulleted-list"><li style="list-style-type:disc">채팅 UX에서는 AI 답변이 긴 메시지로만 나오기 때문에, 사용자는 내가 <strong>요청한 조건이 답변 안에 제대로 들어갔는지 직접 찾아야 한다</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="37e69aa4-f6df-806a-89c9-da896accef0d" class="bulleted-list"><li style="list-style-type:disc">채팅 UX는 사용자의 요청 조건과 AI 답변을 연결해서 보여주지 않고 긴 메시지로만 제공하기 때문에, <strong>사용자가 조건 반영 여부를 직접 읽고 대조해야 하는 마찰(불편)이 발생</strong>한다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37e69aa4-f6df-802e-82b1-d2a7c021b29d" class="bulleted-list"><li style="list-style-type:disc">특히 답변이 길거나 조건이 여러 개일수록, 사용자는 누락된 조건이 있는지 확인하기 위해 전체 답변을 다시 검수해야 한다. 그리고 누락된 내용을 보완할 때도 기존 답변이 바뀌지 않도록<strong> 다시 조건을 설명</strong>해야 한다.</li></ul></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-80ef-b909-e3d784ce8b05" class="">1주차와 무엇이 달라졌고 왜 이렇게 변경 되었을까  </h2></div><div style="display:contents" dir="ltr"><table id="37c69aa4-f6df-80bb-a275-fdfbe97d170e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="37c69aa4-f6df-802e-8e29-dbcf5c1497c7"><th id="U@Cr" class="simple-table-header-color simple-table-header" style="width:95.34375px"></th><th id="f=Gn" class="simple-table-header-color simple-table-header" style="width:286px">무엇이 달라졌나?</th><th id="\C&gt;l" class="simple-table-header-color simple-table-header" style="width:375px">이유가 무엇일까?</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="37c69aa4-f6df-80ab-9eaf-f95c6cf922ff"><th id="U@Cr" class="simple-table-header-color simple-table-header" style="width:95.34375px">사용자</th><td id="f=Gn" class="" style="width:286px">as-is : 여러 조건을 달아 작업을 설계 하는 유저 <br/>to-be : 어떤 조건을 달아서 무엇을 얻고자 하는 유저인지 명확하게 설명 </td><td id="\C&gt;l" class="" style="width:375px">사용자가 겪는 문제에 대해 공감하고 페인포인트와 핵심마찰 정의를 더 명확하게 하기 위해 사용자가 무엇을 하는지 더 구체적인 단어들로 서명했다. </td></tr></div><div style="display:contents" dir="ltr"><tr id="37c69aa4-f6df-800f-9bc4-d548b166e938"><th id="U@Cr" class="simple-table-header-color simple-table-header" style="width:95.34375px">페인포인트</th><td id="f=Gn" class="" style="width:286px">as-is : 불편한 상황을 여러개 나열함<br/>to-be : 여러 상황을 하나로 좁힘 <br/><br/>  • 여러 불편을 만들어 내는 공통의 원인을 찾음</td><td id="\C&gt;l" class="" style="width:375px">해결해야 할 하나의 원인을 찾기 위해. <br/>사용자의 문제가 선명 해야 해결책이 자연스럽게 나온다. <br/></td></tr></div><div style="display:contents" dir="ltr"><tr id="37c69aa4-f6df-8018-8382-f43c48757752"><th id="U@Cr" class="simple-table-header-color simple-table-header" style="width:95.34375px">사용자 목표</th><td id="f=Gn" class="" style="width:286px">as-is : 사용자의 목표를 문제의 해결 이라고 포괄적으로 잡음<br/>to-be : 구체적으로 어떤 결과를 얻고 싶은지를 상세하게 작성 <br/><br/>  • 사용자는 자신이 입력한 목적, 형식, 포함할 내용, 제외할 내용이 빠짐없이 반영된 결과물을 얻고 싶다.</td><td id="\C&gt;l" class="" style="width:375px">사용자의 목표가 포괄적이고 추상적이다 보니 피어리뷰는 유저가 정확히 무엇을 해결하고 싶은지 직관적으로 알지 못한다. <br/>불편한 부분은 인지 하지만 사용자의 상황과 목표가 명확하지 않기에 얼만큼 불편한지 (빡침레벨) 에 대한 공감대가 부족했다. <br/>이번에는 구체적이고 명확한 단어로 다시 작성했다. <br/><br/>  • 조건에 맞는 결과물을 만듦 → 목적, 형식, 포함할 내용, 제외할 내용이 빠짐없이 반영된 결과물<br/>  • 추가 요청이나 검수 불필요 → 답변 전체를 처음부터 다시 읽지 않아도, 각 조건이 어디에 반영되었는지 빠르게 확인<br/>  • 재 요청 하지 않음 → 기존 답변 전체를 다시 수정하지 않고, 필요한 부분만 추가하거나 변경</td></tr></div><div style="display:contents" dir="ltr"><tr id="37c69aa4-f6df-8025-8d56-e86368cfa59c"><th id="U@Cr" class="simple-table-header-color simple-table-header" style="width:95.34375px">핵심마찰 정의</th><td id="f=Gn" class="" style="width:286px">as-is : 불편함에 대한 언급을 반복 함으로써 나의 페인 포인트가 채팅ux의 어떤 지점에서 불편함을 발생시키는지에 되는 지점 설명이 부족함. <br/>to-be : 채팅ux를 LLM으로 사용할 때 나오는 선형 구조를 기준으로 설명함 </td><td id="\C&gt;l" class="" style="width:375px">불편한 지점을 인터페이스의 관점에서 바라 보기 위해 선형구조를 기준삼아 페인포인트가 어느 지점에서 발생하는지 찾아봄. <br/><br/>  • 인터페이스로 문제를 해결해야 하는 과제이기 때문. <br/></td></tr></div><div style="display:contents" dir="ltr"><tr id="37e69aa4-f6df-8032-b764-e62fbc0061e1"><th id="U@Cr" class="simple-table-header-color simple-table-header" style="width:95.34375px"></th><td id="f=Gn" class="" style="width:286px"></td><td id="\C&gt;l" class="" style="width:375px"></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-80ae-bd87-cc3623a42881" class="">인터렉션 설계</h2></div><div style="display:contents" dir="auto"><h4 id="37e69aa4-f6df-8057-9b5b-f6d8b3d5bb23" class=""><strong>조건을 구조화하고, 답변 검수 스크롤을 줄이고, 수정 방식까지 분리하는 인터페이스</strong>로 확장</h4></div><div style="display:contents" dir="ltr"><table id="37f69aa4-f6df-805e-81ca-d05860965789" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-805f-a1a2-cca9e32cd7f2"><td id="Bn`Y" class="" style="width:214.66666666666666px"><strong>하이라이트 or 숏컷 </strong></td><td id="JE_|" class="" style="width:469.6640625px">채팅에서는 AI 답변이 긴 메시지로만 나오기 때문에, 사용자는 내가 요청한 조건이 답변 안에 제대로 들어갔는지 직접 찾아야 한다.</td></tr></div><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-806b-840b-fa4a3683fd7b"><td id="Bn`Y" class="" style="width:214.66666666666666px"><strong>하이라이트</strong></td><td id="JE_|" class="" style="width:469.6640625px">채팅 UX는 사용자의 요청 조건과 AI 답변을 연결해서 보여주지 않고 긴 메시지로만 제공하기 때문에, 사용자가 조건 반영 여부를 직접 읽고 대조해야 하는 마찰(불편)이 발생한다. </td></tr></div><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-8089-a92d-f9e48e957091"><td id="Bn`Y" class="" style="width:214.66666666666666px"><strong>일부 수정과 전체 답변 다시 받기의 옵션을 선택 </strong></td><td id="JE_|" class="" style="width:469.6640625px">특히 답변이 길거나 조건이 여러 개일수록, 사용자는 누락된 조건이 있는지 확인하기 위해 전체 답변을 다시 검수해야 한다. 그리고 누락된 내용을 보완할 때도 기존 답변이 바뀌지 않도록<strong> 다시 조건을 설명</strong>해야 한다. </td></tr></div></tbody></table></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37f69aa4-f6df-807c-a4bd-cd2b0874197f"><div style="width:100%"><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80cb-b168-ffa137f92ba4" class="bulleted-list"><li style="list-style-type:disc">하이라이트는 유지하고 책갈피 형태의 숏컷을 달아 해당 지점에 바로 진입 가능하게 한다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-806a-a465-c3b9177dc40d" class="bulleted-list"><li style="list-style-type:disc"><strong>기존 대비 개선 포인트</strong><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-80a6-be7e-d6a031567419" class="">단순 체크리스트 → 리뷰모드 생성 PDR 구조화 / 선형 채팅 UX 유지 / 스크롤 피로도 감소</p></div></li></ul></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="37f69aa4-f6df-80c0-9392-f04f929fa2e0" class=""><strong>인터랙션 설계 v2</strong></h3></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-804f-ba67-f3e017f18a55" class=""><strong>1. 작업 입력</strong></p></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-8079-ac20-e76718cc7340" class=""><strong>2. 조건 설계 패널 (PDR 구조)</strong></p></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-803f-83bf-db43eb718c1a" class="bulleted-list"><li style="list-style-type:disc">AI 응답은 단순 리스트가 아닌 <strong>4가지 카테고리</strong>로 구조화된 패널로 노출.<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8094-9524-fbb69b0bdd85" class="bulleted-list"><li style="list-style-type:circle">목적</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-801b-817f-fa00cddad585" class="bulleted-list"><li style="list-style-type:circle">형식</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8020-b4bc-f322f9caeb7a" class="bulleted-list"><li style="list-style-type:circle">포함할 내용</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804f-913a-c0248399aca7" class="bulleted-list"><li style="list-style-type:circle">제외할 내용</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80e6-aaed-c8957e989b42" class="bulleted-list"><li style="list-style-type:disc">각 카테고리의 <strong>조건은 체크박스 형태</strong>로 기본 체크된 상태로 나열</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80d4-808a-d7387aa26ba1" class="bulleted-list"><li style="list-style-type:disc">사용자는 <strong>불필요한 조건을 체크 해제 </strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8099-8f7f-d2c3ee7213d3" class="bulleted-list"><li style="list-style-type:disc"><strong>추천 조건</strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8037-b28b-ed8f310b4a6c" class="bulleted-list"><li style="list-style-type:circle">버튼 없이 각 카테고리 하단에 자동으로 노출된다. 칩 형태로 표시되며, 클릭 시 해당 카테고리의 체크리스트에 추가된다. 이미 추가된 항목은 비활성 처리</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804f-a381-f7256f438865" class="bulleted-list"><li style="list-style-type:disc"><strong>조건 직접 추가</strong>: 각 카테고리에 입력 필드가 항상 존재하며, 텍스트 입력 후 추가 시 해당 카테고리에 체크된 상태로 올라감</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8050-a647-e6e491cc20cf" class="bulleted-list"><li style="list-style-type:disc">하단의 <strong>&quot;답변 생성&quot;</strong> 버튼을 누르면 현재 체크된 조건 전체를 기준으로 답변을 생성</li></ul></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-806e-8cde-c8ce3b8cd5fd" class=""><strong>3. 리뷰 모드 (자동 전환)</strong></p></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804f-b5c0-d36b2707f551" class="bulleted-list"><li style="list-style-type:disc">답변 생성 완료 시 채팅에서 <strong>리뷰 모드로 자동 전환</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c8-a9b1-e3ac06f9b691" class="bulleted-list"><li style="list-style-type:disc">화면은 좌우 분할 레이아웃으로 구성<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-806c-b5f4-c23d05f3ec5f" class="bulleted-list"><li style="list-style-type:circle"><strong>왼쪽 — 답변 본문</strong></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c8-a642-c20d7a18c4f4" class="bulleted-list"><li style="list-style-type:disc">답변은 섹션 단위(소개 / Step 1~3 / 성공 기준 / 제외 조건 설명)로 나뉘어 표시된다. <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80fd-88d5-cdfcf09f8e60" class="bulleted-list"><li style="list-style-type:circle">조건과 연결된 섹션은 선택 시 하이라이트 처리</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80d8-b401-d3fca5d41f43" class="bulleted-list"><li style="list-style-type:disc">답변 하단에는 <strong>“+ 조건 추가”</strong> 영역을 제공함<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8095-a7b3-ef76ff64c355" class="bulleted-list"><li style="list-style-type:circle">카테고리 선택 필드와 조건 텍스트 입력 폼을 표시함</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-801a-9ab4-d90f88f80f15" class="bulleted-list"><li style="list-style-type:disc">추가한 조건은 우측 조건 맵에 즉시 반영함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80dc-b4d8-d780a845b69e" class="bulleted-list"><li style="list-style-type:disc"><strong>오른쪽 고정 패널 </strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80e9-aeb1-ea363651ca64" class="bulleted-list"><li style="list-style-type:circle"><strong>조건 검수</strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ef-9af9-c81fe7c51a46" class="bulleted-list"><li style="list-style-type:square">PDR 카테고리별로 조건을 표시함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8090-b0f6-fc56e33d4d49" class="bulleted-list"><li style="list-style-type:square">각 조건에 상태 배지(반영됨 / 확인 필요)를 표시 함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a9-b424-d3a142e616d2" class="bulleted-list"><li style="list-style-type:square">조건을 클릭하면 답변의 해당 섹션으로 자동 이동하고 <mark class="highlight-yellow_background">하이라이트 처리 됨 </mark></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-800c-9f4c-c4ff66985148" class="bulleted-list"><li style="list-style-type:circle"> <strong>섹션 이동</strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c4-8852-ca675d240884" class="bulleted-list"><li style="list-style-type:square">답변의 섹션 목록을 나열</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8055-a971-f9fc56afc3a7" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">클릭 시 해당 섹션으로 즉시 이동</mark>한다. 스크롤 없이 원하는 위치로 이동할 수 있다.</li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-8025-a07c-fac6a08bc81b" class=""><strong>4. 수정 방식 분리</strong></p></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-808a-a13b-d65301f1a4e4" class="">조건 맵에서 조건을 클릭하면 수정 액션 바가 하단에 노출됨</p></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80de-8143-e703c3da2890" class="bulleted-list"><li style="list-style-type:disc"><strong>일부 수정</strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a7-9164-cd611b4d8d1a" class="bulleted-list"><li style="list-style-type:circle">선택한 조건과 연결된 부분만 변경함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80da-90fb-ddfbda9abb77" class="bulleted-list"><li style="list-style-type:circle">모달에서 수정 요청을 입력함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8090-b1d4-ea94a6b931e3" class="bulleted-list"><li style="list-style-type:circle">기존 답변은 유지하고, 답변 하단에 <strong>“일부 수정 결과”</strong> 섹션만 추가함</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ae-ae46-d5f961527fd4" class="bulleted-list"><li style="list-style-type:disc"><strong>전체 다시 생성</strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8090-af47-e052cc7dd27e" class="bulleted-list"><li style="list-style-type:circle">답변의 방향이나 품질이 전반적으로 맞지 않을 때 사용함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c2-878b-f2feedcb9c57" class="bulleted-list"><li style="list-style-type:circle">확인 모달을 거친 후, 선택된 조건 전체를 기준으로 새 버전을 답변 하단에 추가함</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-8003-a02d-c6c4e1b99ce8" class=""><strong>5. 완료</strong></p></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-809e-abef-e13180402d42" class="bulleted-list"><li style="list-style-type:disc">리뷰 모드 하단의 <strong>“완료”</strong> 버튼을 누르면 채팅으로 복귀함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8048-ba2d-e9ae1564e77f" class="bulleted-list"><li style="list-style-type:disc">채팅 복귀 후 완료 메시지를 표시함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8023-b9ac-ef80a3854357" class="bulleted-list"><li style="list-style-type:disc">완료 메시지에는 <strong>최종 답변 전문</strong>을 섹션별로 표시함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804e-8deb-c163ad4382ad" class="bulleted-list"><li style="list-style-type:disc">완료 이후에도 <strong>“답변 수정하기”</strong> 버튼을 통해 리뷰 모드에 재진입할 수 있음</li></ul></div><div style="display:contents" dir="auto"><h2 id="37c69aa4-f6df-80ae-ade8-d4e2592f31c2" class="">테스트 시나리오</h2></div><div style="display:contents" dir="auto"><ol type="1" id="37f69aa4-f6df-8076-a644-f57e48e35be3" class="numbered-list" start="1"><li><strong>작업 입력</strong><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-809d-9d51-fdccec5a4cfd" class="numbered-list" start="1"><li>채팅창에 작업 목적 입력 후 전송</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-804f-950d-f89f8ad9e5c1" class="numbered-list" start="2"><li>사용자 버블 생성 확인</li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="37f69aa4-f6df-801a-b855-dc39ebdd4890" class="numbered-list" start="2"><li><strong>조건 설계</strong><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-8053-97cc-dd01222afaa7" class="numbered-list" start="1"><li> PDR 4카테고리(목적·형식·포함·제외)로 구조화된 조건 패널 노출 확인</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-80d3-ac81-ea60db59dc61" class="numbered-list" start="2"><li>불필요 조건 체크 해제</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-8055-adb8-efdcb343fbb3" class="numbered-list" start="3"><li>누락 조건 직접 입력 후 추가</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-8060-84a4-edfa932c6e8d" class="numbered-list" start="4"><li>추천 조건 선택 → 해당 카테고리에 즉시 반영 확인</li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="37f69aa4-f6df-8061-a489-cb0dd6d99b01" class="numbered-list" start="3"><li><strong>답변 생성 및 리뷰 모드</strong><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-80c3-b4d3-eb34f4e09341" class="numbered-list" start="1"><li>&quot;답변 생성&quot; 클릭 → 리뷰 모드 자동 전환 확인</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-807b-af1f-ef6515af6288" class="numbered-list" start="2"><li>답변이 섹션 단위로 펼쳐진 상태로 노출</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-804a-90ff-f138fc57b640" class="numbered-list" start="3"><li>우측 조건 확인 패널: 조건 클릭 → 해당 섹션 하이라이트 확인</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-80f9-85f1-cf5e2eea5532" class="numbered-list" start="4"><li>우측 섹션 이동 패널: 항목 클릭 → 해당 섹션으로 즉시 이동 확인</li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="37f69aa4-f6df-802e-a26b-c7cb4364d094" class="numbered-list" start="4"><li><strong>수정</strong><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-8009-965f-da4d41ff56b7" class="numbered-list" start="1"><li>조건 선택 후 &quot;일부 수정&quot; 클릭 → 모달 입력 → 기존 답변 유지, 하단에 수정 결과만 추가 확인</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-8031-a97d-cd235a1adb6e" class="numbered-list" start="2"><li>&quot;전체 다시 생성&quot; 클릭 → 확인 모달 → 새 버전 섹션 추가 확인</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-8079-a28b-cb2c26376b86" class="numbered-list" start="3"><li>리뷰 모드 하단 &quot;조건 추가&quot; → 카테고리 선택 + 텍스트 입력 → 우측 패널 즉시 반영 확인</li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="37f69aa4-f6df-8093-b5ea-e59a4e021c33" class="numbered-list" start="5"><li><strong>5단계 · 완료</strong><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-80cf-afab-c9ce49bdca83" class="numbered-list" start="1"><li>&quot;완료&quot; 클릭 → 채팅으로 복귀, 완성된 답변 전문 노출 확인</li></ol></div><div style="display:contents" dir="auto"><ol type="a" id="37f69aa4-f6df-80b1-a137-d783d414b4df" class="numbered-list" start="2"><li>&quot;답변 수정하기&quot; 클릭 → 리뷰 모드 재진입 확인</li></ol></div></li></ol></div><div style="display:contents" dir="auto"><p id="37c69aa4-f6df-803e-ba00-fb45ffcab812" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
