@@ -95,6 +95,13 @@ export const studies = [
         title: "HID",
         items: [
           {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./week-2/hid/prototype/",
+            status: "ready"
+          },
+          {
             id: "one-pager",
             title: "one-pager",
             type: "page",
