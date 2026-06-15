@@ -110,9 +110,9 @@ export const studies = [
           {
             id: "prototype",
             title: "prototype",
-            type: "placeholder",
-            href: "",
-            status: "empty"
+            type: "page",
+            href: "./week-2/engineering/prototype/",
+            status: "ready"
           },
           {
             id: "cot-note",
