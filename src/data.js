@@ -115,13 +115,6 @@ export const studies = [
             status: "empty"
           },
           {
-            id: "one-pager",
-            title: "one-pager",
-            type: "placeholder",
-            href: "",
-            status: "empty"
-          },
-          {
             id: "cot-note",
             title: "CT note",
             type: "page",
