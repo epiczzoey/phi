@@ -120,6 +120,13 @@ export const studies = [
             type: "page",
             href: "./week-2/engineering/cot-note/",
             status: "ready"
+          },
+          {
+            id: "cot",
+            title: "CoT Note",
+            type: "page",
+            href: "./week-2/engineering/cot/",
+            status: "ready"
           }
         ]
       },
