@@ -1,0 +1,743 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Engineering 2주차 분해안</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="37f69aa4-f6df-80f6-a78f-e1682f1d2895" class="page sans"><header><h1 class="page-title" dir="auto">Engineering 2주차 분해안</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="37f69aa4-f6df-8067-bb39-db0c79793457" class="">오르골의 특징을 리스트업 한다</h1></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37f69aa4-f6df-80c0-8413-d0f194459fbd"><div style="width:100%"><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-8074-a420-c835bf158e96" class="">‼️ 주의사항</p></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8047-9745-f7441fa4e1a1" class="bulleted-list"><li style="list-style-type:disc">재질 색상과 같은 겉모습은 배제한다. 사물의 전체 목적 (고수준)을 먼저 정의</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80be-9ddb-d4ff648084a4" class="bulleted-list"><li style="list-style-type:disc">목적 달성하기 위해 작동하는 핵심 기능과 주요 프로세스 단계 (중수준)을 나열</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8054-aa60-dd0fee38a91c" class="bulleted-list"><li style="list-style-type:disc">조각의 시스템이 어떤 변화를 시키는지 (저수준) 가장 작은 단위까지 쪼갠다.</li></ul></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37f69aa4-f6df-801a-9746-c80172e30d9f"><div style="width:100%"><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80d7-952f-d7a568452f66" class="bulleted-list"><li style="list-style-type:disc">큰 문제를 작게 쪼개는 것이 목적</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a6-ac62-fda11b231f53" class="bulleted-list"><li style="list-style-type:disc">컴퓨터가 이해할 수 있도록 숫자가 될 때까지 계속 분해</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8035-aae2-c5bdf6fc1a0f" class="bulleted-list"><li style="list-style-type:disc">기능 단위로 쪼개는 것이 효과적 (예: 인간을 장기별로 분해) </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8000-997a-ca9a7df66f18" class="bulleted-list"><li style="list-style-type:disc">사물은 기능 단위로, 프로세스는 시간 순서로 분해 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8069-b171-cfa8fe35322e" class="bulleted-list"><li style="list-style-type:disc">MECE 원칙: 같은 층에서 겹치지 않고 빠지지 않게 분해 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804a-8ca2-d87ff243686a" class="bulleted-list"><li style="list-style-type:disc">같은 레벨에서는 같은 수준의 표현 사용 (고수준-중수준-저수준) </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8065-bdd4-f8d0b52c8b72" class="bulleted-list"><li style="list-style-type:disc">탑다운과 바텀업 방식을 번갈아가며 진행 </li></ul></div></div></figure></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8016-8970-ed28e0f59315" class="bulleted-list"><li style="list-style-type:disc">오르골은 처음에는<strong> 망치(핀)</strong>로 <strong>종(돌출부)</strong>을 치는 용도 였다 <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804d-b1e4-df3bd7a74864" class="bulleted-list"><li style="list-style-type:circle"><strong>종(소리발생원)이 망치(타격장치)</strong>를 치는것을 빗으로 교체한건 19세기 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-807e-8928-c7d79e779250" class="bulleted-list"><li style="list-style-type:disc"><strong>태엽을 감으면(트리거이벤트) 멜로디(아웃풋)</strong>가 나온다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c7-8eb0-d75a421edcb3" class="bulleted-list"><li style="list-style-type:disc">멜로디(아웃풋)는 회전하는 드럼에 프로그래밍 되어 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ff-9e48-e57a6a9f6809" class="bulleted-list"><li style="list-style-type:disc">드럼은 핀(망치)이라고 불리우는 <strong>돌출부가 있어 빗살을 잡아 당긴다. </strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-801a-b3eb-e42aa8fad38a" class="bulleted-list"><li style="list-style-type:disc">그 빗은 18개의 빗살이 있는 강철 조각이다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8028-a5a3-ff2392fe14f9" class="bulleted-list"><li style="list-style-type:disc">치아 하나하나가 음표이다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8009-a929-c479f2d395cf" class="bulleted-list"><li style="list-style-type:disc">긴 치아는 낮은 음을 짧은 치아는 짧은 음을 낸다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8043-a987-d9f9c09bc6d6" class="bulleted-list"><li style="list-style-type:disc">빗은 여러 갈래로 갈라진 소리굽쇠처럼 작동한다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8019-baf2-d3159c635d3a" class="bulleted-list"><li style="list-style-type:disc">드럼이 움직이지 않는 것처럼 보이지만 톱니는 진동한다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-808d-8f90-f950cc4d91e6" class="bulleted-list"><li style="list-style-type:disc">짧은 차이가 빨리 진동하고 긴 치아가 천천히 진동하는 구조는 <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8086-bc2b-e0d2021f5b0c" class="bulleted-list"><li style="list-style-type:circle">소리를 만들어 낸다. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8063-933a-d29937f13ff9" class="bulleted-list"><li style="list-style-type:disc">이 현의 톱니는 톱날과 같다. <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8058-8ecf-d1349b51a363" class="bulleted-list"><li style="list-style-type:circle">길면 뜯었을때 낮은 음이 난다.  </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ca-899b-e2175efe8ade" class="bulleted-list"><li style="list-style-type:circle">짧으면 높음음이 난다.  </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c8-8224-f4dfebb1ba47" class="bulleted-list"><li style="list-style-type:disc">뒤집으면 빗의 굵기는 모두 다르다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80f4-ad87-e211de9b86cb" class="bulleted-list"><li style="list-style-type:disc">긴 이빨 (저음)은 끝부분에 무게중심이 더 쏠려 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8007-acb8-f4bea4ba1392" class="bulleted-list"><li style="list-style-type:disc">이렇게 무게가 더해지면 (무게가 무거워지면) 무게가 없을떄보다 낮은 음이 난다. <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8075-9dea-d43a0cda626a" class="bulleted-list"><li style="list-style-type:circle">이런 무게중심은 빗이 더욱 컴팩트 해짐 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-809c-8e89-ef818e700290" class="bulleted-list"><li style="list-style-type:circle">한가지 크기로 대량 생산 가능하다는것 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-801b-a587-c17f1fb78199" class="bulleted-list"><li style="list-style-type:circle">음정을 내려면 필요한 만큼의 재료를 잘라 내면 됨<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8033-8180-cafe9fcedb8a" class="bulleted-list"><li style="list-style-type:square">빗에는 18개의 음표가 있지만 특정 곡에 따라 구체적인 음표는 달라짐 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8043-bfe1-d240e9d43aab" class="bulleted-list"><li style="list-style-type:square">음표의 구간이 빗의 길이 따라 달라짐 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8047-9771-e3f6bf4f9df2" class="bulleted-list"><li style="list-style-type:square">타이밍은 동일함 </li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a1-873d-de42e83643be" class="bulleted-list"><li style="list-style-type:disc"><strong>태엽이 존재</strong><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a5-be79-fcd54ddd8b31" class="bulleted-list"><li style="list-style-type:circle">코일 형태의 강철 스트립 <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80f2-b8b7-fd965c4a12cc" class="bulleted-list"><li style="list-style-type:square">긴 막대기가 스프링처럼 동그랗게 말려 있음 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-803b-a3ee-fb9d8e90ff7a" class="bulleted-list"><li style="list-style-type:circle">스프링 바깥쪽 끝에 T자 형태의 홀더가 있음 <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-805c-80be-c593fd1eb189" class="bulleted-list"><li style="list-style-type:square">그것은 오르골 케이스에 고정되어 오르골을 제자리에 유지시켜줌</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80b9-9c53-f6437ac09312" class="bulleted-list"><li style="list-style-type:circle">스프링 안쪽 끝에는 홈이 있음 <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8019-8c83-d8b26ff5ec12" class="bulleted-list"><li style="list-style-type:square">이 홈은 금속 축의 홈에 걸림 </li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ae-b3a3-c4edfef72f42" class="bulleted-list"><li style="list-style-type:disc"><strong>축</strong>은 태엽 감는 키에 연결 되어 있음<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80cd-b3b8-f52737a5b79e" class="bulleted-list"><li style="list-style-type:circle">축에는 6개의 톱니가 있음</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804b-b060-eb4ef295fa47" class="bulleted-list"><li style="list-style-type:circle">경사진 레짓 기어가 있음. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8038-b803-e0088cdbc1e2" class="bulleted-list"><li style="list-style-type:circle">이 기어는 더 큰 플라스틱 기어 안에 들어감 ( 더 큰 플라스틱기어가 이 축의 기어를 감쌈)</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8091-83d8-c96664b27ecd" class="bulleted-list"><li style="list-style-type:circle">내부에는 4개의 유연한 레칫이 있음 pawls\</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80be-81b3-fa5940a3a145" class="bulleted-list"><li style="list-style-type:circle">축은 플라스틱 기어와 독립적으로 회전함. <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a5-aaff-f4f96ffd8de0" class="bulleted-list"><li style="list-style-type:square">오르골을 감으면 발생하는 현상</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8091-a77d-c28d31d68569" class="bulleted-list"><li style="list-style-type:circle">스프링이 풀리면 축이 반대 방향으로 회전 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80c6-8e9e-d2750ae316b3" class="bulleted-list"><li style="list-style-type:disc">스프링이 풀리면 축이 반대방향으로 회전 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80bc-8d91-d43cb47f0aa2" class="bulleted-list"><li style="list-style-type:disc">6개의 톱니가 있는 기어가 레짓을 잡아 더 큰 플라스틱 기어를 함께 회전시킴 → 이 회전이 오르골을 작동 시킴 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8025-8fa9-f2b1af64bf4a" class="bulleted-list"><li style="list-style-type:disc">스프링이 풀리면서 이 바벨 기어를 회전 시킴</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-807f-a2ab-c5ac89708b6b" class="bulleted-list"><li style="list-style-type:disc">드럼에 부착된 <strong>두번째 바벨 </strong>기어와 맞물림<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8069-a993-f0dcd377c4d4" class="bulleted-list"><li style="list-style-type:circle">스프링이 빨리 풀리면 음악이 너무 빠르게 재생 됨  </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8039-a015-fdde1e986fb1" class="bulleted-list"><li style="list-style-type:circle">조절기 라고 하는 부품이 이 문제를 해결 </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ad-92d9-d173b62e8b27" class="bulleted-list"><li style="list-style-type:disc"><strong>기어 트레인</strong>을 통해 드럼에 연결 됨<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-807e-b6b3-cfa21958ad14" class="bulleted-list"><li style="list-style-type:circle">기어 장치는 뮤직박스 내부에 콤팩트 하게 내장 되어 있음. </li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8088-9565-f3f63a9406ad" class="bulleted-list"><li style="list-style-type:disc"><strong>조속기의 회전</strong>으로 속도를 제어함.<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8064-b7e2-fdd4607118da" class="bulleted-list"><li style="list-style-type:circle">조속기가 멈추면 드럼도 멈춤.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ab-877e-ca6f4e87cc8c" class="bulleted-list"><li style="list-style-type:circle">조절기는 공기의 저항을 이용하여 스프링에서 방출되는 에너지를 제어 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8090-b962-c7984d6e95b3" class="bulleted-list"><li style="list-style-type:circle">공기 저항은 물체의 속도의 제곱에 비례 함.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8084-8166-f5498fe22823" class="bulleted-list"><li style="list-style-type:circle">정지 상태에서 출발할때 조절기는 저항이 거의 없어 쉽게 속도를 높임</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8046-bd02-fc385c12790a" class="bulleted-list"><li style="list-style-type:circle">분당 3000회전 이상으로 빠르게 회전하면 공기 저항이 급격히 증가 → 더 빠른 속도로 움직이는 것을 방해</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8016-b942-c359607c819d" class="bulleted-list"><li style="list-style-type:circle">이 동작은 조속기의 속도를 제한 → 드럼의 회전 속도를 제한</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8025-9e25-ea032148a642" class="bulleted-list"><li style="list-style-type:disc">뮤직박스 조절기를 매우 빠르게 회전 시키기 위해 <strong>증속 기어 장치</strong>를 활용</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-806c-9f34-d4032d65ba11" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">스프링에 의해 구동되는 바벨기어가 드럼에 있는 더 작은 기어와 맞물리면서 시작</mark><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8017-b3e8-db481d8cbad3" class="bulleted-list"><li style="list-style-type:circle">이것은 회전 속도가 큰 기어의 톱니 수와</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ce-928e-cee0168aef18" class="bulleted-list"><li style="list-style-type:circle">작은 기어의 톱니 수의 비율을 곱한 값임<div style="display:contents" dir="ltr"><figure id="37f69aa4-f6df-80c3-b62d-c25eb91dbd7a" class="image"><a href="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image.png"><img style="width:240px" src="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8071-991c-c64267fe9c31" class="bulleted-list"><li style="list-style-type:circle">드럼은 더 큰 기어에 고정 되어 있고</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-803b-bf13-ec6ecdee4da5" class="bulleted-list"><li style="list-style-type:circle">이 기어는 또 다른 기어와 맞물려 회전 속도를 증가시킨다. <div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804a-bcb1-d51bbef36b24" class="bulleted-list"><li style="list-style-type:square">이 부품의 더 큰 기어는 회전 속도를 6.3배로 더 증폭 시킨다<div style="display:contents" dir="ltr"><figure id="37f69aa4-f6df-8097-b913-ec38dea965ef" class="image"><a href="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image%201.png"><img style="width:336px" src="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image%201.png"/></a></figure></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8013-8c85-d0132c2000fb" class="bulleted-list"><li style="list-style-type:circle">마지막으로 스퍼기어는 조속기 축에 있는 윔 스큐와 맞물린다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8064-acc9-d0b1974c3b1d" class="bulleted-list"><li style="list-style-type:circle">움직임이 너무 빨라 흐릿하게 보이지만 여기서는 30회 이상 재생된다</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8074-b0d1-fe777e199a9c" class="bulleted-list"><li style="list-style-type:circle">웜 스크류와 맞물리는 기어는 다른 기어들과 달리 톱니가 구부려져 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804f-92b2-e148e45c85ad" class="bulleted-list"><li style="list-style-type:circle">이 톱니 모양은 나사에 더 잘 맞물리도록 설계됨</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8084-b1b4-c655ef31ced9" class="bulleted-list"><li style="list-style-type:circle">웜 스큐류는 기어의 톱니 하나당 한 바퀴씩 회전하며 톱니가 24개 이므로 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80bd-b3aa-f3722527f89b" class="bulleted-list"><li style="list-style-type:circle">회전속도를 24배 증가시킴<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8097-b229-d6ccff770cd6" class="bulleted-list"><li style="list-style-type:square">첫번째 바벨 기어가 한바퀴 회전할 때마다 조속기가 2400번 회전 한다는 것을 의미</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-807a-aa48-d66021c9a1fb" class="bulleted-list"><li style="list-style-type:square">첫번째 기어기 분당 약 1.5배 회전함으로 조속기는 분당 3600회전한다. </li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8077-aae0-e691d043a09a" class="bulleted-list"><li style="list-style-type:disc">두개의 배럴과 빗살을 장착하여 동시에 연주함으로써 풍부한 화음 가능</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a1-a259-df6e38952bc5" class="bulleted-list"><li style="list-style-type:disc">초창기 뮤직박스는 실린더를 사용했지만 나중에는 디스크를 사용하는 뮤직박스로 대체됨.<div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80cc-a013-f5566fb5ac45" class="bulleted-list"><li style="list-style-type:circle">디스크의 모양은 동그란모양</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8096-8b14-d7848be28b24" class="bulleted-list"><li style="list-style-type:circle">여기서 멜로디는 금속 원반에 세겨져 있음</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8094-bb6b-dd242c3af368" class="bulleted-list"><li style="list-style-type:disc">오르골은 손에 들고 있으면 소리가 작음</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-806a-8258-c62a8cea03ba" class="bulleted-list"><li style="list-style-type:disc">빈 용기 위에 올라가면 소리가 큼 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-801e-b6af-c372461ff008" class="bulleted-list"><li style="list-style-type:disc">빗의 진동은 금속 받침대의 용기로 전달 되어 공명함</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-809e-b3c9-e1438fed1fcf" class="bulleted-list"><li style="list-style-type:disc">오르골은 치아에 대면 두개골 안에서 울려 퍼짐</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80fd-a30f-c78b68dd714b" class="bulleted-list"><li style="list-style-type:disc">진동 </li></ul></div><div style="display:contents" dir="auto"><h1 id="37f69aa4-f6df-8007-a464-db612f798407" class="">트리구조로 재 편성 한다</h1></div><div style="display:contents" dir="auto"><h2 id="37f69aa4-f6df-80e6-a56a-cd671bfc01ab" class="">고수준</h2></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="38069aa4-f6df-802c-a99a-c3fdb25484dc"><div style="width:100%"><div style="display:contents" dir="ltr"><figure id="37f69aa4-f6df-801d-962e-f6afa4e87cfa" class="image"><a href="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image%202.png"><img style="width:704px" src="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image%202.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="38069aa4-f6df-8087-a95e-eff2697dbc8b" class="">타격장치와 소리발생원이 마찰하면 아웃풋이 발생한다.</h3></div><div style="display:contents" dir="auto"><p id="38069aa4-f6df-8050-9742-db6701e77032" class="">타격장치 - 이벤트 트리거가 액션 - 소리발생원이 진동 - 아웃풋 발생 </p></div></div></figure></div><div style="display:contents" dir="auto"><h2 id="37f69aa4-f6df-802a-9926-f136b6f0a28d" class="">중수준 (상수)</h2></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80de-b0c3-fc6fd722110e" class="bulleted-list"><li style="list-style-type:disc"><strong>타격장치는 금속 빗살이 있다. </strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8002-a5f2-d53f8a9fb2b3" class="bulleted-list"><li style="list-style-type:disc">그것의 길이는 다르다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-806b-add6-dfc62372a001" class="bulleted-list"><li style="list-style-type:disc">다른 다른길이는 다른 소리를 낸다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8022-ad50-c5ba61132bed" class="bulleted-list"><li style="list-style-type:disc">무게가 더해지면 소리가 달라진다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8076-98bb-f157fd205e65" class="bulleted-list"><li style="list-style-type:disc">무게에 따라 다른 소리 구간을 갖는다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80d7-a8ab-e029090c96a8" class="bulleted-list"><li style="list-style-type:disc">음의 개수에는 한계가 있다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8074-a435-f11a27474bec" class="bulleted-list"><li style="list-style-type:disc"><strong>드럼은 동그랗고 회전한다. </strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8067-a57e-e8ed2be60be3" class="bulleted-list"><li style="list-style-type:disc"><strong>드럼 표면에는 돌출된 핀을 갖는다. </strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8068-92bc-f718d8554328" class="bulleted-list"><li style="list-style-type:disc">핀의 위치가 다르게 프로그래밍 되어 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8007-bd27-efd9e72f1101" class="bulleted-list"><li style="list-style-type:disc">돌출된 핀이 빗살을 잡아 당긴다. (이벤트)</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8060-ab3e-f9ab08e44270" class="bulleted-list"><li style="list-style-type:disc">길이가 다른 빗과 위치가 다른 핀의 마찰은 진동을 만든다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-809d-bd3e-cc067990365e" class="bulleted-list"><li style="list-style-type:disc"><strong>태엽은 스프링처럼 말려있다. </strong></li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8062-93f6-ff5bd5342151" class="bulleted-list"><li style="list-style-type:disc">풀리면서 기능한다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-803a-ade3-db434952c99e" class="bulleted-list"><li style="list-style-type:disc">스프링이 풀리면서 드럼을 움직인다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-800d-978d-f84d08cc65a6" class="bulleted-list"><li style="list-style-type:disc">움직이는 드럼이 빗을 튕겨 소리를 만든다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80f3-8243-ca3bf0e94be1" class="bulleted-list"><li style="list-style-type:disc">태엽을 감으면 스프링이 풀리면서 소리가 난다.</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8007-8c8c-df2a0aa1e30b" class="bulleted-list"><li style="list-style-type:disc">태엽의 스프링은 속도를 조절하는 기어가 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-809f-9798-c05f8c76fb21" class="bulleted-list"><li style="list-style-type:disc">스프링의 길이는 한계가 있고 다 풀리면 소리가 멈춘다. </li></ul></div><div style="display:contents" dir="auto"><h2 id="37f69aa4-f6df-807d-9691-c14efb50ff3e" class="">저수준 (변수)</h2></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8009-95ab-eb26bab3ed90" class="bulleted-list"><li style="list-style-type:disc">금속 빗살의 갯수</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80ae-8705-ecf49db333b1" class="bulleted-list"><li style="list-style-type:disc">금속 빗살의 길이 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8011-83c6-c06ac25a64a9" class="bulleted-list"><li style="list-style-type:disc">금속 빗살의 무게 </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-804f-9f6c-ded0b2ecf8a1" class="bulleted-list"><li style="list-style-type:disc">드럼의 크기 (기어의 크기) </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8034-95f4-cf138de322a7" class="bulleted-list"><li style="list-style-type:disc">드럼은 동그랗고 회전한다</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8031-906a-ee8d5e7f5579" class="bulleted-list"><li style="list-style-type:disc">드럼 표면은 핀을 갖는다</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80bc-bfd7-f608a9698e72" class="bulleted-list"><li style="list-style-type:disc">핀의 위치가 다르다</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80e8-b6c1-ea04bda0c8f2" class="bulleted-list"><li style="list-style-type:disc">빗과 핀은 마찰한다</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-805d-b838-c93bcf540e8b" class="bulleted-list"><li style="list-style-type:disc">마찰은 진동을 만든다</li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-802d-ad47-f842f61e1afd" class="bulleted-list"><li style="list-style-type:disc">태엽은 감겨 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-802f-948c-e8b107208f9e" class="bulleted-list"><li style="list-style-type:disc">스프링처럼 말려 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-80a2-94f1-e41ce5e96d5b" class="bulleted-list"><li style="list-style-type:disc">풀리면서 움직인다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8001-a90b-c22973d5bea6" class="bulleted-list"><li style="list-style-type:disc">태엽의 길이는 한계가 있다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-806f-9043-d2f8b22bce2c" class="bulleted-list"><li style="list-style-type:disc">태엽의 속도는 기어가 조절한다. </li></ul></div><div style="display:contents" dir="auto"><ul id="37f69aa4-f6df-8048-9f7f-fb206c4df568" class="bulleted-list"><li style="list-style-type:disc">기어의 톱니 수와 비례한다. </li></ul></div><div style="display:contents" dir="ltr"><figure id="38069aa4-f6df-8065-82c5-f481ac225b51" class="image"><a href="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image%203.png"><img style="width:703.9921875px" src="Engineering%202%EC%A3%BC%EC%B0%A8%20%EB%B6%84%ED%95%B4%EC%95%88/image%203.png"/></a></figure></div><div style="display:contents" dir="auto"><h1 id="37f69aa4-f6df-8001-b871-c25dcebea4fb" class="">패턴 인식</h1></div><div style="display:contents" dir="ltr"><table id="37f69aa4-f6df-8066-ae9b-ce0f239e1dde" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-80c9-a6ae-e7d011935879"><td id="N:[l" class="" style="width:108px"></td><td id="Xsk{" class="" style="width:303px">오르골</td><td id="{V`x" class="" style="width:305px">모래시계</td></tr></div><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-801b-877d-e01303475314"><td id="N:[l" class="" style="width:108px">상수</td><td id="Xsk{" class="" style="width:303px">  • 금속 빗살<br/>  • 핀을 갖는 드럼통<br/>  • 태엽은 스프링처럼 말려 있다</td><td id="{V`x" class="" style="width:305px">  • 모래가 담겨 있는 곳<br/>  • 모래가 이동할 곳<br/>  • 모래가 이동하는 통로</td></tr></div><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-805b-96d5-ea798516b13b"><td id="N:[l" class="" style="width:108px">변수</td><td id="Xsk{" class="" style="width:303px">  • 태엽의 길이<br/>  • 금속 빗살의 길이<br/>  • 금속 빗살의 갯수<br/>  • 금속 빗살의 무게<br/>  • 드럼 표면 핀의 위치<br/>  • 드럼의 굵기<br/>  • 드럼의 회전 속도 <br/>  • 태엽의 길이<br/>  • 태엽 스프링이 풀리는 속도</td><td id="{V`x" class="" style="width:305px">  • 모래의 양<br/>  • 모래를 담는 곳의 크기<br/>  • 모래가 이동하는 통로의 넓이</td></tr></div><div style="display:contents" dir="ltr"><tr id="37f69aa4-f6df-8056-aed2-c166d49b69ac"><td id="N:[l" class="" style="width:108px">트리거</td><td id="Xsk{" class="" style="width:303px">  • 태엽이 풀린다<br/>      ◦ 스프링이 돌아간다<br/>  • 움직이는 드럼의 핀이 빗살과 접촉한다<br/>      ◦ 핀이 빗살을 잡아 당긴다<br/>      ◦ 빗살이 놓이며 진동한다<br/>      ◦ 진동이 소리를 만든다 <br/>  • 빗살의 진동이 소리로 전달된다</td><td id="{V`x" class="" style="width:305px">  • 뒤집기<br/>      ◦ 위쪽 공간에서 아래쪽 공간으로 모래가 이동한다<br/>      ◦ 모래가 두 공간 사이의 통로를 지나 아래쪽 공간에 모래가 쌓인다.</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="37f69aa4-f6df-809e-b385-e40651a5c69b" class="">추상화</h1></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37f69aa4-f6df-80c0-b1fc-c7d9b2189e62"><div style="width:100%"><div style="display:contents" dir="auto"><h2 id="37f69aa4-f6df-8055-9e02-e4a5627562ab" class="">태엽이 풀리면서 드럼통의 핀과 금속 빗살이 마찰해 만드는 소리</h2></div></div></figure></div><div style="display:contents" dir="auto"><p id="37f69aa4-f6df-80ec-ab8b-ef88d087b748" class="">저장된 에너지가 회전 운동으로 바뀌고, 드럼에 저장된 음 정보가 순서대로 실행되어 금속 빗살의 진동을 통해 소리로 출력되는 구조</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

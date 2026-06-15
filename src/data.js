@@ -113,8 +113,15 @@ export const studies = [
       {
         id: "engineering",
         title: "engineering",
-        status: "empty",
-        items: []
+        items: [
+          {
+            id: "cot-note",
+            title: "CT note",
+            type: "page",
+            href: "./week-2/engineering/cot-note/",
+            status: "ready"
+          }
+        ]
       },
       {
         id: "aesthetic-literacy",
