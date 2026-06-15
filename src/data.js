@@ -61,13 +61,6 @@ export const studies = [
             type: "page",
             href: "./week-1/engineering/one-pager/",
             status: "ready"
-          },
-          {
-            id: "cot-note",
-            title: "cot-note",
-            type: "page",
-            href: "./week-1/engineering/cot-note/",
-            status: "ready"
           }
         ]
       },
@@ -107,13 +100,6 @@ export const studies = [
             type: "page",
             href: "./week-2/hid/one-pager/",
             status: "ready"
-          },
-          {
-            id: "cot-note",
-            title: "cot-note",
-            type: "page",
-            href: "./week-2/hid/cot-note/",
-            status: "empty"
           }
         ]
       },
@@ -122,22 +108,8 @@ export const studies = [
         title: "engineering",
         items: [
           {
-            id: "prototype-a",
-            title: "prototype-a",
-            type: "placeholder",
-            href: "",
-            status: "empty"
-          },
-          {
-            id: "prototype-b",
-            title: "prototype-b",
-            type: "placeholder",
-            href: "",
-            status: "empty"
-          },
-          {
-            id: "prototype-c",
-            title: "prototype-c",
+            id: "prototype",
+            title: "prototype",
             type: "placeholder",
             href: "",
             status: "empty"
