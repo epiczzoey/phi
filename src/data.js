@@ -144,5 +144,31 @@ export const studies = [
         ]
       }
     ]
+  },
+  {
+    id: "week-3",
+    title: "week-3",
+    tracks: [
+      {
+        id: "hid",
+        title: "HID",
+        items: [
+          {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./week-3/hid/prototype/",
+            status: "ready"
+          },
+          {
+            id: "one-pager",
+            title: "one-pager",
+            type: "page",
+            href: "./week-3/hid/one-pager/",
+            status: "ready"
+          }
+        ]
+      }
+    ]
   }
 ];

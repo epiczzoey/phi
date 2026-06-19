@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HID 수업 3주차 1pager</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="38469aa4-f6df-80f7-b865-fa8a134b0174" class="page sans"><header><h1 class="page-title" dir="auto"><strong>HID 수업 3주차 1pager</strong></h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="38469aa4-f6df-800b-b245-e2b826442d13" class="">문제정의</h1></div><div style="display:contents" dir="auto"><p id="38469aa4-f6df-80bf-adf5-dc4f7f446ba5" class="">채팅 인터페이스로 LLM을 사용할 때, 사용자는 &quot;AI에게 일을 맡겼다&quot;고 느끼지 못한다. 요청을 보낸 뒤에도 <strong>결과가 내 요청대로 됐는지 직접 확인하고, 부족하면 다시 설명하고, 길어진 대화를 계속 스크롤하며 관리해야 한다.</strong></p></div><div style="display:contents" dir="auto"><p id="38469aa4-f6df-80c9-ad06-d37855552650" class="">근본 원인은 채팅 UX의 구조 자체에 있다.</p></div><div style="display:contents" dir="auto"><blockquote id="38469aa4-f6df-8026-b693-f24ebc1fea70" class=""><strong>대화가 선형(linear)으로 끝없이 쌓인다.</strong> 모든 요청·답변·수정이 시간 순으로 한 줄에 누적되기 때문에, 맥락을 다시 찾고·다시 설명하고·다시 검수하는 비용이 대화가 길어질수록 커진다.</blockquote></div><div style="display:contents" dir="auto"><h1 id="38469aa4-f6df-80c3-95e6-c28287ec2d31" class="">사용자  </h1></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-805c-b934-d55b7968e5c6" class="bulleted-list"><li style="list-style-type:disc"><strong>누구</strong>: LLM에게 실제 &quot;작업(output)&quot;을 맡기는 사람. 단순 잡담이 아니라 결과물(기획안, 설계, 문서, 코드 등)을 얻으려는 실무자.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8024-81b6-e640d48fa0d5" class="bulleted-list"><li style="list-style-type:disc"><strong>맥락</strong>: 하나의 작업을 여러 번의 요청·수정으로 다듬어 완성한다. 한 번에 끝나지 않고 <strong>반복적으로 고쳐가는</strong> 사용 패턴.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80c8-aa0f-caf75ae3cfb3" class="bulleted-list"><li style="list-style-type:disc"><strong>기대</strong>: &quot;맡겼으니 알아서 정확히 반영해 주고, 나는 최소한만 확인하면 되는&quot; 경험.</li></ul></div><div style="display:contents" dir="auto"><h1 id="38469aa4-f6df-80b1-bb00-ea95451bc6ff" class="">페인포인트 </h1></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-80f3-8b67-dd39b39586fd" class="numbered-list" start="1"><li><strong>다시 찾기</strong>: 답변이 길어 내가 요청한 조건이 어디에 어떻게 반영됐는지 본문을 뒤져야 한다.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-8035-8f00-d4b06e9782e2" class="numbered-list" start="2"><li><strong>다시 대조</strong>: 반영 여부를 사람이 직접 읽고 체크해야 한다 (검수가 사용자 몫으로 남는다).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-80a3-b21f-e5a98ecddbe9" class="numbered-list" start="3"><li><strong>다시 설명</strong>: 빠진 부분을 추가할 때 &quot;다른 건 건드리지 말고 이것만 바꿔줘&quot;를 매번 다시 입력해야 한다.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-8012-9562-c4ee773e62a0" class="numbered-list" start="4"><li><strong>답변이 사라짐</strong>: 수정 요청을 하면 기존 답변이 통째로 바뀌어, 마음에 들던 부분까지 잃는다.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-8024-8332-f6950df112e5" class="numbered-list" start="5"><li><strong>스크롤 압박</strong>: 대화가 쌓일수록 원하는 지점으로 가기 위한 스크롤 비용이 커진다.</li></ol></div><div style="display:contents" dir="auto"><h1 id="38469aa4-f6df-80d7-9911-ed0362526e3f" class="">사용자의 목표</h1></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8089-9662-eeafe8e1c5b7" class="bulleted-list"><li style="list-style-type:disc"><strong>한 번만 설명하고 싶다</strong> — 같은 맥락을 반복 입력하지 않기.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80d3-bb51-d36c1cee8f6f" class="bulleted-list"><li style="list-style-type:disc"><strong>검수하고 싶지 않다</strong> — 내가 대조하는 대신, 무엇이 어떻게 바뀌었는지 결과가 스스로 보여주기.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-800c-861d-c6bee76615eb" class="bulleted-list"><li style="list-style-type:disc"><strong>큰 맥락은 유지하면서 일부만 고치고 싶다</strong> — 마음에 드는 답변은 보존하고 필요한 부분만 수정.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8031-91ff-e8a6fc977c06" class="bulleted-list"><li style="list-style-type:disc"><strong>길어도 길을 잃지 않고 싶다</strong> — 원하는 섹션으로 바로 점프.</li></ul></div><div style="display:contents" dir="auto"><h1 id="38469aa4-f6df-80b1-bcf3-de917916b460" class="">핵심 마찰 정의</h1></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-806b-bf1b-ee4e1467f66a" class="numbered-list" start="1"><li><strong>검수 마찰 (다시 찾기·대조·설명)</strong><div style="display:contents" dir="auto"><blockquote id="38469aa4-f6df-805f-a539-fe011bc14db0" class="">요청한 조건이 답변에 제대로 들어갔는지 <strong>사용자가 직접 찾아 대조</strong>해야 하고, 안 맞으면 <strong>다시 설명</strong>해야 한다.</blockquote></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-80a6-aa69-f2878b2406e3" class="numbered-list" start="2"><li><strong> 통제 마찰 (맡겼는데도 계속 관리)</strong><div style="display:contents" dir="auto"><blockquote id="38469aa4-f6df-805c-af57-f696cd389ce4" class="">누락된 부분을 추가할 때 기존 답변이 망가지지 않도록 매번 조건을 다시 설명해야 하고, <strong>일을 맡겼음에도 결과를 계속 검수·통제해야 하는 부담</strong>이 남는다.</blockquote></div></li></ol></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="38469aa4-f6df-8067-bd95-e184c74cb50a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="38469aa4-f6df-8043-a232-ef5a325c324d" class=""><strong>결론</strong>: 두 마찰 모두 <em>&quot;설명을 여러 번 해야 하는 불편&quot;</em> + <em>&quot;맡겼는데도 검수가 다시 생기는 불편&quot;</em> 으로 수렴한다. 따라서 개선 방향은 <strong>인터페이스의 뎁스를 단순화하고(예측 가능하게), 채팅 + 하이라이트 + 숏컷만 남겨 마찰을 제거</strong>하는 것이다.</p></div></div></figure></div><div style="display:contents" dir="auto"><h1 id="38469aa4-f6df-809c-9b90-dcc6ad43e49a" class="">인터렉션 설계</h1></div><div style="display:contents" dir="auto"><p id="38469aa4-f6df-80bc-a39d-d7b60b985a2e" class="">핵심 마찰(검수·통제)을 줄이기 위해 인터페이스를 다음 세 가지로 설계한다.<div class="indented"><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-80f9-bd8c-c7c16d5cb504" class="numbered-list" start="1"><li><strong>한 번만 설명한다</strong> — 이전 요청을 다시 불러와 일부만 고친다. 처음부터 다시 쓰지 않는다.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-801d-834f-e34fc318d65c" class="numbered-list" start="2"><li><strong>검수하지 않는다</strong> — 사람이 대조하는 대신, 변화 자체(diff)가 무엇이 바뀌었는지 보여준다.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-802c-bfec-e14a492281d0" class="numbered-list" start="3"><li><strong>뎁스를 줄이고 예측 가능하게</strong> — 모달·별도 모드·복잡한 패널을 없애고 <strong>하나의 채팅 화면</strong>에서 끝낸다. 남기는 건 채팅 + 하이라이트 + 숏컷뿐.</li></ol></div></div></p></div><div style="display:contents" dir="auto"><h4 id="38469aa4-f6df-80d0-a1fa-f24f71092e0e" class=""><strong>마찰별 인터페이스 해결책</strong></h4></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-802d-b13a-c1a51ecdf70e" class="numbered-list" start="1"><li><strong>검수 마찰 → 머지형 diff + 가독성</strong><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80c7-91fe-f3f6f6f6d77a" class="bulleted-list"><li style="list-style-type:disc">수정 답변은 <strong>원본 전체를 보존</strong>한 채 변경분만 인라인으로 표시한다.<div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80e3-a368-e76ed10c1785" class="bulleted-list"><li style="list-style-type:circle">추가: <code>+</code> · 초록, 삭제: <code>−</code> · 빨강(취소선), 변경 없음: 기본색.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8094-a37a-e7f043cfd6ef" class="bulleted-list"><li style="list-style-type:disc">사용자는 &quot;어디가 어떻게 바뀌었는지&quot;를 대조 없이 한눈에 확인한다 → <strong>검수가 읽기 한 번으로 끝난다.</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8037-9a2b-ea86114bd8ac" class="bulleted-list"><li style="list-style-type:disc">본문은 노션식 타이포(콜아웃·구분선·굵게/형광/코드)로 정리해 훑어보기 쉽게.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-8098-ac2a-efd274403317" class="numbered-list" start="2"><li><strong> 통제 마찰 → 편집 아이콘 → 입력창 자동 채움</strong><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80b2-88c7-f2b25920af24" class="bulleted-list"><li style="list-style-type:disc">질문/답변 버블 하단의 <strong>편집 아이콘</strong>을 누르면, 그 요청 텍스트가 <strong>입력창에 자동으로 채워진다.</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80ee-a7e2-e6523de5f8cf" class="bulleted-list"><li style="list-style-type:disc">사용자는 처음부터 다시 설명하지 않고 <strong>필요한 부분만 고쳐서</strong> 전송한다.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8028-804c-d4f91cdd8904" class="bulleted-list"><li style="list-style-type:disc">&quot;수정 중&quot; 배너로 <em>&quot;이건 기존 답변을 다듬는 요청&quot;</em> 임을 명시 → 큰 맥락은 유지되고 일부만 바뀐다.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-803f-a538-c0a059d68c6e" class="bulleted-list"><li style="list-style-type:disc">복사(⧉) 아이콘도 함께 제공(클릭 시 체크로 전환).</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38469aa4-f6df-80e3-a2a5-d69efb4eb30f" class="numbered-list" start="3"><li><strong>마찰 스크롤 압박 → 점프 네비</strong><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-80c0-8974-c4019d611d48" class="bulleted-list"><li style="list-style-type:disc">최신 답변의 섹션(h2)을 우측 목차로 띄우고, 클릭하면 해당 섹션으로 부드럽게 점프 + 잠깐 하이라이트.</li></ul></div><div style="display:contents" dir="auto"><ul id="38469aa4-f6df-8005-8b5b-d9f16b66e563" class="bulleted-list"><li style="list-style-type:disc">스크롤 스파이로 현재 보고 있는 섹션을 강조 → 긴 답변에서도 길을 잃지 않는다.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><h3 id="38469aa4-f6df-8087-be03-c82d763f4bf4" class="">시나리오</h3></div><div style="display:contents" dir="ltr"><table id="38469aa4-f6df-801d-a221-df1c5c08440e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8036-9f0b-d4bfdfa86597"><th id="J_&lt;|" class="simple-table-header-color simple-table-header"></th><th id="hcRF" class="simple-table-header-color simple-table-header"><strong>사용자 행동</strong></th><th id="BJPi" class="simple-table-header-color simple-table-header"><strong>화면 (인터페이스)</strong></th><th id="H`LP" class="simple-table-header-color simple-table-header"><strong>반응 (인터랙션)</strong></th><th id="X}iE" class="simple-table-header-color simple-table-header"><strong>해결 마찰</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8029-8f7a-ecb356e015d6"><td id="J_&lt;|" class="">1</td><td id="hcRF" class="">작업을 입력하고 전송</td><td id="BJPi" class="">가운데 채팅 컬럼, 하단 입력창</td><td id="H`LP" class="">사용자 버블 → 0.4초 후 AI 답변 버블 생성, 자동 스크롤</td><td id="X}iE" class="">—</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-800c-a906-e95f11660bff"><td id="J_&lt;|" class="">2</td><td id="hcRF" class="">답변을 읽는다</td><td id="BJPi" class="">정리된 긴 텍스트(콜아웃·구분선·굵게/형광)</td><td id="H`LP" class="">노션식 타이포로 훑어보기 쉬움</td><td id="X}iE" class="">가독성</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8093-bb76-e9363a494c7a"><td id="J_&lt;|" class="">3</td><td id="hcRF" class="">원하는 섹션으로 이동</td><td id="BJPi" class="">우측 미니 목차(점프 네비)</td><td id="H`LP" class="">클릭 → 부드러운 스크롤 + 1.3초 하이라이트, 현재 섹션 자동 강조</td><td id="X}iE" class="">스크롤 압박</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-80a3-8f0b-cad7882e1d7c"><td id="J_&lt;|" class="">4</td><td id="hcRF" class="">요청대로 됐는지 확인</td><td id="BJPi" class="">답변 본문</td><td id="H`LP" class="">읽기만으로 검수(대조 작업 없음)</td><td id="X}iE" class="">검수 마찰</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8000-a917-d0602b764cc8"><td id="J_&lt;|" class="">5</td><td id="hcRF" class="">일부를 고치고 싶다</td><td id="BJPi" class="">버블 하단 ✎ 편집 아이콘(hover 시 또렷)</td><td id="H`LP" class="">클릭 → <strong>직전 요청이 입력창에 자동 채워짐</strong></td><td id="X}iE" class="">통제 마찰</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8092-9451-cf21c555991d"><td id="J_&lt;|" class="">6</td><td id="hcRF" class="">필요한 부분만 수정</td><td id="BJPi" class="">입력창 위 &quot;수정 중&quot; 배너 + 취소(✕), 테두리 강조</td><td id="H`LP" class="">처음부터 다시 안 쓰고 일부만 편집</td><td id="X}iE" class="">반복 설명</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8078-83d3-d334ead24462"><td id="J_&lt;|" class="">7</td><td id="hcRF" class="">전송</td><td id="BJPi" class="">—</td><td id="H`LP" class="">신규 답변이 아닌 <strong>부분 수정 답변(diff)</strong> 생성, 이전 답변 접힘</td><td id="X}iE" class="">—</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-8056-9b3b-f084e4db89ea"><td id="J_&lt;|" class="">8</td><td id="hcRF" class="">무엇이 바뀌었는지 확인</td><td id="BJPi" class="">머지형 diff (원본 보존)</td><td id="H`LP" class="">추가 <code>+</code>·초록 / 삭제 <code>−</code>·빨강·취소선 / 변경없음 기본색</td><td id="X}iE" class="">검수 마찰</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-80e9-8e48-f04ccaea482f"><td id="J_&lt;|" class="">9</td><td id="hcRF" class="">결과를 가져간다</td><td id="BJPi" class="">버블 하단 ⧉ 복사 아이콘</td><td id="H`LP" class="">클릭 → 평문 복사, 1.2초간 ✓로 전환</td><td id="X}iE" class="">—</td></tr></div><div style="display:contents" dir="ltr"><tr id="38469aa4-f6df-809c-8a93-c3e4efb214c0"><td id="J_&lt;|" class="">(취소)</td><td id="hcRF" class="">수정을 그만둔다</td><td id="BJPi" class="">입력창 배너의 ✕</td><td id="H`LP" class="">편집 모드 해제 → 일반 입력으로 복귀</td><td id="X}iE" class="">—</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="38469aa4-f6df-8036-8900-e013a55fd666" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
