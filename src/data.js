@@ -168,6 +168,32 @@ export const studies = [
             status: "ready"
           }
         ]
+      },
+      {
+        id: "engineering",
+        title: "engineering",
+        items: [
+          {
+            id: "coming-soon",
+            title: "coming-soon",
+            type: "placeholder",
+            href: "",
+            status: "empty"
+          }
+        ]
+      },
+      {
+        id: "aesthetic-literacy",
+        title: "aesthetic-literacy",
+        items: [
+          {
+            id: "coming-soon",
+            title: "coming-soon",
+            type: "placeholder",
+            href: "",
+            status: "empty"
+          }
+        ]
       }
     ]
   }
