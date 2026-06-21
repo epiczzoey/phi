@@ -166,6 +166,13 @@ export const studies = [
             type: "page",
             href: "./week-3/hid/one-pager/",
             status: "ready"
+          },
+          {
+            id: "cot",
+            title: "CoT Note",
+            type: "page",
+            href: "./week-3/hid/cot/",
+            status: "ready"
           }
         ]
       },
