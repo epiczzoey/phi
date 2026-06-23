@@ -181,11 +181,11 @@ export const studies = [
         title: "engineering",
         items: [
           {
-            id: "coming-soon",
-            title: "coming-soon",
-            type: "placeholder",
-            href: "",
-            status: "empty"
+            id: "cot-note",
+            title: "CT note",
+            type: "page",
+            href: "./week-3/engineering/cot-note/",
+            status: "ready"
           }
         ]
       },
