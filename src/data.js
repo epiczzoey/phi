@@ -238,6 +238,13 @@ export const studies = [
             type: "page",
             href: "./week-4/engineering/ct-note/",
             status: "ready"
+          },
+          {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./week-4/engineering/prototype/",
+            status: "ready"
           }
         ]
       }
