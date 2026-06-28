@@ -1,0 +1,743 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HID 수업 4주차 1pager</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="38d69aa4-f6df-8050-a01b-d757a0fd2a34" class="page sans"><header><h1 class="page-title" dir="auto"><strong>HID 수업 4주차 1pager</strong></h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="38d69aa4-f6df-808a-a496-df32fec3c245" class=""><strong>문제정의</strong></h2></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8068-b425-ff1a81d01941" class="bulleted-list"><li style="list-style-type:disc">LLM 채팅에서 수정 요청 후 <strong>검수 비용이 사용자에게 되돌아옴</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8013-8a32-f383e2c64f30" class="bulleted-list"><li style="list-style-type:disc">수정 답변은 새 텍스트 덩어리로 교체 → <strong>무엇이 바뀌었는지 사용자가 직접 대조</strong></li></ul></div><div style="display:contents" dir="auto"><h2 id="38d69aa4-f6df-800e-bb04-ee1fe76dbd34" class=""><strong>사용자</strong></h2></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80fa-b86c-c9ca03061a76" class="bulleted-list"><li style="list-style-type:disc"><strong>누구:</strong> LLM에게 실제 결과물(기획안·문서·설계)을 맡기는 실무자</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80c9-9a22-cd0ce2b554da" class="bulleted-list"><li style="list-style-type:disc"><strong>사용 목적:</strong> 잡담이 아닌 output 생산 — 한 번에 완성되지 않고 반복 수정으로 완성</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-806f-9dc6-d079c64795c9" class="bulleted-list"><li style="list-style-type:disc"><strong>기대 경험:</strong> 맡겼으면 알아서 반영 → 나는 결과만 빠르게 확인</li></ul></div><div style="display:contents" dir="auto"><h2 id="38d69aa4-f6df-80e0-b248-fcb62f99b27d" class=""><strong>페인포인트</strong></h2></div><div style="display:contents" dir="auto"><ol type="1" id="38d69aa4-f6df-808c-a9b2-cd8aa55f22bf" class="numbered-list" start="1"><li><strong>검수가 다시 생김</strong> — 수정 후에도 이전 답변과 새 답변을 스스로 비교해야 함</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38d69aa4-f6df-8000-8628-fa91b505cf16" class="numbered-list" start="2"><li><strong>맥락 반복 설명</strong> — &quot;2단계만 바꿔줘&quot; 같은 이전 요청 맥락을 매 수정마다 재입력</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38d69aa4-f6df-801c-84a8-fe493a993bc8" class="numbered-list" start="3"><li><strong>상태 불명확</strong> — 입력창이 항상 비어있어 지금 수정 중인지 새 요청인지 인터페이스가 말해주지 않음</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38d69aa4-f6df-804b-93f8-e4b5334c4113" class="numbered-list" start="4"><li><strong>diff 정보 과부하</strong> — 변경 표시가 항상 노출되면 최종 결과만 보고 싶은 사용자에게 노이즈</li></ol></div><div style="display:contents" dir="auto"><h2 id="38d69aa4-f6df-80e2-8dc7-f2875f3af44f" class=""><strong>사용자의 목표</strong></h2></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80b5-a386-f4d9ea090b18" class="bulleted-list"><li style="list-style-type:disc"><strong>검수하지 않는다</strong> — 결과물이 무엇이 어떻게 바뀌었는지 스스로 보여주기</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8036-ab12-c1dc56074a93" class="bulleted-list"><li style="list-style-type:disc"><strong>한 번만 설명한다</strong> — 수정 요청이 이전 맥락에서 이어지기</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80cb-895e-e8af2fdc6011" class="bulleted-list"><li style="list-style-type:disc"><strong>상태를 먼저 안다</strong> — 지금 수정 중임을 인터페이스가 먼저 알려주기</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80ee-9b50-f7c7b8c2086f" class="bulleted-list"><li style="list-style-type:disc"><strong>밀도를 선택한다</strong> — 변경 상세 vs 최종 결과만, 둘 중 선택 가능</li></ul></div><div style="display:contents" dir="auto"><h2 id="38d69aa4-f6df-8040-9a28-f0abd00982cb" class=""><strong>핵심마찰 정의</strong></h2></div><div style="display:contents" dir="auto"><ol type="1" id="38d69aa4-f6df-80c6-b7d8-f618e41ab510" class="numbered-list" start="1"><li><strong>검수 마찰 — &quot;뭐가 바뀌었는지 모른다&quot;</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-805f-b673-fd2628207edd" class="bulleted-list"><li style="list-style-type:disc">수정 답변 = 기존 답변 통째 교체</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-803c-a42c-dfe4dba0bf0c" class="bulleted-list"><li style="list-style-type:disc">사용자가 이전 답변 기억하거나 스크롤해서 직접 대조</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-806c-96bd-f6002bca9211" class="bulleted-list"><li style="list-style-type:disc">→ <strong>검수 비용이 사용자에게 고스란히 전가</strong></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38d69aa4-f6df-8063-8931-d4f6ddd767f9" class="numbered-list" start="2"><li><strong>통제 마찰 — &quot;수정이 새 대화처럼 느껴진다&quot;</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80f9-a54d-dc9dfbb15efc" class="bulleted-list"><li style="list-style-type:disc">입력창 항상 비어있음 → 이전 요청과의 연결 단절</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80cd-9281-c5b8167d6789" class="bulleted-list"><li style="list-style-type:disc">수정 의도를 처음부터 재입력해야 함</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8048-9d1a-c13ae6fad00e" class="bulleted-list"><li style="list-style-type:disc">수정 중이라는 상태 표시 없음</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8053-92de-e89df02e89a9" class="bulleted-list"><li style="list-style-type:disc">→ <strong>수정이 흐름이 아니라 새 작업이 됨</strong></li></ul></div></li></ol></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="38d69aa4-f6df-8025-ac72-e83f08bd735f"><div style="width:100%"><div style="display:contents" dir="auto"><p id="38d69aa4-f6df-8062-8cf3-e81ff2c28d98" class=""><strong>공통 원인</strong></p></div><div style="display:contents" dir="auto"><p id="38d69aa4-f6df-80a1-87a4-dae5ff45d8ca" class="">두 마찰 모두 &quot;수정이 이전과 연결되지 않는다&quot;로 수렴<br/>→ 수정 결과가 스스로 무엇이 바뀌었는지 보여주고, 수정 요청이 이전 맥락에서 이어져야 함</p></div></div></figure></div><div style="display:contents" dir="auto"><h2 id="38d69aa4-f6df-80ea-9c65-eb7a2be72872" class=""><strong>인터페이스 디벨롭</strong></h2></div><div style="display:contents" dir="auto"><h3 id="38d69aa4-f6df-8014-af89-d9f35f45da72" class=""><strong>편집 모드  → 통제 마찰 해소</strong></h3></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8074-9041-ff2fec578fc4" class="bulleted-list"><li style="list-style-type:disc"><strong>편집 진입 방식</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-802e-b4a6-f07b23d2753a" class="bulleted-list"><li style="list-style-type:circle">답변 카드 하단 연필 아이콘 클릭 → 직전 요청 텍스트가 입력창에 자동 삽입</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80d4-a0d5-e3fdec9acdc9" class="bulleted-list"><li style="list-style-type:circle">처음부터 다시 쓰지 않고 필요한 부분만 수정 후 전송</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-801f-a54c-cd945dfc63b6" class="bulleted-list"><li style="list-style-type:disc"><strong>자동 포커스 + 커서 끝 이동</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8099-8a20-f2d60d81511e" class="bulleted-list"><li style="list-style-type:circle">아이콘 클릭 즉시: 포커스 획득 + 커서가 텍스트 맨 끝으로 위치</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80fc-bed4-dd131840559d" class="bulleted-list"><li style="list-style-type:circle">인터페이스가 먼저 &quot;바로 타이핑하세요&quot;를 행동으로 전달</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8047-ad1b-df77eba0fde7" class="bulleted-list"><li style="list-style-type:disc"><strong>힌트 텍스트 전환</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8055-aee1-eb59ddd6e604" class="bulleted-list"><li style="list-style-type:circle">기본: &quot;⌘ Enter로 전송&quot; → 편집 중: &quot;수정 후 ⌘ Enter로 전송&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-808c-9ecc-c121b5fca001" class="bulleted-list"><li style="list-style-type:circle">같은 위치, 같은 크기 — 텍스트 교체만으로 모드 전환을 전달</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="38d69aa4-f6df-80e5-9448-f320ac440b45" class=""><strong>answer-diff 카드  → 검수 마찰 해소</strong></h3></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8056-b930-d59a19c7a126" class="bulleted-list"><li style="list-style-type:disc"><strong>카드 생성 방식</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80e9-90fb-d6440b910edf" class="bulleted-list"><li style="list-style-type:circle">편집 모드 전송 시: 1차 답변(answer-doc)이 비활성화, 0.4초 후 answer-diff 카드 생성</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80d4-bb71-e131aaab8d6b" class="bulleted-list"><li style="list-style-type:circle">새 텍스트가 아닌 머지형 diff — 원본 전체 보존 + 변경된 줄만 인라인 강조</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80c0-85d8-c78358c3fe4d" class="bulleted-list"><li style="list-style-type:disc"><strong>헤더 변경 카운트 칩</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8056-b40d-f212eb4a491e" class="bulleted-list"><li style="list-style-type:circle">초록 칩: <code>+ N줄 추가</code> / 빨강 칩: <code>− N줄 삭제</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80ad-9258-ef1290ab2111" class="bulleted-list"><li style="list-style-type:circle">읽기 전에 변경 규모 파악 가능 — 칩 색상이 성격(추가/삭제)을 직관적으로 전달</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8095-bcd4-f60241dc5a30" class="bulleted-list"><li style="list-style-type:disc"><strong>인라인 diff 강조</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80fb-ac3e-d3abe0cf22c4" class="bulleted-list"><li style="list-style-type:circle">추가된 줄: <code>+</code> 기호 + 초록 배경 + 초록 좌측 보더</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80ba-9fd6-d5a4a6e7f59e" class="bulleted-list"><li style="list-style-type:circle">삭제된 줄: <code>−</code> 기호 + 연한 빨강 배경 + 취소선 + 흐린 텍스트</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8016-a498-e2a9ec817f17" class="bulleted-list"><li style="list-style-type:circle">변경 없는 줄: 기호 없음 + 기본 본문색</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8000-a141-f45144199bb3" class="bulleted-list"><li style="list-style-type:circle">시선이 강조 색상으로 자연스럽게 변경 지점으로 이동</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-809e-b79b-ce9478a73a37" class="bulleted-list"><li style="list-style-type:disc"><strong>하단 범례</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8049-af76-ea7487aa6c1e" class="bulleted-list"><li style="list-style-type:circle"><code>+</code> 추가됨 / <code>−</code> 삭제됨 / ● 변경 없음 — 3가지 기호 설명</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80c8-bb63-eff871ebe204" class="bulleted-list"><li style="list-style-type:circle">diff 모드에서만 표시 (clean 모드 전환 시 함께 숨겨짐)</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-805a-97cc-dfa72ab86263" class="bulleted-list"><li style="list-style-type:disc"><strong>카드 스타일 일관성</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8031-886e-e1cd20274cb5" class="bulleted-list"><li style="list-style-type:circle">answer-doc과 동일: 흰 배경 + 1px 보더 + radius 12px + 하단 액션 바</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8048-93ac-ef83010296ee" class="bulleted-list"><li style="list-style-type:circle">형식이 다른 두 카드가 같은 시스템에 속한다는 시각적 일관성 유지</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="38d69aa4-f6df-80fe-891b-e8e2d2544b18" class=""><strong>diff 토글  → 정보 밀도를 사용자가 선택</strong></h3></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8017-81fc-e2a5c43a3cd2" class="bulleted-list"><li style="list-style-type:disc"><strong>헤더 우측 토글 버튼</strong> — &quot;변경사항 숨기기 / 변경사항 보기&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-805d-9296-f90201dd0db7" class="bulleted-list"><li style="list-style-type:disc"><strong>diff 모드 (기본)</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80b0-8c5c-d9135fac193b" class="bulleted-list"><li style="list-style-type:circle">+/− 기호, 색상 강조, 범례 전체 표시</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80f1-b882-eae1e4716753" class="bulleted-list"><li style="list-style-type:circle">변경사항을 정확히 파악하려는 사용자용</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80e3-b673-f307cc282532" class="bulleted-list"><li style="list-style-type:disc"><strong>clean 모드 (토글 후)</strong><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-805d-880d-cb8abb483cac" class="bulleted-list"><li style="list-style-type:circle">삭제된 줄 숨김 → 추가 + 유지된 줄만 깔끔하게 표시</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8081-a935-c2e02f20b0a3" class="bulleted-list"><li style="list-style-type:circle">범례도 함께 사라짐 — diff 관련 UI 전체가 일관되게 숨겨짐</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80a3-82e8-f28181e04d05" class="bulleted-list"><li style="list-style-type:circle">최종 결과만 보거나 복사하려는 사용자용</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8013-8a44-c29d7d78d709" class="bulleted-list"><li style="list-style-type:disc">언제든 &quot;변경사항 보기&quot;로 diff 모드 복귀 가능</li></ul></div><div style="display:contents" dir="auto"><h3 id="38d69aa4-f6df-8004-ba2b-cf30f887095e" class=""><strong>2종 카드 시스템  → 카드 자체가 맥락을 전달</strong></h3></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-801a-bb58-f05935a3a8a3" class="bulleted-list"><li style="list-style-type:disc"><strong>answer-doc</strong> — 1차 답변 카드<div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8054-9a90-fbdb336a1723" class="bulleted-list"><li style="list-style-type:circle">노션식 문서 포맷: 콜아웃 · 구분선 · 굵게 · 헤딩</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-806f-924a-faae05a0002c" class="bulleted-list"><li style="list-style-type:circle">우측 점프 네비게이션: 섹션 제목 클릭 → 해당 위치 스크롤</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-804b-b973-f00749f88aad" class="bulleted-list"><li style="list-style-type:disc"><strong>answer-diff</strong> — 2차 수정 결과 카드<div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-80ac-9fae-e886e1d98182" class="bulleted-list"><li style="list-style-type:circle">머지형 diff 포맷: 변경 카운트 칩 + 토글 + diff/clean 2모드</li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-804e-a641-e503bdf475e8" class="bulleted-list"><li style="list-style-type:circle">카드 종류만으로 &quot;처음 생성&quot; vs &quot;수정 결과&quot; 구분 가능</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38d69aa4-f6df-8067-977f-f758066f0b10" class="bulleted-list"><li style="list-style-type:disc">1차 답변은 2차 전송 시 자동 비활성화 (frozen) → &quot;이전 결과물&quot;임을 시각적으로 표시</li></ul></div><div style="display:contents" dir="auto"><h1 id="38d69aa4-f6df-802d-aa12-c099ad06603c" class=""><strong>시나리오</strong></h1></div><div style="display:contents" dir="ltr"><table id="38d69aa4-f6df-80bc-ac78-f176aa0ea785" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-8089-a4d0-e3e87b7d2579"><th id="eNU_" class="simple-table-header-color simple-table-header"><strong>단계</strong></th><th id="?HDL" class="simple-table-header-color simple-table-header"><strong>사용자 행동</strong></th><th id="glk>" class="simple-table-header-color simple-table-header"><strong>화면</strong></th><th id="K{PF" class="simple-table-header-color simple-table-header"><strong>인터랙션</strong></th><th id="H_lE" class="simple-table-header-color simple-table-header"><strong>해소 마찰</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-808a-ba04-ef2f8b1615f9"><td id="eNU_" class="">1</td><td id="?HDL" class="">요청 입력 후 전송</td><td id="glk>" class="">하단 입력창&quot;⌘ Enter로 전송&quot; 힌트</td><td id="K{PF" class="">사용자 버블 생성→ 0.4초 후 answer-doc 카드 등장→ 자동 스크롤</td><td id="H_lE" class="">—</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-8078-a7cf-d44df5af23c4"><td id="eNU_" class="">2</td><td id="?HDL" class="">답변 읽기</td><td id="glk>" class="">노션식 문서 카드(콜아웃·구분선·굵게)</td><td id="K{PF" class="">우측 점프 네비 → 원하는 섹션 바로 이동</td><td id="H_lE" class="">스크롤 압박</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-80b7-8f1d-f7a1bf1d1b6e"><td id="eNU_" class="">3</td><td id="?HDL" class="">일부 수정 원함</td><td id="glk>" class="">카드 하단 연필 아이콘(hover 시 노출)</td><td id="K{PF" class="">클릭 → 직전 요청 자동 삽입커서 텍스트 끝 이동입력창 테두리 → 검정</td><td id="H_lE" class="">통제 마찰(반복 설명)</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-8033-b257-e91343eaed7b"><td id="eNU_" class="">4</td><td id="?HDL" class="">편집 배너 확인</td><td id="glk>" class="">입력창 위 회색 배너(연필 + 안내 + ✕)</td><td id="K{PF" class="">&quot;수정 중&quot; 상태 명시힌트 → &quot;수정 후 ⌘ Enter로 전송&quot;</td><td id="H_lE" class="">통제 마찰(상태 불명확)</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-800f-8208-e801f07784a3"><td id="eNU_" class="">5</td><td id="?HDL" class="">필요한 부분만 수정 후 전송</td><td id="glk>" class="">—</td><td id="K{PF" class="">1차 answer-doc → 비활성(frozen)0.4초 후 answer-diff 카드 생성</td><td id="H_lE" class="">—</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-805e-af9f-e036ca532f20"><td id="eNU_" class="">6</td><td id="?HDL" class="">무엇이 바뀌었는지 확인</td><td id="glk>" class="">answer-diff 헤더&quot;+ N줄 추가 · − N줄 삭제&quot; 칩</td><td id="K{PF" class=""><code>+</code> 초록 배경 행<code>−</code> 빨강 취소선 행하단 범례 3종</td><td id="H_lE" class="">검수 마찰</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-804a-8bda-dcdb3a9848b2"><td id="eNU_" class="">7</td><td id="?HDL" class="">diff가 부담됨</td><td id="glk>" class="">헤더 &quot;변경사항 숨기기&quot; 버튼</td><td id="K{PF" class="">클릭 → clean 모드삭제 줄 사라짐, 범례도 숨겨짐&quot;변경사항 보기&quot;로 복귀 가능</td><td id="H_lE" class="">정보 과부하</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-80b4-969a-de8a64a8acda"><td id="eNU_" class="">8</td><td id="?HDL" class="">수정 취소</td><td id="glk>" class="">편집 배너 ✕ 버튼</td><td id="K{PF" class="">편집 해제, 입력창 초기화테두리 → 회색 복귀</td><td id="H_lE" class="">—</td></tr></div><div style="display:contents" dir="ltr"><tr id="38d69aa4-f6df-80f4-aa40-c174e8774ff1"><td id="eNU_" class="">9</td><td id="?HDL" class="">결과 복사</td><td id="glk>" class="">카드 하단 복사 아이콘</td><td id="K{PF" class="">삭제 줄 제외 평문 클립보드 복사1.2초간 ✓ 아이콘 전환</td><td id="H_lE" class="">—</td></tr></div></tbody></table></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
