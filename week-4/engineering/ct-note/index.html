@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CT 4단계 — Retro-Report 초안 생성기</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff; color: #37352f; line-height: 1.6; font-size: 16px;
+    }
+    .page { max-width: 760px; margin: 0 auto; padding: 80px 72px 160px; }
+
+    .cover { margin-bottom: 40px; }
+    .cover h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 8px; }
+    .cover-sub { color: #9b9a97; font-size: 15px; margin-bottom: 16px; }
+    .cover-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+    .meta-item { font-size: 13px; color: #9b9a97; }
+    .meta-item strong { color: #37352f; }
+
+    hr { border: none; border-top: 1px solid #e9e9e7; margin: 28px 0; }
+
+    .callout { display: flex; gap: 10px; padding: 14px 16px; border-radius: 4px; margin: 14px 0; }
+    .callout.yellow { background: #fef9db; }
+    .callout.blue   { background: #e8f3fc; }
+    .callout.gray   { background: #f7f6f3; }
+    .callout-body { font-size: 14px; color: #37352f; }
+
+    h2 { font-size: 20px; font-weight: 700; margin-top: 40px; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 5px; background: #37352f; color: #fff; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .step-sub { color: #9b9a97; font-weight: 400; font-size: 14px; }
+    h3 { font-size: 15px; font-weight: 600; margin-top: 20px; margin-bottom: 8px; }
+    p { font-size: 14px; color: #37352f; margin-bottom: 8px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+    thead th { text-align: left; padding: 8px 12px; border-bottom: 1px solid #e9e9e7; color: #9b9a97; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; background: #fafaf9; }
+    tbody td { padding: 9px 12px; border-bottom: 1px solid #f0efed; vertical-align: top; line-height: 1.5; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafaf9; }
+
+    .insight { border-left: 3px solid #37352f; padding: 10px 14px; margin: 10px 0; background: #fafaf9; font-size: 14px; }
+    .insight.green { border-left-color: #1f7a3a; background: #edf7ef; }
+    .insight.blue  { border-left-color: #1a6f9a; background: #e8f3fc; }
+
+    .t { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 3px; font-weight: 500; margin: 1px; }
+    .t.b { background: #d3eafd; color: #1a6f9a; }
+    .t.g { background: #d4edda; color: #1f7a3a; }
+    .t.p { background: #e8ddf8; color: #5b3b9a; }
+    .t.o { background: #fdebd0; color: #b35f1a; }
+    .t.n { background: #e3e2df; color: #37352f; }
+
+    code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background: #f0efed; padding: 1px 5px; border-radius: 3px; }
+
+    ul, ol { padding-left: 20px; margin: 8px 0; }
+    li { font-size: 14px; margin-bottom: 7px; line-height: 1.55; }
+
+    .tree { margin: 16px 0; }
+    .tree-root { padding: 12px 16px; background: #37352f; color: #fff; border-radius: 6px; font-size: 14px; font-weight: 600; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 2px; }
+    .tree-children { margin-left: 20px; padding-left: 16px; padding-top: 6px; padding-bottom: 2px; border-left: 2px solid #d4d3d0; }
+    .tree-mid-item { margin: 6px 0; }
+    .tree-mid { padding: 8px 12px; background: #f0efed; border-radius: 4px; font-size: 13px; font-weight: 600; display: flex; align-items: flex-start; gap: 8px; position: relative; }
+    .tree-mid::before { content: ''; position: absolute; left: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 1px; background: #d4d3d0; }
+    .tree-low-list { margin-left: 12px; padding-left: 14px; border-left: 1px dashed #d4d3d0; margin-top: 4px; margin-bottom: 2px; }
+    .tree-low { padding: 4px 6px; font-size: 12px; color: #37352f; display: flex; align-items: center; gap: 7px; position: relative; }
+    .tree-low::before { content: ''; position: absolute; left: -14px; top: 50%; transform: translateY(-50%); width: 14px; height: 1px; background: #d4d3d0; }
+    .lv { flex-shrink: 0; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; padding: 1px 5px; border-radius: 2px; text-transform: uppercase; }
+    .lv.h { background: rgba(255,255,255,0.18); color: #fff; }
+    .lv.m { background: #1f7a3a; color: #fff; }
+    .lv.l { background: #d3eafd; color: #1a6f9a; }
+
+    .state-table { border: 1px solid #e9e9e7; border-radius: 6px; overflow: hidden; margin: 10px 0; }
+    .state-row { display: flex; border-bottom: 1px solid #f0efed; }
+    .state-row:last-child { border-bottom: none; }
+    .state-name { flex-shrink: 0; width: 90px; padding: 9px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; border-right: 1px solid #e9e9e7; background: #fafaf9; display: flex; align-items: center; }
+    .state-desc { padding: 9px 14px; font-size: 13px; flex: 1; align-self: center; }
+
+    @media (max-width: 640px) {
+      .page { padding: 40px 20px 80px; }
+      .tree-children { margin-left: 10px; padding-left: 10px; }
+      .state-row { flex-direction: column; }
+      .state-name { border-right: none; border-bottom: 1px solid #e9e9e7; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="cover">
+    <h1>Retro-Report 초안 생성기</h1>
+    <p class="cover-sub">컴퓨팅 사고력 4단계 문서 · PHI 엔지니어링 Track E 최종 과제</p>
+    <div class="cover-meta">
+      <span class="meta-item"><strong>마감</strong> 2026년 6월 29일 (월) 18:00</span>
+      <span class="meta-item"><strong>주제</strong> 프로세스 자동화</span>
+      <span class="meta-item"><strong>기록</strong> 프로젝트 A · 프로젝트 B</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="callout yellow">
+    <div class="callout-body">
+      <strong>반복 상황</strong><br>
+      프로젝트가 끝날 때마다 같은 일이 반복된다. 아웃룩·슬랙·위키를 뒤져 자료를 모으고, 그걸 다시 회고 프레임워크에 맞는 언어로 가공하는 두 단계가 매번 가장 많은 시간을 소비한다.
+    </div>
+  </div>
+
+  <hr>
+
+  <h2><span class="step-num">1</span> 분해 <span class="step-sub">Decomposition</span></h2>
+  <p style="color:#9b9a97; font-size:13px; margin-bottom:14px;">프로젝트 A·B의 retro 작성 과정을 고수준에서 저수준(숫자 단위)까지 하향식으로 분해합니다.</p>
+
+  <div class="tree">
+    <div class="tree-root">
+      <span class="lv h">고수준</span>
+      프로젝트 종료 후, 분산된 문서에서 자료를 수집하고 회고 프레임워크 언어로 가공하여 Retro/Report 초안을 완성한다
+    </div>
+    <div class="tree-children">
+      <div class="tree-mid-item">
+        <div class="tree-mid"><span class="lv m">중수준</span> 자료 탐색 — 아웃룩·슬랙·위키에서 관련 문서 검색</div>
+        <div class="tree-low-list">
+          <div class="tree-low"><span class="lv l">저수준</span> 탐색 채널: 3개 (아웃룩·슬랙·위키)</div>
+          <div class="tree-low"><span class="lv l">저수준</span> 수집 문서: 10~20건 / 프로젝트</div>
+          <div class="tree-low"><span class="lv l">저수준</span> 탐색 소요 시간: 30~60분</div>
+        </div>
+      </div>
+      <div class="tree-mid-item">
+        <div class="tree-mid"><span class="lv m">중수준</span> 내용 분류 — 역할 구분과 회고 정리 (주관적 정보)</div>
+        <div class="tree-low-list">
+          <div class="tree-low"><span class="lv l">저수준</span> 주관 입력 종류: 2종 (내 역할 / 회고)</div>
+          <div class="tree-low"><span class="lv l">저수준</span> 종당 입력 분량: ~200자</div>
+          <div class="tree-low"><span class="lv l">저수준</span> 회고 항목 수: 7개 (KPT + 4L)</div>
+        </div>
+      </div>
+      <div class="tree-mid-item">
+        <div class="tree-mid"><span class="lv m">중수준</span> 초안 작성 — 빈 문서에서 섹션별 직접 작성</div>
+        <div class="tree-low-list">
+          <div class="tree-low"><span class="lv l">저수준</span> 주요 출력: 4개 섹션 (SEC1~4) + 보조 출력 3개 (RETRO · DATA · QUESTIONS)</div>
+          <div class="tree-low"><span class="lv l">저수준</span> 섹션당 분량: 1~2문단 (~200자)</div>
+          <div class="tree-low"><span class="lv l">저수준</span> 작성 소요 시간: 60~90분</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2><span class="step-num">2</span> 패턴인식 <span class="step-sub">Pattern Recognition</span></h2>
+  <p style="color:#9b9a97; font-size:13px; margin-bottom:14px;">분해에서 발견한 속성으로 프로젝트 A·B를 비교 매트릭스에 정리하고, 공통·차이 패턴을 추출합니다.</p>
+
+  <table>
+    <thead>
+      <tr><th>비교 속성</th><th>프로젝트 A</th><th>프로젝트 B</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>탐색 채널</strong></td><td>아웃룩·슬랙·위키</td><td>아웃룩·슬랙·위키</td></tr>
+      <tr><td><strong>탐색 소요 시간</strong></td><td>30~60분</td><td>30~60분</td></tr>
+      <tr><td><strong>주관 입력 방식</strong></td><td>기억에서 직접 작성</td><td>기억에서 직접 작성</td></tr>
+      <tr><td><strong>초안 작성 방식</strong></td><td>빈 문서에서 직접 작성</td><td>빈 문서에서 직접 작성</td></tr>
+      <tr><td><strong>병목 구간</strong></td><td>자료 탐색 + 텍스트 가공</td><td>자료 탐색 + 텍스트 가공</td></tr>
+      <tr><td><strong>프로젝트 내용</strong></td><td>배경·결과·수치 모두 고유</td><td>배경·결과·수치 모두 고유</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight green">
+    <strong>공통 패턴:</strong> 두 프로젝트 모두 탐색 채널·소요 시간·작성 방식이 동일하며, 병목이 발생하는 구간(자료 탐색·텍스트 가공)도 완전히 같다.
+  </div>
+  <div class="insight blue">
+    <strong>차이 패턴:</strong> 프로젝트의 내용(배경·결과·수치)만 다르며, 이 차이는 외부 문서 입력(<code>gleanDoc</code>)과 주관적 텍스트 입력(<code>myRole</code>·<code>reflection</code>)으로 대체될 수 있다.
+  </div>
+
+  <hr>
+
+  <h2><span class="step-num">3</span> 추상화 <span class="step-sub">Abstraction</span></h2>
+
+  <div class="callout yellow" style="margin-top:8px;">
+    <div class="callout-body">
+      <strong>추상화 모델 한 줄 문장</strong><br>
+      분산된 외부 문서와 주관적 텍스트를 단일 입력으로 통합하여, AI 변환 규칙을 적용해 회고 프레임워크 형식의 초안을 생성하는 시스템
+    </div>
+  </div>
+
+  <h3>추상화 모델을 이루는 요소</h3>
+  <table>
+    <thead>
+      <tr><th>단계</th><th>Input</th><th>Activity</th><th>Output</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="t b" style="margin-bottom:4px;display:inline-block;">유저</span><br><strong>글린 파일 읽기</strong><br><span style="color:#9b9a97;font-size:12px;">업로드한 파일에서 텍스트를 꺼낸다</span></td>
+        <td>HTML 파일 (드래그&amp;드롭)</td>
+        <td>파일 텍스트 추출</td>
+        <td><code>gleanDoc</code> <span class="t n">변수</span></td>
+      </tr>
+      <tr>
+        <td><span class="t b" style="margin-bottom:4px;display:inline-block;">유저</span><br><strong>내 의견 입력</strong><br><span style="color:#9b9a97;font-size:12px;">파일에 없는 주관 정보를 직접 쓴다</span></td>
+        <td>사용자 직접 입력</td>
+        <td>텍스트 바인딩</td>
+        <td><code>myRole</code>, <code>reflection</code> <span class="t n">변수</span> <span class="t g">선택</span></td>
+      </tr>
+      <tr>
+        <td><span class="t n" style="margin-bottom:4px;display:inline-block;">시스템</span><br><strong>AI 지시문 준비</strong><br><span style="color:#9b9a97;font-size:12px;">파일 + 내 의견 + 역할 지침을 합쳐 AI에게 건넬 지시문을 만든다</span></td>
+        <td><code>gleanDoc</code> 존재 시<br><code>myRole</code> + <code>reflection</code> (선택)<br>+ <code>SYSTEM_PROMPT</code> <span class="t o">상수</span></td>
+        <td>변수 3종 + 상수 결합</td>
+        <td><code>userPrompt</code></td>
+      </tr>
+      <tr>
+        <td><span class="t n" style="margin-bottom:4px;display:inline-block;">시스템</span><br><strong>AI에게 요청</strong><br><span style="color:#9b9a97;font-size:12px;">조립한 지시문을 Claude API로 전송한다</span></td>
+        <td><code>userPrompt</code></td>
+        <td>Claude API 호출</td>
+        <td>AI 응답 텍스트 (마커 포함)</td>
+      </tr>
+      <tr>
+        <td><span class="t n" style="margin-bottom:4px;display:inline-block;">시스템</span><br><strong>초안 카드로 펼치기</strong><br><span style="color:#9b9a97;font-size:12px;">AI 응답을 섹션별로 분리해 편집 가능한 카드로 화면에 표시한다</span></td>
+        <td>AI 응답 텍스트</td>
+        <td>마커 기준으로 텍스트 분리 (<code>parseBlock</code>)</td>
+        <td>4섹션 카드 렌더링</td>
+      </tr>
+      <tr>
+        <td><span class="t n" style="margin-bottom:4px;display:inline-block;">시스템</span><br><strong>예시로 대체</strong><br><span style="color:#9b9a97;font-size:12px;">AI 요청이 실패하면 미리 준비한 예시를 보여준다</span></td>
+        <td>API 오류 발생</td>
+        <td>데모 데이터 자동 삽입</td>
+        <td>4섹션 카드 (DEMO)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout gray" style="margin-top:4px;">
+    <div class="callout-body">
+      <strong>상수</strong> —
+      <code>SYSTEM_PROMPT</code> (페르소나·문체 규칙 고정) ·
+      출력 마커 패턴 7종 (<code>[SEC1]</code>~<code>[SEC4]</code>, <code>[RETRO]</code>, <code>[DATA]</code>, <code>[QUESTIONS]</code>)
+    </div>
+  </div>
+
+  <hr>
+
+  <h2><span class="step-num">4</span> 플로우차트 <span class="step-sub">Algorithm / Flowchart</span></h2>
+
+  <div class="callout gray" style="margin-top:8px;">
+    <div class="callout-body">
+      <strong>인터페이스 개요</strong><br>
+      Glean HTML 파일을 드래그하고 선택적으로 텍스트 2종을 입력한 뒤 버튼을 누르면, AI가 회고 프레임워크에 맞는 7섹션 초안을 카드 형태로 생성·표시하는 단일 페이지 인터페이스
+    </div>
+  </div>
+
+  <h3>UI 상태</h3>
+  <div class="state-table">
+    <div class="state-row">
+      <div class="state-name" style="color:#9b9a97;">IDLE</div>
+      <div class="state-desc">파일 미업로드. 드롭존만 표시, "초안 생성" 버튼 비활성.</div>
+    </div>
+    <div class="state-row">
+      <div class="state-name" style="color:#1a6f9a;">INPUT</div>
+      <div class="state-desc">파일 업로드 완료. 텍스트 입력 가능, "초안 생성" 버튼 활성.</div>
+    </div>
+    <div class="state-row">
+      <div class="state-name" style="color:#b35f1a;">LOADING</div>
+      <div class="state-desc">AI 생성 중. 스피너 표시, 버튼 비활성, 입력 불가.</div>
+    </div>
+    <div class="state-row">
+      <div class="state-name" style="color:#1f7a3a;">DONE</div>
+      <div class="state-desc">4개 섹션 카드 (SEC1~4) 렌더링 완료. 복사·재생성 버튼 활성.</div>
+    </div>
+    <div class="state-row">
+      <div class="state-name" style="color:#5b3b9a;">FALLBACK</div>
+      <div class="state-desc">API 실패 시 자동 전환. 데모 데이터로 4개 섹션 표시, [DEMO] 배지 노출.</div>
+    </div>
+  </div>
+
+  <h3>상태 전환 시나리오</h3>
+  <table>
+    <thead>
+      <tr><th>현재 상태</th><th>조건</th><th>전환 상태</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="t n">IDLE</span></td>
+        <td>파일 드래그&amp;드롭 또는 클릭 업로드</td>
+        <td><span class="t b">INPUT</span></td>
+      </tr>
+      <tr>
+        <td><span class="t b">INPUT</span></td>
+        <td>"초안 생성" 버튼 클릭</td>
+        <td><span class="t o">LOADING</span></td>
+      </tr>
+      <tr>
+        <td><span class="t o">LOADING</span></td>
+        <td>Claude API 응답 성공 → <code>parseBlock</code> 실행</td>
+        <td><span class="t g">DONE</span></td>
+      </tr>
+      <tr>
+        <td><span class="t o">LOADING</span></td>
+        <td>API 오류 catch → 데모 데이터 삽입</td>
+        <td><span class="t p">FALLBACK</span></td>
+      </tr>
+      <tr>
+        <td><span class="t g">DONE</span> / <span class="t p">FALLBACK</span></td>
+        <td>"다시 생성" 버튼 클릭</td>
+        <td><span class="t b">INPUT</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>프로토타입 구현 계획</h2>
+
+  <table>
+    <thead><tr><th>순서</th><th>구현 내용</th><th>확인 방법</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>HTML 파일 업로드 + 텍스트 추출 → <code>gleanDoc</code> 저장</td><td>콘솔에 gleanDoc 출력 확인</td></tr>
+      <tr><td><strong>2</strong></td><td>내 역할·회고 입력창 UI → <code>myRole</code>, <code>reflection</code> 바인딩</td><td>입력값 콘솔 확인</td></tr>
+      <tr><td><strong>3</strong></td><td>프롬프트 조립 + Claude API 연결</td><td>raw 응답이 콘솔에 출력되는지 확인</td></tr>
+      <tr><td><strong>4</strong></td><td>마커 파서 + 4섹션 카드 렌더링 (SEC1~4 주요, RETRO·DATA·QUESTIONS 보조)</td><td>섹션이 올바르게 분리·출력되는지 확인</td></tr>
+      <tr><td><strong>5</strong></td><td>UI 마감 + 복사 버튼 + Vercel 배포</td><td>전체 플로우 end-to-end 확인</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue" style="margin-top:16px;">
+    <div class="callout-body">
+      <ul>
+        <li>글린 자료만 넣으면 케이스 스터디에 필요한 핵심 맥락을 자동으로 추출한다.</li>
+        <li>사용자가 긴 입력폼을 채우지 않아도, 부족한 정보만 질문받고 빠르게 초안 생성 단계로 넘어갈 수 있다.</li>
+        <li>KPT·4L 회고 관점으로 프로젝트를 분석해 단순 업무 기록이 아닌 문제 해결 중심의 서사로 재구성한다.</li>
+        <li>데이터 기반 관점을 반영해 문제 정의, 디자인 판단, 성과 측정 가능성이 드러나는 포트폴리오 문장을 만든다.</li>
+        <li>"뭐부터 써야 하지?"에서 멈추지 않고, 바로 편집 가능한 케이스 스터디 초안을 제공한다.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

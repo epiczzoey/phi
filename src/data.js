@@ -227,6 +227,19 @@ export const studies = [
             status: "ready"
           }
         ]
+      },
+      {
+        id: "engineering",
+        title: "engineering",
+        items: [
+          {
+            id: "ct-note",
+            title: "CT note",
+            type: "page",
+            href: "./week-4/engineering/ct-note/",
+            status: "ready"
+          }
+        ]
       }
     ]
   }
