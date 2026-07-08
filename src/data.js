@@ -249,5 +249,24 @@ export const studies = [
         ]
       }
     ]
+  },
+  {
+    id: "final",
+    title: "final",
+    tracks: [
+      {
+        id: "aesthetic-literacy",
+        title: "aesthetic-literacy",
+        items: [
+          {
+            id: "aesthetic-literacy",
+            title: "aesthetic-literacy",
+            type: "page",
+            href: "./final/aesthetic-literacy/",
+            status: "ready"
+          }
+        ]
+      }
+    ]
   }
 ];
