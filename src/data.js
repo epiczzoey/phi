@@ -268,6 +268,26 @@ export const studies = [
         ]
       },
       {
+        id: "engineering",
+        title: "engineering",
+        items: [
+          {
+            id: "ct-note",
+            title: "CT note",
+            type: "page",
+            href: "./final/engineering/ct-note/",
+            status: "ready"
+          },
+          {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./final/engineering/prototype/",
+            status: "ready"
+          }
+        ]
+      },
+      {
         id: "aesthetic-literacy",
         title: "aesthetic-literacy",
         items: [

@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>습관 씨앗 정원 — CT 방법론 적용 문서</title>
+  <style>
+    :root{
+      --bg:#f7f3ec;
+      --paper:#fffaf2;
+      --ink:#282522;
+      --muted:#80776d;
+      --soft:#efe5d7;
+      --line:#e6d9c8;
+      --green:#9bcaa8;
+      --green-2:#dcebd8;
+      --mint:#cce8dc;
+      --pink:#f0c9cb;
+      --lav:#ddd3ef;
+      --yellow:#f3dea3;
+      --shadow:0 22px 60px rgba(89,70,48,.12);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-rounded, "SF Pro Rounded", "Pretendard", "Apple SD Gothic Neo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, #fff7db 0 14%, transparent 32%),
+        radial-gradient(circle at 86% 4%, #eadff9 0 12%, transparent 31%),
+        radial-gradient(circle at 85% 86%, #d8efe0 0 16%, transparent 36%),
+        var(--bg);
+      line-height:1.55;
+    }
+    .wrap{max-width:1080px;margin:0 auto;padding:34px 22px 80px}
+    .hero{
+      background:rgba(255,250,242,.74);
+      border:1px solid rgba(230,217,200,.75);
+      border-radius:36px;
+      box-shadow:var(--shadow);
+      padding:44px;
+      backdrop-filter: blur(16px);
+      position:relative;
+      overflow:hidden;
+    }
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#fff2d2;color:#8a6530;font-size:13px;font-weight:700;margin-bottom:22px}
+    h1{font-size:50px;letter-spacing:-.06em;line-height:1.02;margin:0 0 18px;font-weight:850}
+    .lead{font-size:18px;color:#5f564d;max-width:680px;margin:0 0 24px}
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .pill{border-radius:999px;background:#fff;border:1px solid var(--line);padding:9px 13px;font-size:13px;color:#5d554d;font-weight:700}
+    nav{position:sticky;top:14px;z-index:5;margin:22px 0;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    nav a{text-decoration:none;color:#5e554e;background:rgba(255,250,242,.78);border:1px solid rgba(230,217,200,.9);padding:9px 13px;border-radius:999px;font-size:13px;font-weight:800;backdrop-filter: blur(12px)}
+    section{background:rgba(255,250,242,.82);border:1px solid rgba(230,217,200,.8);border-radius:var(--radius);box-shadow:0 18px 44px rgba(89,70,48,.08);padding:32px;margin:18px 0;backdrop-filter: blur(12px)}
+    h2{font-size:28px;letter-spacing:-.04em;margin:0 0 6px}
+    .step-label{display:inline-block;font-size:13px;font-weight:800;color:#8a6530;background:#fff2d2;border-radius:999px;padding:6px 12px;margin-bottom:12px}
+    h3{font-size:19px;letter-spacing:-.03em;margin:26px 0 10px}
+    .muted{color:var(--muted)}
+    .card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px}
+    .table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:20px;background:#fff;border:1px solid var(--line);margin-top:8px}
+    .table th,.table td{padding:14px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
+    .table th{background:#f1e8dd;font-size:13px;color:#655c54}
+    .table tr:last-child td{border-bottom:0}
+    .quote{font-size:22px;line-height:1.4;letter-spacing:-.03em;background:linear-gradient(135deg,#f7ead2,#e6f1e4);border-radius:26px;padding:24px;margin:16px 0;font-weight:850}
+    .highlight{background:#fff6d7;border:1px solid #eddca7;border-radius:20px;padding:18px;margin-top:14px}
+    .highlight b{display:block;margin-bottom:6px}
+    .diagram{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;margin-top:14px;overflow:auto}
+    .diagram .mermaid{display:flex;justify-content:center}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .tag{display:inline-block;margin:4px 5px 4px 0;padding:6px 10px;border-radius:999px;background:#f3eadf;color:#70645a;font-size:12px;font-weight:800}
+    .footer{color:#887d72;text-align:center;margin-top:34px;font-size:13px}
+    .footer a{color:#8a6530;font-weight:800;text-decoration:none}
+    @media (max-width:860px){.grid-2{grid-template-columns:1fr}h1{font-size:36px}.hero{padding:28px}section{padding:22px}}
+
+    /* ---------- flowchart legend & process diagram ---------- */
+    .legend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+    .legend-item{background:#fbf8f2;border:1px solid var(--line);border-radius:16px;padding:12px 10px 10px;text-align:center}
+    .legend-item svg{display:block;margin:0 auto 6px}
+    .legend-item .name{font-size:12.5px;font-weight:800;color:#4a433c}
+    .legend-item .desc{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4}
+    .devterm{display:inline-block;margin:6px 3px 0;font-size:10px;font-weight:800;color:#8a6530;background:#fff2d2;border-radius:999px;padding:3px 9px;letter-spacing:.01em}
+    .flow-canvas{overflow:auto}
+    .flow-canvas svg{display:block;margin:0 auto}
+    @media (max-width:860px){.legend-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <span class="eyebrow">🧭 CT Docs — 습관 씨앗 정원</span>
+      <h1>Computational Thinking 적용 문서</h1>
+      <p class="lead">기획서(<code>기획서.html</code>)에 정리된 "습관 씨앗 정원" 개념을 분해 → 패턴 인식 → 추상화 → 플로우차트 4단계로 공식화한다. 사물은 앱 자체 하나이며, 패턴 인식 단계에서는 앱 내부의 세 하위 시스템을 비교 대상으로 삼는다.</p>
+      <div class="pill-row">
+        <span class="pill">1. Decomposition</span>
+        <span class="pill">2. Pattern Recognition</span>
+        <span class="pill">3. Abstraction</span>
+        <span class="pill">4. Flowchart</span>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#decomposition">1. 분해</a>
+      <a href="#pattern">2. 패턴 인식</a>
+      <a href="#abstraction">3. 추상화</a>
+      <a href="#flowchart">4. 플로우차트</a>
+      <a href="../prototype/">프로토타입 →</a>
+    </nav>
+
+    <section id="decomposition">
+      <span class="step-label">STEP 1</span>
+      <h2>분해 (Decomposition)</h2>
+      <p class="muted">사물: <b>습관 씨앗 정원 앱</b> 하나를 고수준 → 중수준(하위 시스템) → 저수준(수치화 요소)으로 나눈다.</p>
+
+      <div class="quote">"사용자가 습관을 씨앗으로 등록하고, 매일의 실행을 알림 체크인으로 기록하여, 그 누적된 돌봄이 정원 속 식물의 성장으로 가시화되는 시스템"</div>
+
+      <h3>트리 구조</h3>
+      <div class="diagram">
+        <pre class="mermaid">
+flowchart TD
+  root["습관 씨앗 정원<br/>(고수준: 등록→체크인→성장 가시화)"]
+  A["A. 씨앗 심기 시스템<br/>(등록)"]
+  B["B. 알림 체크인 시스템<br/>(실행 기록)"]
+  C["C. 성장·생기 표현 시스템<br/>(피드백)"]
+
+  root --> A
+  root --> B
+  root --> C
+
+  A --> A1["habitName : string"]
+  A --> A2["reminderTime : HH:mm"]
+  A --> A3["createdAt : timestamp"]
+
+  B --> B1["logDate : date"]
+  B --> B2["didWater : boolean"]
+
+  C --> C1["totalLogs : int"]
+  C --> C2["recentLogs7Days : int"]
+  C1 --> C3["growthStage : 0~4"]
+  C2 --> C4["vitalityLevel : 0~100%"]
+        </pre>
+      </div>
+
+      <h3>표로 보기</h3>
+      <table class="table">
+        <thead><tr><th>고수준</th><th>중수준 (하위 시스템)</th><th>저수준 (수치화 요소)</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3">습관을 씨앗으로 등록하고, 실행을 체크인으로 기록해, 누적된 돌봄이 식물 성장으로 가시화되는 시스템</td><td>A. 씨앗 심기 시스템 (등록)</td><td><code>habitName</code>(string), <code>reminderTime</code>(HH:mm), <code>createdAt</code>(timestamp)</td></tr>
+          <tr><td>B. 알림 체크인 시스템 (실행 기록)</td><td><code>logDate</code>(date), <code>didWater</code>(boolean)</td></tr>
+          <tr><td>C. 성장·생기 표현 시스템 (피드백)</td><td><code>totalLogs</code>, <code>recentLogs7Days</code> → <code>growthStage</code>(0~4), <code>vitalityLevel</code>(0~100%)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="pattern">
+      <span class="step-label">STEP 2</span>
+      <h2>패턴 인식 (Pattern Recognition)</h2>
+      <p class="muted">사물이 하나뿐이므로, 앱을 구성하는 세 하위 시스템(A/B/C)을 나란히 놓고 공통 규칙과 분기점을 찾는다.</p>
+
+      <table class="table">
+        <thead><tr><th>비교 속성</th><th>A. 씨앗 심기</th><th>B. 알림 체크인</th><th>C. 성장·생기 표현</th></tr></thead>
+        <tbody>
+          <tr><td>트리거 발생 위치</td><td>앱 내부 (능동)</td><td>앱 외부 (OS 알림, 수동 도달)</td><td>트리거 없음 (파생값)</td></tr>
+          <tr><td>입력 형태</td><td>텍스트 + 시간 선택</td><td>단일 버튼 탭</td><td>없음 (계산됨)</td></tr>
+          <tr><td>출력 형태</td><td>정원에 씨앗 등장</td><td>오늘 로그 저장</td><td>식물 형태·색 변화</td></tr>
+          <tr><td>상태 지속성</td><td>1회성 (생성 시 한 번)</td><td>매일 반복</td><td>누적·파생 (영구 반영)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="grid-2">
+        <div class="highlight"><b>공통 규칙</b>모든 하위 시스템은 "트리거 발생 → 상태값 갱신 → 시각 피드백"의 3단 구조를 공유한다.</div>
+        <div class="highlight"><b>분기점</b>트리거가 앱 내부 / 외부 / 파생 중 어디서 발생하는지에 따라 시스템의 반응 방식이 갈린다.</div>
+      </div>
+    </section>
+
+    <section id="abstraction">
+      <span class="step-label">STEP 3</span>
+      <h2>추상화 (Abstraction)</h2>
+
+      <div class="quote">"특정 트리거(등록/체크인)에 의해 누적되는 '돌봄 값'을 규칙에 따라 두 개의 파생 상태(성장 단계, 생기 수준)로 변환해 시각적으로 표현하는 시스템"</div>
+
+      <h3>변수 / 상수</h3>
+      <table class="table">
+        <thead><tr><th>구분</th><th>이름</th><th>설명</th></tr></thead>
+        <tbody>
+          <tr><td>변수</td><td><code>careEvent</code></td><td>등록 | 체크인</td></tr>
+          <tr><td>변수</td><td><code>totalCare</code></td><td>누적 돌봄 횟수</td></tr>
+          <tr><td>변수</td><td><code>recentCare</code></td><td>최근 7일 돌봄 횟수</td></tr>
+          <tr><td>상수</td><td><code>GROWTH_THRESHOLDS</code></td><td><code>[3, 7, 14, 30]</code></td></tr>
+          <tr><td>상수</td><td><code>VITALITY_WINDOW</code></td><td>7일 (기획서 <code>recentLogs7Days</code> 기준)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>이벤트 (if → then)</h3>
+      <table class="table">
+        <thead><tr><th>조건 (IF)</th><th>결과 (THEN)</th></tr></thead>
+        <tbody>
+          <tr><td><code>careEvent == 등록</code></td><td>Habit 생성, <code>growthStage = 0</code></td></tr>
+          <tr><td><code>careEvent == 체크인</code> AND 오늘 미기록</td><td>Log 생성, <code>totalCare += 1</code></td></tr>
+          <tr><td><code>totalCare</code>가 임계값을 넘음</td><td><code>growthStage += 1</code> (역행 없음)</td></tr>
+          <tr><td>(항상)</td><td><code>vitalityLevel = recentCare / 7 * 100</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight"><b>은유적 대응</b><code>growthStage</code> = 누적된 노력(사용자의 성장) · <code>vitalityLevel</code> = 최근 컨디션</div>
+    </section>
+
+    <section id="flowchart">
+      <span class="step-label">STEP 4</span>
+      <h2>플로우차트</h2>
+      <p class="muted">인터페이스 개요: "하나의 정원 화면 위에서 씨앗 등록·알림 체크인·성장 확인이 모두 이루어지는 단일 화면 상태 머신"</p>
+
+      <h3>명시적 상태</h3>
+      <table class="table">
+        <thead><tr><th>상태</th><th>의미</th></tr></thead>
+        <tbody>
+          <tr><td><code>EMPTY_GARDEN</code></td><td>빈 정원, 씨앗 하나만 노출</td></tr>
+          <tr><td><code>PLANT_NAME_STEP</code></td><td>습관 이름 입력 카드</td></tr>
+          <tr><td><code>REMINDER_TIME_STEP</code></td><td>알림 시간 선택 카드</td></tr>
+          <tr><td><code>READY_TO_PLANT</code></td><td>심기 확인 대기</td></tr>
+          <tr><td><code>GARDEN_WITH_SEED</code></td><td>정원에 씨앗/식물 심어진 상태</td></tr>
+          <tr><td><code>NOTIFICATION_PENDING</code></td><td>알림 발송 대기 중</td></tr>
+          <tr><td><code>WATERED_TODAY</code></td><td>오늘 체크인 완료, 성장 반영</td></tr>
+        </tbody>
+      </table>
+
+      <h3>순서도 기호 범례</h3>
+      <p class="muted">아래 전체 프로세스 다이어그램은 KS/ISO 표준 순서도 기호 6종만 사용해 그렸다. 기호가 곧 단계의 성격(시작/끝·준비·처리·판단·입출력·반복)을 나타내므로, 각 도형 안에는 구체적인 동작만 적는다. 개발할 때 익숙한 용어(<b>Event · Activity · If/Then · Input · Output</b>)도 함께 표시해, 순서도 기호와 실제 코드 개념을 바로 연결할 수 있게 했다.</p>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <svg width="140" height="60" viewBox="0 0 140 60"><rect x="4" y="4" width="132" height="52" rx="26" fill="#fff" stroke="#8a8f98" stroke-width="1.6"/><text x="70" y="34" text-anchor="middle" font-size="13" fill="#333">시작 / 끝</text></svg>
+          <div class="name">터미널 (Terminal)</div>
+          <div class="desc">프로세스의 시작점과 종료점</div>
+          <span class="devterm">Event</span>
+        </div>
+        <div class="legend-item">
+          <svg width="140" height="60" viewBox="0 0 140 60"><path d="M24,4 H116 L136,30 L116,56 H24 L4,30 Z" fill="#fff" stroke="#8a8f98" stroke-width="1.6"/><text x="70" y="34" text-anchor="middle" font-size="13" fill="#333">준비</text></svg>
+          <div class="name">준비 (Preparation)</div>
+          <div class="desc">이후 반복·분기를 위한 값 설정</div>
+          <span class="devterm">Activity</span>
+        </div>
+        <div class="legend-item">
+          <svg width="140" height="60" viewBox="0 0 140 60"><rect x="4" y="4" width="132" height="52" rx="6" fill="#fff" stroke="#8a8f98" stroke-width="1.6"/><text x="70" y="34" text-anchor="middle" font-size="13" fill="#333">처리</text></svg>
+          <div class="name">처리 (Process)</div>
+          <div class="desc">상태값을 계산·갱신하는 단계</div>
+          <span class="devterm">Activity</span>
+        </div>
+        <div class="legend-item">
+          <svg width="140" height="60" viewBox="0 0 140 60"><polygon points="70,4 136,30 70,56 4,30" fill="#fff" stroke="#8a8f98" stroke-width="1.6"/><text x="70" y="34" text-anchor="middle" font-size="13" fill="#333">판단</text></svg>
+          <div class="name">판단 (Decision)</div>
+          <div class="desc">예/아니오로 갈라지는 분기점</div>
+          <span class="devterm">If / Then</span>
+        </div>
+        <div class="legend-item">
+          <svg width="140" height="60" viewBox="0 0 140 60"><polygon points="26,4 136,4 114,56 4,56" fill="#fff" stroke="#8a8f98" stroke-width="1.6"/><text x="70" y="34" text-anchor="middle" font-size="13" fill="#333">입출력</text></svg>
+          <div class="name">입출력 (I/O)</div>
+          <div class="desc">사용자 입력 또는 화면 표시</div>
+          <span class="devterm">Input</span><span class="devterm">Output</span>
+        </div>
+        <div class="legend-item">
+          <svg width="140" height="60" viewBox="0 0 140 60"><rect x="4" y="4" width="132" height="52" rx="4" fill="#fff" stroke="#8a8f98" stroke-width="1.6"/><line x1="4" y1="26" x2="136" y2="26" stroke="#8a8f98" stroke-width="1.6"/><text x="70" y="18" text-anchor="middle" font-size="10.5" fill="#333">반복 조건</text><text x="70" y="44" text-anchor="middle" font-size="12" fill="#333">처리</text></svg>
+          <div class="name">반복 조건 / 처리 (Loop)</div>
+          <div class="desc">조건을 만족할 때까지 되풀이</div>
+          <span class="devterm">If/Then</span><span class="devterm">Activity</span>
+        </div>
+      </div>
+
+      <h3>전체 프로세스 순서도</h3>
+      <p class="muted">처음과 끝을 추상적인 이벤트가 아니라 <b>실제 Input / Output</b>으로 설계했다. 처음은 "사용자가 습관 정보를 입력하거나 물을 줬다고 탭하는 순간"(Input)이고, 끝은 "정원 화면이 갱신되어 최종적으로 보이는 순간"(Output) — 성공 사이클이면 성장한 정원, 초기화 사이클이면 빈 정원이다. "다음 알림 시각 계산"은 그 값이 오직 바로 다음 반복 조건에만 쓰이므로, 별도 처리 박스로 두지 않고 반복(Loop) 도형의 조건부에 합쳐 그렸다. 오른쪽 바깥 통로들은 모두 다시 이 반복 박스로 합류해 하루 단위 반복을 재시작한다.</p>
+      <div class="diagram flow-canvas">
+        <svg id="processFlowSvg"></svg>
+      </div>
+
+      <h3>설계 검증</h3>
+      <p class="muted">위 순서도를 실제 구현(<code>prototype/index.html</code>)과 한 줄씩 대조했다.</p>
+      <table class="table">
+        <thead><tr><th>다이어그램 단계</th><th>대응 코드</th><th>검증 결과</th></tr></thead>
+        <tbody>
+          <tr><td>Input · 습관 정보 / 체크인 탭</td><td><code>plantHabit()</code>, <code>waterHabit()</code></td><td>✅ 일치</td></tr>
+          <tr><td>판단 · 씨앗이 있나요?</td><td><code>render()</code> 내 <code>state.habits.length &gt; 0</code></td><td>✅ 일치</td></tr>
+          <tr><td>반복 조건(다음 알림 시각 계산 포함) · 처리 (알림 배너)</td><td><code>getNextDueHabit()</code> / <code>scheduleNextNotification()</code> / <code>showMockNotification()</code></td><td>✅ 일치</td></tr>
+          <tr><td>판단 · 오늘 이미 기록했나요?</td><td><code>waterHabit()</code>의 <code>if (!getTodayLog(habitId))</code></td><td>⚠️ 기존 다이어그램엔 없던 단계 — 이번에 추가해 일치시킴</td></tr>
+          <tr><td>처리 · 오늘 로그 저장</td><td><code>state.logs.push(...)</code> (totalCare = 로그 개수)</td><td>✅ 일치</td></tr>
+          <tr><td>처리 · vitality 갱신</td><td><code>vitalityTier(recentCare)</code>, 공식 <code>recentCare/7*100</code></td><td>✅ 일치 — growthStage와 무관한 값이라 판단보다 먼저 실행해도 결과가 같음</td></tr>
+          <tr><td>판단 · 임계값 초과? / growthStage +1</td><td><code>growthStage(totalCare)</code></td><td>✅ 개념적으로 일치하나, 실제로는 "+1 증가"가 아니라 <code>totalCare</code>로부터 매번 다시 계산되는 파생값. 결과는 동일(역행 없음)하므로 표현만 참고할 것</td></tr>
+          <tr><td>Output · 정원 화면 반영</td><td><code>render()</code></td><td>✅ 일치</td></tr>
+          <tr><td>Output(끝) · 빈 정원 화면 출력</td><td><code>resetBtn</code> → <code>state = defaultState</code> → <code>render()</code></td><td>✅ 일치</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight"><b>발견된 보완 필요 지점</b>다이어그램은 "나중에"를 탭하거나 이미 기록된 경우에도 다음 알림 시각을 다시 계산한 뒤 대기하도록(의도된 설계) 그렸다. 그런데 실제 코드의 <code>mockLater</code> 핸들러는 배너만 닫고 <code>scheduleNextNotification()</code>을 다시 호출하지 않는다 — 즉 사용자가 다른 동작을 하기 전까지는 알림이 자동으로 재예약되지 않는 구현상의 틈이 있다. 이 문서의 순서도가 <b>의도된 설계</b>이므로, 프로토타입 쪽 코드를 이 설계에 맞춰 보완하는 것을 다음 작업으로 남겨둔다.</div>
+      <div class="highlight"><b>도형 통합</b>"다음 알림 시각 계산"(처리)과 "반복 조건 · 알림 시각 도달"(반복)은 항상 붙어서 1:1로만 이어지고, 계산 결과가 오직 바로 다음 조건 판단에만 쓰인다 — 즉 독자적인 의미가 없는 부속 계산이다. 그래서 별도 처리 박스로 두지 않고 반복 도형의 조건부 안에 함께 적어 한 박스로 합쳤다. 범례의 "준비" 기호는 표준 순서도 6종 설명을 위해 남겨두지만, 이 프로세스에는 별도 도형으로 등장하지 않는다.</div>
+      <div class="highlight"><b>실행 순서 조정</b>"vitality 갱신"(레벨 갱신)과 "성장 임계값 초과? → growthStage +1"은 서로 참조하는 값이 없는 독립적인 계산이다. 그래서 vitality 갱신을 판단보다 <b>먼저</b> 실행해 "레벨 갱신은 성장 여부와 상관없이 항상 일어난다"는 것을 시각적으로 분명히 하고, growthStage +1은 조건이 맞을 때만 실행된 뒤 같은 지점(Output 직전)에서 합류하도록 순서를 바꿨다. 두 순서 모두 최종 상태값은 동일하다.</div>
+    </section>
+
+    <p class="footer">이 문서를 근거로 제작한 프로토타입 → <a href="../prototype/">prototype</a></p>
+  </div>
+
+  <script>
+    // ============ 전체 프로세스 순서도 (표준 순서도 기호 6종) ============
+    (function () {
+      const NS = 'http://www.w3.org/2000/svg';
+      const STROKE = '#8a8f98';
+      const TEXT = '#333';
+      const svg = document.getElementById('processFlowSvg');
+
+      function make(tag, attrs) {
+        const el = document.createElementNS(NS, tag);
+        Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+        return el;
+      }
+
+      // firstBaselineY = 첫 줄의 텍스트 baseline y좌표 (세로 중앙 정렬은 호출부에서 계산해 넘긴다)
+      function addLines(cx, firstBaselineY, lines, fontSize, color, weight, anchor) {
+        const lh = fontSize + 3.5;
+        const t = make('text', { x: cx, y: firstBaselineY, 'text-anchor': anchor || 'middle', 'font-size': fontSize, fill: color || TEXT, 'font-weight': weight || 600 });
+        lines.forEach((line, i) => {
+          const tspan = make('tspan', { x: cx, dy: i === 0 ? 0 : lh });
+          tspan.textContent = line;
+          t.appendChild(tspan);
+        });
+        svg.appendChild(t);
+        return t;
+      }
+
+      function addLabel(cx, cy, lines, fontSize) {
+        fontSize = fontSize || 13;
+        const lh = fontSize + 3.5;
+        const startY = cy - ((lines.length - 1) * lh) / 2 + fontSize * 0.32;
+        addLines(cx, startY, lines, fontSize);
+      }
+
+      // 한글 순서도 라벨(lines) + 영문 개발 용어(dev)를 한 도형 안에 세로로 함께 배치한다.
+      function addLabelWithDev(cx, cy, lines, fontSize, dev) {
+        fontSize = fontSize || 13;
+        const lh = fontSize + 3.5;
+        const devSize = 9.5, devLh = 14;
+        const mainH = (lines.length - 1) * lh;
+        const gap = dev ? 6 : 0;
+        const totalH = mainH + (dev ? gap + devLh : 0);
+        const mainFirstBaselineY = cy - totalH / 2 + fontSize * 0.32;
+        addLines(cx, mainFirstBaselineY, lines, fontSize);
+        if (dev) {
+          const devBaselineY = mainFirstBaselineY + mainH + gap + devLh * 0.6;
+          addLines(cx, devBaselineY, [`· ${dev}`], devSize, '#8a6530', 800);
+        }
+      }
+
+      // ---- 노드(도형) 정의 : x,y 는 중심 좌표 ----
+      // dev = 순서도 기호에 대응하는 개발 용어(Event/Activity/If-Then/Input/Output)
+      // 처음(start)과 끝(end)은 추상적인 Event가 아니라 실제 Input/Output으로 설계했다.
+      const nodes = {
+        start:      { type: 'io',       x: 430, y: 42,   w: 240, h: 64,  lines: ['사용자 입력', '(습관 정보 또는 체크인 탭)'], dev: 'Input' },
+        hasSeedQ:   { type: 'diamond',  x: 430, y: 196,  w: 270, h: 120, lines: ['정원에 심어진', '씨앗이 있나요?'], dev: 'If / Then' },
+        inputName:  { type: 'io',       x: 700, y: 196,  w: 220, h: 64,  lines: ['습관 이름 입력'], dev: 'Input' },
+        inputTime:  { type: 'io',       x: 700, y: 300,  w: 220, h: 64,  lines: ['알림 시간 선택'], dev: 'Input' },
+        createSeed: { type: 'process',  x: 700, y: 404,  w: 240, h: 64,  lines: ['씨앗 생성', '(growthStage = 0)'], dev: 'Activity' },
+        // "다음 알림 시각 계산"은 바로 다음 반복 조건에만 쓰이는 부속 계산이라 별도 처리 박스 없이 반복 도형 헤더에 합쳤다.
+        loopWait:   { type: 'loop',     x: 430, y: 560,  w: 320, h: 108, header: ['다음 알림 시각 계산 (reminderTime 기준)', '반복 조건 · 알림 시각 도달'], lines: ['알림 배너 표시'], headerDev: 'If / Then', bodyDev: 'Activity' },
+        wateredQ:   { type: 'diamond',  x: 430, y: 744,  w: 280, h: 120, lines: ['"물을 줬어요"를', '탭했나요?'], dev: 'If / Then' },
+        alreadyLoggedQ: { type: 'diamond', x: 430, y: 929, w: 280, h: 110, lines: ['오늘 이미', '기록했나요?'], dev: 'If / Then' },
+        saveLog:    { type: 'process',  x: 430, y: 1076, w: 300, h: 64,  lines: ['오늘 로그 저장', '(totalCare += 1)'], dev: 'Activity' },
+        // vitality 갱신은 growthStage와 무관한 값(recentCare 기준)이라 항상 먼저 실행해도 결과가 같다 — 판단보다 앞에 두어 "레벨 갱신은 매번 일어난다"는 것을 명확히 했다.
+        updateVital:{ type: 'process',  x: 430, y: 1200, w: 320, h: 64,  lines: ['vitalityLevel 갱신', '(recentCare / 7 × 100)'], dev: 'Activity' },
+        thresholdQ: { type: 'diamond',  x: 430, y: 1362, w: 280, h: 120, lines: ['totalCare가 성장', '임계값을 넘었나요?'], dev: 'If / Then' },
+        growStage:  { type: 'process',  x: 700, y: 1362, w: 220, h: 64,  lines: ['growthStage += 1'], dev: 'Activity' },
+        showGarden: { type: 'io',       x: 430, y: 1516, w: 320, h: 68,  lines: ['정원 화면에', '성장·생기 반영'], dev: 'Output' },
+        end:        { type: 'io',       x: 430, y: 1654, w: 280, h: 68,  lines: ['빈 정원 화면 출력', '(정원 초기화 결과)'], dev: 'Output' }
+      };
+
+      Object.values(nodes).forEach(n => {
+        n.top = n.y - n.h / 2; n.bottom = n.y + n.h / 2;
+        n.left = n.x - n.w / 2; n.right = n.x + n.w / 2;
+      });
+
+      function drawNode(n) {
+        const x0 = n.left, y0 = n.top, w = n.w, h = n.h;
+        if (n.type === 'terminal') {
+          svg.appendChild(make('rect', { x: x0, y: y0, width: w, height: h, rx: h / 2, fill: '#fff', stroke: STROKE, 'stroke-width': 1.8 }));
+        } else if (n.type === 'process') {
+          svg.appendChild(make('rect', { x: x0, y: y0, width: w, height: h, rx: 6, fill: '#fff', stroke: STROKE, 'stroke-width': 1.8 }));
+        } else if (n.type === 'prep') {
+          const cut = 26;
+          const pts = [
+            [x0 + cut, y0], [x0 + w - cut, y0], [x0 + w, n.y],
+            [x0 + w - cut, y0 + h], [x0 + cut, y0 + h], [x0, n.y]
+          ].map(p => p.join(',')).join(' ');
+          svg.appendChild(make('polygon', { points: pts, fill: '#fff', stroke: STROKE, 'stroke-width': 1.8 }));
+        } else if (n.type === 'diamond') {
+          const pts = [[n.x, y0], [x0 + w, n.y], [n.x, y0 + h], [x0, n.y]].map(p => p.join(',')).join(' ');
+          svg.appendChild(make('polygon', { points: pts, fill: '#fff', stroke: STROKE, 'stroke-width': 1.8 }));
+        } else if (n.type === 'io') {
+          const skew = 26;
+          const pts = [[x0 + skew, y0], [x0 + w, y0], [x0 + w - skew, y0 + h], [x0, y0 + h]].map(p => p.join(',')).join(' ');
+          svg.appendChild(make('polygon', { points: pts, fill: '#fff', stroke: STROKE, 'stroke-width': 1.8 }));
+          } else if (n.type === 'loop') {
+            const headerLines = Array.isArray(n.header) ? n.header : [n.header];
+            const headerH = headerLines.length > 1 ? 46 : 30;
+            svg.appendChild(make('rect', { x: x0, y: y0, width: w, height: h, rx: 4, fill: '#fff', stroke: STROKE, 'stroke-width': 1.8 }));
+            svg.appendChild(make('line', { x1: x0, y1: y0 + headerH, x2: x0 + w, y2: y0 + headerH, stroke: STROKE, 'stroke-width': 1.8 }));
+            addLabel(n.x, y0 + headerH / 2, headerLines, headerLines.length > 1 ? 10.5 : 11);
+            addLabel(n.x, y0 + headerH + (h - headerH) / 2, n.lines, 13);
+            if (n.headerDev) addLines(x0 + w - 10, y0 + headerH - 8, [`· ${n.headerDev}`], 9.5, '#8a6530', 800, 'end');
+            if (n.bodyDev) addLines(x0 + w - 10, y0 + headerH + (h - headerH) / 2 + 3.5, [`· ${n.bodyDev}`], 9.5, '#8a6530', 800, 'end');
+            return;
+          }
+        addLabelWithDev(n.x, n.y, n.lines, 13, n.dev);
+      }
+
+      function drawEdge(d, opts) {
+        opts = opts || {};
+        const p = make('path', { d: d, fill: 'none', stroke: STROKE, 'stroke-width': 1.6, 'marker-end': 'url(#arrowhead)' });
+        if (opts.dashed) p.setAttribute('stroke-dasharray', '6,5');
+        svg.appendChild(p);
+        if (opts.label) {
+          const lx = opts.labelPos[0], ly = opts.labelPos[1];
+          const t = make('text', { x: lx, y: ly, 'text-anchor': opts.anchor || 'middle', 'font-size': 11.5, fill: '#8a6530', 'font-weight': 800 });
+          t.textContent = opts.label;
+          const bbox = { w: opts.label.length * 7 + 10 };
+          svg.appendChild(make('rect', { x: (opts.anchor === 'start' ? lx - 4 : lx - bbox.w / 2), y: ly - 12, width: bbox.w, height: 15, fill: '#fbf8f2', opacity: 0.9 }));
+          svg.appendChild(t);
+        }
+      }
+
+      // ---- defs: 화살표 마커 ----
+      const defs = make('defs', {});
+      const marker = make('marker', { id: 'arrowhead', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' });
+      marker.appendChild(make('path', { d: 'M0,0 L10,5 L0,10 Z', fill: STROKE }));
+      defs.appendChild(marker);
+      svg.appendChild(defs);
+
+      // ---- 도형 그리기 ----
+      Object.values(nodes).forEach(drawNode);
+
+      // ---- 화살표(엣지) 그리기 ----
+      const n = nodes;
+      drawEdge(`M${n.start.x},${n.start.bottom} V${n.hasSeedQ.top}`, {});
+      drawEdge(`M${n.hasSeedQ.right},${n.hasSeedQ.y} H${n.inputName.left}`, { label: '아니오', labelPos: [(n.hasSeedQ.right + n.inputName.left) / 2, n.hasSeedQ.y - 8] });
+      drawEdge(`M${n.inputName.x},${n.inputName.bottom} V${n.inputTime.top}`, {});
+      drawEdge(`M${n.inputTime.x},${n.inputTime.bottom} V${n.createSeed.top}`, {});
+      drawEdge(`M${n.createSeed.x},${n.createSeed.bottom} V480 H${n.loopWait.x} V${n.loopWait.top}`, {});
+      drawEdge(`M${n.hasSeedQ.x},${n.hasSeedQ.bottom} V${n.loopWait.top}`, { label: '예', labelPos: [n.hasSeedQ.x + 14, n.hasSeedQ.bottom + 46], anchor: 'start' });
+      drawEdge(`M${n.loopWait.x},${n.loopWait.bottom} V${n.wateredQ.top}`, {});
+      drawEdge(`M${n.wateredQ.right},${n.wateredQ.y} H940 V525 H${n.loopWait.right}`, { label: '아니오 · 나중에 (재계산 후 대기)', labelPos: [755, n.wateredQ.y - 10] });
+      drawEdge(`M${n.wateredQ.x},${n.wateredQ.bottom} V${n.alreadyLoggedQ.top}`, { label: '예', labelPos: [n.wateredQ.x + 14, n.wateredQ.bottom + 37], anchor: 'start' });
+      drawEdge(`M${n.alreadyLoggedQ.right},${n.alreadyLoggedQ.y} H940 V525 H${n.loopWait.right}`, { label: '예 · 이미 기록됨 (재계산 후 대기)', labelPos: [755, n.alreadyLoggedQ.y - 10] });
+      drawEdge(`M${n.alreadyLoggedQ.x},${n.alreadyLoggedQ.bottom} V${n.saveLog.top}`, { label: '아니오', labelPos: [n.alreadyLoggedQ.x + 14, n.alreadyLoggedQ.bottom + 30], anchor: 'start' });
+      drawEdge(`M${n.saveLog.x},${n.saveLog.bottom} V${n.updateVital.top}`, {});
+      drawEdge(`M${n.updateVital.x},${n.updateVital.bottom} V${n.thresholdQ.top}`, {});
+      drawEdge(`M${n.thresholdQ.right},${n.thresholdQ.y} H${n.growStage.left}`, { label: '예', labelPos: [(n.thresholdQ.right + n.growStage.left) / 2, n.thresholdQ.y - 8] });
+      drawEdge(`M${n.growStage.x},${n.growStage.bottom} V1440 H${n.showGarden.x} V${n.showGarden.top}`, {});
+      drawEdge(`M${n.thresholdQ.x},${n.thresholdQ.bottom} V${n.showGarden.top}`, { label: '아니오', labelPos: [n.thresholdQ.x + 14, n.thresholdQ.bottom + 40], anchor: 'start' });
+      drawEdge(`M${n.showGarden.right},${n.showGarden.y} H990 V575 H${n.loopWait.right}`, { label: '다음 알림 시각 재계산 후 대기 (반복)', labelPos: [795, n.showGarden.y - 10] });
+      drawEdge(`M${n.showGarden.x},${n.showGarden.bottom} V${n.end.top}`, { dashed: true, label: '정원을 초기화하면', labelPos: [n.showGarden.x + 14, n.showGarden.bottom + 34], anchor: 'start' });
+
+      svg.setAttribute('viewBox', '0 0 1060 1730');
+      svg.setAttribute('width', '1060');
+      svg.setAttribute('height', '1730');
+    })();
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+  </script>
+</body>
+</html>

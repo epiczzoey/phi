@@ -1,0 +1,140 @@
+/*
+  습관 씨앗 정원 — 디자인 토큰 (Single Source of Truth)
+  ------------------------------------------------------------
+  이 파일은 prototype/index.html 과 design-system/index.html 이
+  동시에 참조합니다. 여기 값을 바꾸면 두 화면 모두 즉시 반영됩니다.
+  → 색상/그림자/타이포/모션을 "디벨롭"할 때는 이 파일만 고치면 됩니다.
+
+  구조를 바꾸는 값(레이아웃 크기, px 위치 등)은 이 파일이 다루지 않습니다.
+  여기에는 "다시 칠할 수 있는" 값만 모아둡니다: 색, 반경, 그림자, 타이포, 모션.
+*/
+
+:root{
+  /* ============ 1. 베이스 서페이스 & 텍스트 ============ */
+  --bg:#f7f3ec;                 /* 앱 바깥 배경 */
+  --paper:rgba(255,250,242,.86);/* 데모 도구 패널 배경 */
+  --ink:#282522;                /* 기본 본문 글자색 */
+  --muted:#80776d;              /* 보조 설명 글자색 */
+  --line:#e6d9c8;               /* 기본 테두리선 */
+
+  --text-strong:#4c4640;        /* 상태바 시계 등 진한 글자 */
+  --text-body:#5b5348;          /* 오늘 칩, 데모 버튼 본문 글자 */
+  --text-soft:#6a5c4d;          /* 칩 버튼 기본 글자 */
+  --text-quiet:#6d6155;         /* "나중에" 버튼 글자 */
+  --text-plant-label:#5c5145;   /* 식물 이름표 글자 */
+  --accent-link:#8a6530;        /* 링크·데모 라벨 강조 글자 */
+
+  /* ============ 2. 브랜드 · 식물 팔레트 ============ */
+  --green:#9bcaa8;
+  --green-light:#8fbf9c;        /* 기본 버튼 그라디언트 상단 */
+  --green-dark:#4e7b5a;
+  --leaf:#9bcfa7;
+  --leaf2:#c9e3c0;
+  --bloom:#eac1d1;
+  --bloom-gold-1:#f0d3b3;
+  --bloom-gold-2:#f2d6a6;
+  --trunk:#a8754e;               /* 씨앗 단계 새싹 봉오리 */
+  --trunk-young:#8b6a45;         /* 새싹 · 묘목(소) 단계 줄기 */
+  --trunk-mature:#866241;        /* 묘목(대) · 만개 단계 줄기 */
+  --soil:#c3a17c;                /* 화분 흙 라인 */
+  --soil-shadow:rgba(96,73,45,.12); /* 식물 아래 그림자 타원 */
+  --highlight-soft:rgba(255,255,255,.22); /* 줄기·씨앗 하이라이트 스트로크 */
+
+  /* 잎 무리 팔레트 — 묘목(대)/만개 단계가 공유 */
+  --foliage-1:#97c990;
+  --foliage-2:#add9a6;
+  --foliage-3:#8cc18d;
+  --foliage-4:#9fd19a;
+  --foliage-5:#83b986;
+  /* 묘목(소) 단계 전용 잎 색 */
+  --foliage-sm-1:#a9d7a5;
+  --foliage-sm-2:#8fc48f;
+  --foliage-sm-3:#98cc97;
+
+  /* 씨앗 아이콘 그라디언트 */
+  --seed-grad-1:#c7986b;
+  --seed-grad-2:#8e6540;
+  --seed-shadow-dark:rgba(78,43,20,.16);
+
+  /* 배경 은은한 빛무리(ambient blob) */
+  --ambient-1:#fff7db;
+  --ambient-2:#eadff9;
+  --ambient-3:#d8efe0;
+
+  /* 화면 안 그라디언트 */
+  --screen-grad-1:#f7f1e2;
+  --screen-grad-2:#eef2e2;
+  --screen-grad-3:#e4ecdc;
+  --screen-glow:rgba(155,202,168,.28);
+  --glass-highlight:rgba(255,255,255,.4);
+  --glass-fade:rgba(255,255,255,.02);
+  --screen-border:rgba(255,255,255,.5);
+
+  /* ============ 3. 표면(서페이스) 컴포넌트 색 ============ */
+  --surface-frame-top:#fffaf3;
+  --surface-frame-bottom:#efe4d3;
+  --surface-frame-border:rgba(230,217,200,.9);
+  --surface-notch:#2b2825;
+  --surface-card:#fffaf2;              /* 하단 시트(작성 폼) 배경 */
+  --surface-elevated:rgba(255,255,255,.94); /* 알림 배너 배경 */
+  --surface-elevated-border:rgba(255,255,255,.7);
+  --surface-input:#ffffff;             /* 입력창 · 칩 기본 배경 */
+  --surface-chip-hover:rgba(0,0,0,.03);/* 닫기(x) 버튼 배경 */
+  --surface-chip-soft:rgba(255,255,255,.7);   /* 오늘 칩 배경 */
+  --surface-pill:rgba(255,255,255,.72);       /* 식물 이름표 배경 */
+  --surface-pill-strong:rgba(255,255,255,.78);/* 씨앗 추가(축소) 버튼 배경 */
+  --surface-pill-border:rgba(255,255,255,.6);
+  --dot-inactive:rgba(119,95,66,.2);   /* 스텝 표시 비활성 점 */
+
+  /* ============ 4. 오버레이 & 강조 상태 ============ */
+  --overlay-backdrop:rgba(40,33,24,.22); /* 시트 뒤 배경 딤 */
+  --overlay-toast:rgba(43,37,30,.9);     /* 하단 토스트 배경 */
+
+  --accent-selected-bg:rgba(155,202,168,.24);  /* 선택된 칩 배경 */
+  --accent-selected-border:rgba(78,123,90,.4); /* 선택된 칩 테두리 */
+  --accent-focus-border:rgba(78,123,90,.5);    /* 입력창 포커스 테두리 */
+  --accent-focus-ring:rgba(155,202,168,.22);   /* 입력창 포커스 링 */
+  --btn-later-bg:rgba(115,94,70,.09);          /* "나중에" 버튼 배경 */
+
+  /* ============ 5. 그림자 ============ */
+  --shadow-shell:0 22px 60px rgba(89,70,48,.14);   /* 기기 프레임 */
+  --shadow-seed:0 16px 16px rgba(86,59,30,.16);    /* 큰 씨앗 아이콘 */
+  --shadow-pill:0 14px 30px rgba(82,59,30,.16);    /* 축소된 씨앗 추가 버튼 */
+  --shadow-card:0 8px 18px rgba(90,66,38,.09);     /* 식물 이름표 */
+  --shadow-composer:0 -20px 60px rgba(72,49,24,.16); /* 하단 시트 */
+  --shadow-notif:0 20px 46px rgba(42,36,30,.24);   /* 알림 배너 */
+  --shadow-lift:0 10px 22px rgba(78,123,90,.28);   /* 기본(초록) 버튼 */
+
+  /* ============ 6. 반경(radius) 스케일 ============ */
+  --radius-sm:8px;     /* 상태 코드 칩 */
+  --radius-md:16px;    /* 입력창, 기본 버튼 */
+  --radius-lg:22px;    /* 알림 배너, 데모 패널 */
+  --radius-xl:28px;    /* 하단 시트 상단 */
+  --radius-2xl:40px;   /* 스크린 코너 */
+  --radius-frame:52px; /* 기기 프레임 코너 */
+  --radius-pill:999px; /* 칩·배지 전용 */
+
+  /* ============ 7. 스페이싱 스케일 ============ */
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:32px;
+
+  /* ============ 8. 타이포그래피 ============ */
+  --font-family: ui-rounded, "SF Pro Rounded", "Pretendard", "Apple SD Gothic Neo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-xs:11px;    /* 데모 보조 설명 */
+  --text-sm:12px;    /* 라벨, 보조 텍스트 */
+  --text-base:13px;  /* 본문 기본 */
+  --text-md:14px;    /* 알림 제목 */
+  --text-lg:17px;    /* 시트 제목 */
+  --text-xl:22px;    /* 화면 헤딩 */
+
+  /* ============ 9. 모션 ============ */
+  --ease:cubic-bezier(.2,.85,.25,1);
+  --dur-fast:.2s;
+  --dur-base:.28s;
+  --dur-slow:.35s;
+}

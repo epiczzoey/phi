@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>습관 씨앗 정원 — 프로토타입</title>
+  <link rel="stylesheet" href="../design-system/tokens.css" />
+  <style>
+    /*
+      색상·그림자·반경·타이포·모션 값은 모두 ../design-system/tokens.css 의
+      CSS 변수를 사용합니다. 톤을 바꾸고 싶다면 이 파일이 아니라
+      tokens.css 값을 고치세요 — 디자인 시스템 문서에도 동시에 반영됩니다.
+    */
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: var(--font-family);
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, var(--ambient-1) 0 14%, transparent 32%),
+        radial-gradient(circle at 86% 4%, var(--ambient-2) 0 12%, transparent 31%),
+        radial-gradient(circle at 85% 86%, var(--ambient-3) 0 16%, transparent 36%),
+        var(--bg);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:22px;
+      padding:36px 16px 60px;
+    }
+    button,input{font:inherit}
+    button{cursor:pointer;border:0;background:none}
+    a{color:inherit}
+
+    .top-note{
+      text-align:center;
+      max-width:420px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .top-note a{color:var(--accent-link);font-weight:800;text-decoration:none}
+
+    /* ---------- device frame ---------- */
+    .device{
+      width:390px;
+      max-width:calc(100vw - 24px);
+      border-radius:var(--radius-frame);
+      background:linear-gradient(180deg,var(--surface-frame-top),var(--surface-frame-bottom));
+      border:1px solid var(--surface-frame-border);
+      box-shadow:var(--shadow-shell);
+      padding:14px;
+      position:relative;
+    }
+    .notch{
+      position:absolute;
+      left:50%; top:14px;
+      transform:translateX(-50%);
+      width:118px; height:26px;
+      background:var(--surface-notch);
+      border-radius:var(--radius-md);
+      z-index:20;
+    }
+    .screen{
+      position:relative;
+      height:780px;
+      max-height:calc(100vh - 220px);
+      border-radius:var(--radius-2xl);
+      overflow:hidden;
+      background:
+        linear-gradient(180deg, var(--glass-highlight), var(--glass-fade)),
+        radial-gradient(ellipse at 50% 82%, var(--screen-glow), transparent 42%),
+        linear-gradient(165deg, var(--screen-grad-1) 0%, var(--screen-grad-2) 55%, var(--screen-grad-3) 100%);
+      border:1px solid var(--screen-border);
+    }
+    .status-bar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 26px 0;
+      font-size:var(--text-base);
+      font-weight:800;
+      color:var(--text-strong);
+      position:relative;
+      z-index:6;
+    }
+
+    /* ---------- app header ---------- */
+    .app-header{
+      padding:14px 22px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      position:relative;
+      z-index:6;
+    }
+    .app-header h1{margin:0;font-size:var(--text-xl);letter-spacing:-.045em}
+    .app-header p{margin:6px 0 0;color:var(--muted);font-size:12.5px}
+    .today-chip{
+      background:var(--surface-chip-soft);
+      border:1px solid var(--line);
+      border-radius:var(--radius-pill);
+      padding:8px 12px;
+      font-size:var(--text-sm);
+      font-weight:800;
+      color:var(--text-body);
+      white-space:nowrap;
+    }
+
+    /* ---------- garden stage ---------- */
+    .garden-shell{
+      position:absolute;
+      left:14px; right:14px; top:112px; bottom:14px;
+      border-radius:32px;
+      overflow:hidden;
+    }
+    .garden-stage{ position:absolute; inset:0; }
+
+    .empty-hint{
+      position:absolute;
+      left:26px; right:26px; top:14%;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+      opacity:0;
+      transform:translateY(6px);
+      transition:.3s var(--ease);
+      pointer-events:none;
+    }
+    .empty .empty-hint{ opacity:1; transform:translateY(0); }
+
+    .seed-add{
+      position:absolute;
+      left:50%; top:58%;
+      transform:translate(-50%,-50%);
+      width:108px; height:108px;
+      display:grid;
+      place-items:center;
+      filter:drop-shadow(var(--shadow-seed));
+      transition:var(--dur-base) var(--ease);
+    }
+    .has-habits .seed-add{
+      width:56px; height:56px;
+      left:calc(100% - 42px);
+      top:calc(100% - 42px);
+      background:var(--surface-pill-strong);
+      border-radius:var(--radius-lg);
+      border:1px solid var(--surface-elevated-border);
+      box-shadow:var(--shadow-pill);
+    }
+    .seed-add:hover{ transform:translate(-50%,-50%) scale(1.05); }
+    .has-habits .seed-add:hover{ transform:translate(-50%,-50%) scale(1.06); }
+    .seed-icon{
+      width:52px; height:64px;
+      border-radius:58% 42% 54% 46% / 58% 45% 55% 42%;
+      background:linear-gradient(145deg,var(--seed-grad-1),var(--seed-grad-2));
+      transform:rotate(-18deg);
+      box-shadow:inset 8px -10px 16px var(--seed-shadow-dark), inset -6px 6px 14px var(--highlight-soft);
+    }
+    .has-habits .seed-icon{ width:24px; height:30px; }
+
+    .plant-card{
+      position:absolute;
+      width:104px;
+      min-height:132px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-end;
+      gap:6px;
+      transform:translate(-50%,-50%);
+      transition:transform .25s var(--ease), filter .25s var(--ease);
+      animation:rise .5s var(--ease) both;
+    }
+    .plant-card:hover{ transform:translate(-50%,-52%) scale(1.04); }
+    .plant-card.watered{ animation:watered .6s var(--ease); }
+    @keyframes rise{ from{opacity:0; transform:translate(-50%,-42%) scale(.8);} to{opacity:1; transform:translate(-50%,-50%) scale(1);} }
+    @keyframes watered{ 0%{transform:translate(-50%,-50%) scale(1);} 38%{transform:translate(-50%,-58%) scale(1.1);} 100%{transform:translate(-50%,-50%) scale(1);} }
+
+    .plant-svg{ width:96px; height:104px; overflow:visible; transition:opacity .3s ease, filter .3s ease; }
+    .vitality-faded .plant-svg{ opacity:.5; filter:saturate(.4); }
+    .vitality-normal .plant-svg{ opacity:.84; filter:saturate(.82); }
+    .vitality-vivid .plant-svg{ opacity:1; filter:saturate(1.12); }
+
+    .plant-name{
+      max-width:104px;
+      padding:6px 10px;
+      border-radius:var(--radius-pill);
+      background:var(--surface-pill);
+      border:1px solid var(--surface-pill-border);
+      color:var(--text-plant-label);
+      font-size:11.5px;
+      font-weight:700;
+      box-shadow:var(--shadow-card);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    /* ---------- composer bottom sheet ---------- */
+    .sheet-backdrop{
+      position:absolute;
+      inset:0;
+      background:var(--overlay-backdrop);
+      opacity:0;
+      pointer-events:none;
+      transition:var(--dur-base) var(--ease);
+      z-index:8;
+    }
+    .sheet-backdrop.open{ opacity:1; pointer-events:auto; }
+
+    .composer{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      background:var(--surface-card);
+      border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      padding:20px 20px 26px;
+      box-shadow:var(--shadow-composer);
+      transform:translateY(102%);
+      transition:.32s var(--ease);
+      z-index:9;
+    }
+    .composer.open{ transform:translateY(0); }
+    .composer-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:14px; }
+    .composer h2{ margin:0; font-size:var(--text-lg); letter-spacing:-.04em; }
+    .composer p.desc{ margin:5px 0 0; color:var(--muted); font-size:var(--text-sm); line-height:1.4; }
+    .x-btn{ width:30px; height:30px; border:1px solid var(--line); border-radius:50%; background:var(--surface-chip-hover); color:var(--muted); flex-shrink:0; }
+
+    .step-dots{ display:flex; gap:6px; margin-bottom:16px; }
+    .dot{ height:6px; width:6px; border-radius:var(--radius-pill); background:var(--dot-inactive); transition:var(--dur-fast) ease; }
+    .dot.active{ width:22px; background:var(--green-dark); }
+
+    .field{ display:grid; gap:9px; }
+    label{ font-size:var(--text-sm); color:var(--muted); }
+    input[type="text"], input[type="time"]{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:var(--radius-md);
+      background:var(--surface-input);
+      padding:13px 14px;
+      outline:none;
+      color:var(--ink);
+    }
+    input:focus{ border-color:var(--accent-focus-border); box-shadow:0 0 0 4px var(--accent-focus-ring); }
+
+    .quick-times{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:8px; }
+    .chip-btn{
+      border:1px solid var(--line);
+      background:var(--surface-input);
+      border-radius:var(--radius-pill);
+      padding:9px 6px;
+      color:var(--text-soft);
+      font-size:12.5px;
+      transition:var(--dur-fast) ease;
+    }
+    .chip-btn.selected{ background:var(--accent-selected-bg); border-color:var(--accent-selected-border); color:var(--green-dark); font-weight:800; }
+
+    .primary-btn{
+      width:100%;
+      border-radius:var(--radius-md);
+      background:linear-gradient(180deg,var(--green-light),var(--green-dark));
+      color:#fff;
+      padding:13px 14px;
+      margin-top:14px;
+      font-weight:800;
+      box-shadow:var(--shadow-lift);
+      transition:var(--dur-fast) ease;
+    }
+    .primary-btn:disabled{ opacity:.4; box-shadow:none; }
+    .secondary-row{ display:flex; gap:8px; margin-top:10px; }
+    .secondary-row .chip-btn{ flex:1; }
+
+    /* ---------- in-frame notification banner ---------- */
+    .mock-notification{
+      position:absolute;
+      left:12px; right:12px; top:16px;
+      background:var(--surface-elevated);
+      border:1px solid var(--surface-elevated-border);
+      box-shadow:var(--shadow-notif);
+      border-radius:var(--radius-lg);
+      padding:14px;
+      transform:translateY(-130%);
+      transition:var(--dur-slow) var(--ease);
+      z-index:30;
+    }
+    .mock-notification.show{ transform:translateY(0); }
+    .mock-top{ display:flex; align-items:center; gap:8px; color:var(--muted); font-size:11.5px; margin-bottom:6px; font-weight:700; }
+    .mock-body strong{ display:block; font-size:var(--text-md); margin-bottom:3px; letter-spacing:-.02em; }
+    .mock-body span{ color:var(--muted); font-size:12.5px; line-height:1.35; }
+    .mock-actions{ display:flex; gap:8px; margin-top:11px; }
+    .mock-actions button{ flex:1; border-radius:13px; padding:10px; font-weight:800; font-size:var(--text-base); }
+    .mock-actions .done{ background:var(--green-dark); color:#fff; }
+    .mock-actions .later{ background:var(--btn-later-bg); color:var(--text-quiet); }
+
+    .notice{
+      position:absolute;
+      left:50%; bottom:20px;
+      transform:translate(-50%,14px);
+      background:var(--overlay-toast);
+      color:#fff;
+      border-radius:var(--radius-pill);
+      padding:11px 15px;
+      font-size:12.5px;
+      opacity:0;
+      pointer-events:none;
+      z-index:25;
+      transition:var(--dur-base) ease;
+      white-space:nowrap;
+      max-width:88%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .notice.show{ opacity:1; transform:translate(-50%,0); }
+    .hidden{ display:none !important; }
+
+    /* ---------- demo tools (outside device, not part of the app) ---------- */
+    .demo-tools{
+      width:390px;
+      max-width:calc(100vw - 24px);
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:16px;
+      backdrop-filter:blur(10px);
+    }
+    .demo-tools .demo-label{ font-size:var(--text-sm); font-weight:800; color:var(--accent-link); margin-bottom:10px; }
+    .demo-row{ display:flex; gap:8px; flex-wrap:wrap; }
+    .demo-btn{
+      flex:1;
+      min-width:120px;
+      background:var(--surface-input);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12.5px;
+      font-weight:700;
+      color:var(--text-body);
+      text-align:left;
+    }
+    .demo-btn span{ display:block; color:var(--muted); font-weight:500; font-size:var(--text-xs); margin-top:2px; }
+    .demo-select{
+      flex:1;
+      min-width:120px;
+      background:var(--surface-input);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12.5px;
+      font-weight:700;
+      color:var(--text-body);
+    }
+    .demo-note{ margin:8px 0 0; font-size:var(--text-xs); color:var(--muted); line-height:1.5; }
+    .state-chip{
+      margin-top:10px;
+      font-size:11.5px;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .state-chip code{
+      background:var(--surface-input);
+      border:1px solid var(--line);
+      border-radius:var(--radius-sm);
+      padding:3px 7px;
+      color:var(--green-dark);
+      font-weight:800;
+    }
+
+    @media (max-height:840px){ .screen{ height:700px; } }
+  </style>
+</head>
+<body>
+  <p class="top-note">이 화면이 실제 앱의 전부입니다. 탭도 목록도 없이, 정원 하나만 존재해요.<br/>설계 근거는 <a href="../ct-note/">CT 방법론 문서</a>를 참고하세요.</p>
+
+  <div class="device">
+    <div class="notch"></div>
+    <div class="screen empty" id="screen">
+      <div class="status-bar"><span id="clock">9:41</span><span>Seed Garden</span></div>
+
+      <div class="app-header">
+        <div>
+          <h1>오늘 정원</h1>
+          <p>씨앗이 부르면, 한 번만 답해요.</p>
+        </div>
+        <div class="today-chip" id="todayChip">0</div>
+      </div>
+
+      <div class="garden-shell">
+        <div class="garden-stage" id="gardenStage">
+          <div class="empty-hint">폼은 숨어 있어요.<br/>씨앗을 누르면 한 단계씩 나타나요.</div>
+          <button class="seed-add" id="addSeedBtn" aria-label="씨앗 심기 시작">
+            <span class="seed-icon"></span>
+          </button>
+        </div>
+
+        <div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+        <div class="composer" id="composer">
+          <div class="composer-head">
+            <div>
+              <h2 id="composerTitle">어떤 습관을 심을까요?</h2>
+              <p class="desc" id="composerDesc">습관 이름만 먼저 정해요.</p>
+            </div>
+            <button class="x-btn" id="closeComposer">×</button>
+          </div>
+
+          <div class="step-dots">
+            <span class="dot active" id="dot1"></span>
+            <span class="dot" id="dot2"></span>
+            <span class="dot" id="dot3"></span>
+          </div>
+
+          <div id="stepName" class="field">
+            <label for="habitName">습관 이름</label>
+            <input id="habitName" type="text" placeholder="예: 물 마시기" maxlength="18" autocomplete="off" />
+            <button class="primary-btn" id="nextToTime" disabled>다음</button>
+          </div>
+
+          <div id="stepTime" class="field hidden">
+            <label for="reminderTime">언제 씨앗이 불러줄까요?</label>
+            <input id="reminderTime" type="time" value="21:00" />
+            <div class="quick-times">
+              <button class="chip-btn" data-time="08:00">아침</button>
+              <button class="chip-btn" data-time="13:00">낮</button>
+              <button class="chip-btn selected" data-time="21:00">저녁</button>
+            </div>
+            <div class="secondary-row">
+              <button class="chip-btn" id="backToName">이전</button>
+              <button class="primary-btn" id="nextToConfirm" style="margin-top:0">다음</button>
+            </div>
+          </div>
+
+          <div id="stepConfirm" class="field hidden">
+            <p id="confirmText" style="margin:0 0 2px;font-size:15px;">이 씨앗을 심을까요?</p>
+            <p class="desc" id="confirmSub">심은 뒤에는 알림에서 "물을 줬어요"로 답하면 자라요.</p>
+            <div class="secondary-row">
+              <button class="chip-btn" id="backToTime">이전</button>
+              <button class="primary-btn" id="plantBtn" style="margin-top:0">심기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mock-notification" id="mockNotification">
+          <div class="mock-top">🌱 Seed Garden · 알림</div>
+          <div class="mock-body">
+            <strong id="mockTitle">씨앗이 기다려요</strong>
+            <span id="mockText">오늘 이 습관에 물을 줬나요?</span>
+          </div>
+          <div class="mock-actions">
+            <button class="done" id="mockDone">물을 줬어요</button>
+            <button class="later" id="mockLater">나중에</button>
+          </div>
+        </div>
+
+        <div class="notice" id="notice">씨앗을 심었어요</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-tools">
+    <div class="demo-label">데모 도구 (실제 앱 화면이 아니에요)</div>
+    <div class="demo-row">
+      <button class="demo-btn" id="testNotificationBtn">알림 바로 보기<span>정해진 시간까지 기다리지 않고 즉시 테스트</span></button>
+      <button class="demo-btn" id="permissionBtn">브라우저 알림 허용<span>OS 알림처럼 페이지 밖에서도 표시</span></button>
+      <button class="demo-btn" id="resetBtn">정원 초기화<span>모든 씨앗과 기록 삭제</span></button>
+    </div>
+
+    <div class="demo-label" style="margin-top:14px">성장 과정 데모 (실제 하루 1회 체크인과는 별개)</div>
+    <div class="demo-row">
+      <select id="growthHabitSelect" class="demo-select"></select>
+      <button class="demo-btn" id="growthDemoBtn">＋ 하루치 물주기<span>탭할수록 씨앗→새싹→…→만개까지 진행돼요</span></button>
+    </div>
+    <p class="demo-note">실제 습관 등록 시 알림 시간은 한 번만 쓰이고 하루 1회만 체크인돼요. 이 버튼은 성장 단계를 빠르게 확인하기 위한 프로토타입 전용 더미이며, 오늘 날짜의 실제 체크인 기록에는 영향을 주지 않아요.</p>
+
+    <div class="state-chip">현재 상태 <code id="stateLabel">EMPTY_GARDEN</code></div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'seed-garden-v1';
+    const GROWTH_THRESHOLDS = [3, 7, 14, 30];
+    const VITALITY_WINDOW = 7;
+    const todayKey = () => new Date().toISOString().slice(0, 10);
+
+    const defaultState = { habits: [], logs: [] };
+    let state = loadState();
+    let activeNotificationHabitId = null;
+    let notificationTimer = null;
+
+    const els = {
+      screen: document.getElementById('screen'),
+      gardenStage: document.getElementById('gardenStage'),
+      addSeedBtn: document.getElementById('addSeedBtn'),
+      sheetBackdrop: document.getElementById('sheetBackdrop'),
+      composer: document.getElementById('composer'),
+      closeComposer: document.getElementById('closeComposer'),
+      composerTitle: document.getElementById('composerTitle'),
+      composerDesc: document.getElementById('composerDesc'),
+      dot1: document.getElementById('dot1'),
+      dot2: document.getElementById('dot2'),
+      dot3: document.getElementById('dot3'),
+      stepName: document.getElementById('stepName'),
+      stepTime: document.getElementById('stepTime'),
+      stepConfirm: document.getElementById('stepConfirm'),
+      habitName: document.getElementById('habitName'),
+      reminderTime: document.getElementById('reminderTime'),
+      nextToTime: document.getElementById('nextToTime'),
+      nextToConfirm: document.getElementById('nextToConfirm'),
+      backToName: document.getElementById('backToName'),
+      backToTime: document.getElementById('backToTime'),
+      plantBtn: document.getElementById('plantBtn'),
+      confirmText: document.getElementById('confirmText'),
+      confirmSub: document.getElementById('confirmSub'),
+      todayChip: document.getElementById('todayChip'),
+      notice: document.getElementById('notice'),
+      testNotificationBtn: document.getElementById('testNotificationBtn'),
+      permissionBtn: document.getElementById('permissionBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      growthHabitSelect: document.getElementById('growthHabitSelect'),
+      growthDemoBtn: document.getElementById('growthDemoBtn'),
+      mockNotification: document.getElementById('mockNotification'),
+      mockTitle: document.getElementById('mockTitle'),
+      mockText: document.getElementById('mockText'),
+      mockDone: document.getElementById('mockDone'),
+      mockLater: document.getElementById('mockLater'),
+      clock: document.getElementById('clock'),
+      stateLabel: document.getElementById('stateLabel')
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : structuredClone(defaultState);
+      } catch {
+        return structuredClone(defaultState);
+      }
+    }
+    function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
+
+    function setState(name) { els.stateLabel.textContent = name; }
+
+    function showNotice(text) {
+      els.notice.textContent = text;
+      els.notice.classList.add('show');
+      clearTimeout(showNotice.timer);
+      showNotice.timer = setTimeout(() => els.notice.classList.remove('show'), 1800);
+    }
+
+    function setComposerStep(step) {
+      els.stepName.classList.toggle('hidden', step !== 'name');
+      els.stepTime.classList.toggle('hidden', step !== 'time');
+      els.stepConfirm.classList.toggle('hidden', step !== 'confirm');
+      els.dot1.classList.toggle('active', step === 'name');
+      els.dot2.classList.toggle('active', step === 'time');
+      els.dot3.classList.toggle('active', step === 'confirm');
+
+      const name = els.habitName.value.trim() || '새 습관';
+      const time = els.reminderTime.value || '21:00';
+
+      if (step === 'name') {
+        setState('PLANT_NAME_STEP');
+        els.composerTitle.textContent = '어떤 습관을 심을까요?';
+        els.composerDesc.textContent = '습관 이름만 먼저 정해요. 다음 단계에서 씨앗이 부를 시간을 골라요.';
+        setTimeout(() => els.habitName.focus(), 80);
+      }
+      if (step === 'time') {
+        setState('REMINDER_TIME_STEP');
+        els.composerTitle.textContent = '언제 씨앗이 불러줄까요?';
+        els.composerDesc.textContent = '정해진 시간이 되면 앱 밖 알림으로 물어봐요.';
+      }
+      if (step === 'confirm') {
+        setState('READY_TO_PLANT');
+        els.composerTitle.textContent = '이 씨앗을 심을까요?';
+        els.composerDesc.textContent = '심은 뒤에는 알림에서 "물을 줬어요"로 답하면 자라요.';
+        els.confirmText.textContent = `"${name}" 씨앗`;
+        els.confirmSub.textContent = `매일 ${formatTime(time)}에 조용히 불러줄게요.`;
+      }
+    }
+
+    function openComposer() {
+      els.sheetBackdrop.classList.add('open');
+      els.composer.classList.add('open');
+      setComposerStep('name');
+    }
+    function closeComposer() {
+      els.sheetBackdrop.classList.remove('open');
+      els.composer.classList.remove('open');
+      setState(state.habits.length ? 'GARDEN_WITH_SEED' : 'EMPTY_GARDEN');
+      // 입력값만 조용히 초기화한다. 스텝/제목 텍스트는 여기서 되돌리지 않는다 —
+      // openComposer()가 다음에 열릴 때 항상 'name' 스텝으로 리셋하므로,
+      // 닫히는 애니메이션 도중에 제목이 먼저 바뀌어 잠깐 보이는 깜빡임을 막는다.
+      els.habitName.value = '';
+      els.nextToTime.disabled = true;
+      els.reminderTime.value = '21:00';
+      document.querySelectorAll('.quick-times .chip-btn').forEach(b => b.classList.toggle('selected', b.dataset.time === '21:00'));
+    }
+
+    function formatTime(value) {
+      const [h, m] = value.split(':').map(Number);
+      const period = h < 12 ? '오전' : '오후';
+      const hour = h % 12 || 12;
+      return `${period} ${hour}:${String(m).padStart(2, '0')}`;
+    }
+
+    function getHabitLogs(habitId) { return state.logs.filter(l => l.habitId === habitId); }
+    function getTodayLog(habitId) { return state.logs.find(l => l.habitId === habitId && l.date === todayKey()); }
+
+    function recentCare(habitId) {
+      const now = new Date(todayKey());
+      const min = new Date(now);
+      min.setDate(now.getDate() - (VITALITY_WINDOW - 1));
+      return getHabitLogs(habitId).filter(l => {
+        const d = new Date(l.date);
+        return d >= min && d <= now;
+      }).length;
+    }
+
+    function growthStage(totalCare) {
+      const [s1, s2, s3, s4] = GROWTH_THRESHOLDS;
+      if (totalCare >= s4) return 'bloom';
+      if (totalCare >= s3) return 'big';
+      if (totalCare >= s2) return 'small';
+      if (totalCare >= s1) return 'sprout';
+      return 'seed';
+    }
+
+    function vitalityTier(recent) {
+      const percent = Math.round((recent / VITALITY_WINDOW) * 100);
+      if (percent >= 70) return 'vivid';
+      if (percent >= 25) return 'normal';
+      return 'faded';
+    }
+
+    function getPosition(index, total) {
+      const presets = [
+        { x: 50, y: 58 }, { x: 30, y: 48 }, { x: 70, y: 48 },
+        { x: 24, y: 70 }, { x: 76, y: 70 }, { x: 50, y: 38 }
+      ];
+      if (index < presets.length) return presets[index];
+      const angle = (index / Math.max(total, 1)) * Math.PI * 2;
+      return { x: 50 + Math.cos(angle) * 26, y: 56 + Math.sin(angle) * 16 };
+    }
+
+    function renderPlantSvg(stage) {
+      if (stage === 'seed') {
+        return `<svg class="plant-svg" viewBox="0 0 120 130" aria-hidden="true">
+          <ellipse cx="60" cy="106" rx="34" ry="10" fill="var(--soil-shadow)"/>
+          <path d="M61 42 C80 55 76 85 57 94 C39 80 42 54 61 42Z" fill="var(--trunk)"/>
+          <path d="M67 50 C75 62 71 78 61 88" fill="none" stroke="var(--highlight-soft)" stroke-width="5" stroke-linecap="round"/>
+          <ellipse cx="61" cy="95" rx="30" ry="8" fill="var(--soil)"/>
+        </svg>`;
+      }
+      if (stage === 'sprout') {
+        return `<svg class="plant-svg" viewBox="0 0 120 130" aria-hidden="true">
+          <ellipse cx="60" cy="106" rx="34" ry="10" fill="var(--soil-shadow)"/>
+          <path d="M60 100 C59 84 61 69 60 57" stroke="var(--trunk-young)" stroke-width="7" stroke-linecap="round"/>
+          <path d="M59 62 C42 48 31 51 25 66 C40 72 52 70 59 62Z" fill="var(--leaf)"/>
+          <path d="M62 60 C77 43 92 45 99 60 C84 68 72 68 62 60Z" fill="var(--leaf2)"/>
+          <ellipse cx="60" cy="104" rx="30" ry="8" fill="var(--soil)"/>
+        </svg>`;
+      }
+      if (stage === 'small') {
+        return `<svg class="plant-svg" viewBox="0 0 120 130" aria-hidden="true">
+          <ellipse cx="60" cy="110" rx="38" ry="10" fill="var(--soil-shadow)"/>
+          <path d="M60 108 C58 82 62 66 60 46" stroke="var(--trunk-young)" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="44" cy="55" r="22" fill="var(--leaf)"/>
+          <circle cx="67" cy="43" r="27" fill="var(--foliage-sm-1)"/>
+          <circle cx="78" cy="66" r="21" fill="var(--foliage-sm-2)"/>
+          <circle cx="55" cy="70" r="24" fill="var(--foliage-sm-3)"/>
+          <ellipse cx="60" cy="108" rx="32" ry="8" fill="var(--soil)"/>
+        </svg>`;
+      }
+      if (stage === 'big') {
+        return `<svg class="plant-svg" viewBox="0 0 120 130" aria-hidden="true">
+          <ellipse cx="60" cy="112" rx="42" ry="10" fill="var(--soil-shadow)"/>
+          <path d="M59 112 C57 84 64 61 60 34" stroke="var(--trunk-mature)" stroke-width="11" stroke-linecap="round"/>
+          <circle cx="38" cy="58" r="25" fill="var(--foliage-1)"/>
+          <circle cx="58" cy="39" r="31" fill="var(--foliage-2)"/>
+          <circle cx="83" cy="55" r="26" fill="var(--foliage-3)"/>
+          <circle cx="51" cy="79" r="26" fill="var(--foliage-4)"/>
+          <circle cx="77" cy="80" r="22" fill="var(--foliage-5)"/>
+          <ellipse cx="60" cy="110" rx="35" ry="8" fill="var(--soil)"/>
+        </svg>`;
+      }
+      return `<svg class="plant-svg" viewBox="0 0 120 130" aria-hidden="true">
+        <ellipse cx="60" cy="112" rx="43" ry="10" fill="var(--soil-shadow)"/>
+        <path d="M59 112 C57 84 64 61 60 32" stroke="var(--trunk-mature)" stroke-width="11" stroke-linecap="round"/>
+        <circle cx="38" cy="58" r="25" fill="var(--foliage-1)"/>
+        <circle cx="58" cy="39" r="31" fill="var(--foliage-2)"/>
+        <circle cx="83" cy="55" r="26" fill="var(--foliage-3)"/>
+        <circle cx="51" cy="79" r="26" fill="var(--foliage-4)"/>
+        <circle cx="77" cy="80" r="22" fill="var(--foliage-5)"/>
+        <circle cx="42" cy="44" r="5" fill="var(--bloom)"/>
+        <circle cx="75" cy="33" r="5" fill="var(--bloom-gold-1)"/>
+        <circle cx="92" cy="66" r="5" fill="var(--bloom)"/>
+        <circle cx="55" cy="84" r="5" fill="var(--bloom-gold-2)"/>
+        <ellipse cx="60" cy="110" rx="35" ry="8" fill="var(--soil)"/>
+      </svg>`;
+    }
+
+    function render() {
+      const hasHabits = state.habits.length > 0;
+      els.screen.classList.toggle('empty', !hasHabits);
+      els.screen.classList.toggle('has-habits', hasHabits);
+
+      const todayCompleted = state.habits.filter(h => getTodayLog(h.id)).length;
+      els.todayChip.textContent = hasHabits ? `${todayCompleted}/${state.habits.length}` : '0';
+
+      [...els.gardenStage.querySelectorAll('.plant-card')].forEach(el => el.remove());
+
+      state.habits.forEach((habit, index) => {
+        const logs = getHabitLogs(habit.id);
+        const totalCare = logs.length;
+        const recent = recentCare(habit.id);
+        const stage = growthStage(totalCare);
+        const vitality = vitalityTier(recent);
+        const pos = getPosition(index, state.habits.length);
+        const card = document.createElement('button');
+        card.className = `plant-card vitality-${vitality}`;
+        card.style.left = `${pos.x}%`;
+        card.style.top = `${pos.y}%`;
+        card.dataset.id = habit.id;
+        card.innerHTML = `${renderPlantSvg(stage)}<span class="plant-name">${escapeHtml(habit.name)}</span>`;
+        card.addEventListener('click', () => {
+          activeNotificationHabitId = habit.id;
+          showMockNotification(habit.id);
+        });
+        els.gardenStage.appendChild(card);
+      });
+
+      if (!els.composer.classList.contains('open')) {
+        setState(hasHabits ? 'GARDEN_WITH_SEED' : 'EMPTY_GARDEN');
+      }
+      renderGrowthSelect();
+      scheduleNextNotification();
+    }
+
+    function renderGrowthSelect() {
+      const select = els.growthHabitSelect;
+      const prevValue = select.value;
+      select.innerHTML = '';
+      if (!state.habits.length) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = '먼저 씨앗을 심어주세요';
+        select.appendChild(opt);
+        els.growthDemoBtn.disabled = true;
+        return;
+      }
+      els.growthDemoBtn.disabled = false;
+      state.habits.forEach(h => {
+        const opt = document.createElement('option');
+        opt.value = h.id;
+        opt.textContent = h.name;
+        select.appendChild(opt);
+      });
+      select.value = state.habits.some(h => h.id === prevValue) ? prevValue : state.habits[0].id;
+    }
+
+    // 프로토타입 전용: 하루 1회 알림 체크인과 별개로, 성장 단계를 빠르게 눈으로 확인하기 위한 더미 기록을 추가한다.
+    // 오늘(todayKey) 날짜는 절대 사용하지 않으므로 실제 알림 체크인 로직(하루 1회 제한)과 절대 충돌하지 않는다.
+    function nextDemoLogDate(habitId) {
+      const used = new Set(getHabitLogs(habitId).map(l => l.date));
+      let offset = 1;
+      while (offset < 3650) {
+        const d = new Date(todayKey());
+        d.setDate(d.getDate() - offset);
+        const key = d.toISOString().slice(0, 10);
+        if (!used.has(key)) return key;
+        offset++;
+      }
+      return null;
+    }
+
+    function dummyGrowthWater(habitId) {
+      const habit = state.habits.find(h => h.id === habitId);
+      if (!habit) { showNotice('먼저 씨앗을 심어주세요'); return; }
+      const date = nextDemoLogDate(habitId);
+      if (!date) return;
+      state.logs.push({ habitId, date, source: 'demo-growth', createdAt: new Date().toISOString() });
+      saveState();
+      render();
+      const card = document.querySelector(`.plant-card[data-id="${CSS.escape(habitId)}"]`);
+      if (card) {
+        card.classList.add('watered');
+        setTimeout(() => card.classList.remove('watered'), 650);
+      }
+      const totalCare = getHabitLogs(habitId).length;
+      showNotice(`데모: "${habit.name}" 누적 돌봄 ${totalCare}회 (${growthStage(totalCare)})`);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[ch]));
+    }
+
+    function plantHabit() {
+      const name = els.habitName.value.trim();
+      if (!name) return;
+      const habit = { id: uid(), name, reminderTime: els.reminderTime.value || '21:00', createdAt: todayKey() };
+      state.habits.push(habit);
+      saveState();
+      closeComposer();
+      render();
+      showNotice('씨앗을 심었어요');
+    }
+
+    function waterHabit(habitId, source = 'notification') {
+      const habit = state.habits.find(h => h.id === habitId);
+      if (!habit) return;
+      if (!getTodayLog(habitId)) {
+        setState('WATERED_TODAY');
+        state.logs.push({ habitId, date: todayKey(), source, createdAt: new Date().toISOString() });
+        saveState();
+        render();
+        const card = document.querySelector(`.plant-card[data-id="${CSS.escape(habitId)}"]`);
+        if (card) {
+          card.classList.add('watered');
+          setTimeout(() => card.classList.remove('watered'), 650);
+        }
+        showNotice(`"${habit.name}"에 물을 줬어요`);
+      } else {
+        showNotice('오늘은 이미 조용히 자라고 있어요');
+      }
+    }
+
+    function showMockNotification(habitId) {
+      const habit = state.habits.find(h => h.id === habitId) || state.habits[0];
+      if (!habit) { showNotice('먼저 씨앗을 심어주세요'); return; }
+      activeNotificationHabitId = habit.id;
+      setState('NOTIFICATION_PENDING');
+      els.mockTitle.textContent = `${habit.name} 씨앗이 기다려요`;
+      els.mockText.textContent = '오늘 이 습관에 물을 줬나요?';
+      els.mockNotification.classList.add('show');
+
+      if ('Notification' in window && Notification.permission === 'granted') {
+        try {
+          const n = new Notification(`${habit.name} 씨앗이 기다려요`, {
+            body: '페이지가 열려 있는 동안 실제 브라우저 알림으로도 표시돼요. 클릭하면 물을 줘요.',
+            tag: `seed-${habit.id}`
+          });
+          n.onclick = () => { window.focus(); waterHabit(habit.id, 'browser-notification'); n.close(); };
+        } catch (err) { /* ignore unsupported */ }
+      }
+    }
+
+    function hideMockNotification() { els.mockNotification.classList.remove('show'); }
+
+    function scheduleNextNotification() {
+      clearTimeout(notificationTimer);
+      if (!state.habits.length) return;
+      const next = getNextDueHabit();
+      if (!next) return;
+      const delay = Math.max(800, Math.min(next.delay, 2147483647));
+      notificationTimer = setTimeout(() => showMockNotification(next.habit.id), delay);
+    }
+
+    function getNextDueHabit() {
+      const now = new Date();
+      let best = null;
+      state.habits.forEach(habit => {
+        const [hh, mm] = (habit.reminderTime || '21:00').split(':').map(Number);
+        const due = new Date();
+        due.setHours(hh, mm, 0, 0);
+        if (due <= now) due.setDate(due.getDate() + 1);
+        const delay = due - now;
+        if (!best || delay < best.delay) best = { habit, delay };
+      });
+      return best;
+    }
+
+    els.addSeedBtn.addEventListener('click', openComposer);
+    els.sheetBackdrop.addEventListener('click', closeComposer);
+    els.closeComposer.addEventListener('click', closeComposer);
+    els.habitName.addEventListener('input', () => { els.nextToTime.disabled = els.habitName.value.trim().length === 0; });
+    els.habitName.addEventListener('keydown', (e) => { if (e.key === 'Enter' && els.habitName.value.trim()) setComposerStep('time'); });
+    els.nextToTime.addEventListener('click', () => setComposerStep('time'));
+    els.nextToConfirm.addEventListener('click', () => setComposerStep('confirm'));
+    els.backToName.addEventListener('click', () => setComposerStep('name'));
+    els.backToTime.addEventListener('click', () => setComposerStep('time'));
+    els.plantBtn.addEventListener('click', plantHabit);
+
+    document.querySelectorAll('.quick-times .chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        els.reminderTime.value = btn.dataset.time;
+        document.querySelectorAll('.quick-times .chip-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    els.testNotificationBtn.addEventListener('click', () => {
+      const habit = state.habits[0];
+      if (!habit) { showNotice('먼저 씨앗을 심어주세요'); openComposer(); return; }
+      showMockNotification(habit.id);
+    });
+
+    els.growthDemoBtn.addEventListener('click', () => {
+      const id = els.growthHabitSelect.value;
+      if (id) dummyGrowthWater(id);
+    });
+
+    els.permissionBtn.addEventListener('click', async () => {
+      if (!('Notification' in window)) { showNotice('이 브라우저는 알림을 지원하지 않아요'); return; }
+      const result = await Notification.requestPermission();
+      showNotice(result === 'granted' ? '알림을 허용했어요' : '알림이 꺼져 있어요');
+    });
+
+    els.mockDone.addEventListener('click', () => {
+      if (activeNotificationHabitId) waterHabit(activeNotificationHabitId, 'mock-notification');
+      hideMockNotification();
+    });
+    els.mockLater.addEventListener('click', () => {
+      hideMockNotification();
+      setState(state.habits.length ? 'GARDEN_WITH_SEED' : 'EMPTY_GARDEN');
+    });
+
+    els.resetBtn.addEventListener('click', () => {
+      if (!confirm('정원을 초기화할까요?')) return;
+      state = structuredClone(defaultState);
+      saveState();
+      render();
+      closeComposer();
+      hideMockNotification();
+      showNotice('정원을 비웠어요');
+    });
+
+    function tickClock() {
+      els.clock.textContent = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+    tickClock();
+    setInterval(tickClock, 15000);
+
+    render();
+  </script>
+</body>
+</html>
