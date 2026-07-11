@@ -255,6 +255,19 @@ export const studies = [
     title: "final",
     tracks: [
       {
+        id: "hid",
+        title: "HID",
+        items: [
+          {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./final/hid/",
+            status: "ready"
+          }
+        ]
+      },
+      {
         id: "aesthetic-literacy",
         title: "aesthetic-literacy",
         items: [
