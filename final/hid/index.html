@@ -131,9 +131,9 @@ ob.observe(document.body,{childList:true,subtree:true});
 (function(){
   var style=document.createElement('style');
   style.textContent=[
-    '.new-chat-btn{position:fixed;left:32px;top:28px;z-index:50;display:inline-flex;align-items:center;gap:4px;padding:11px 16px;border:none;border-radius:99px;background:#2c2c2c;box-shadow:0 1px 2px 0 rgba(0,0,0,0.15);color:#fff;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:-0.4395px;cursor:pointer;}',
+    '.new-chat-btn{position:fixed;left:32px;top:28px;z-index:50;display:inline-flex;align-items:center;gap:4px;padding:11px 16px;border:none;border-radius:99px;background:#2c2c2c;box-shadow:0 1px 2px 0 rgba(0,0,0,0.15);color:#fff;font-family:inherit;font-size:15px;font-weight:500;letter-spacing:-0.4395px;cursor:pointer;}',
     '.new-chat-btn:hover{background:#3a3a3a;}',
-    '.new-chat-icon{width:14px;height:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}',
+    '.new-chat-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}',
     '.sidebar-list{display:none;}',
     '.sidebar-section-label{display:none;}',
     '.sidebar-item{display:none;}'
@@ -143,7 +143,7 @@ ob.observe(document.body,{childList:true,subtree:true});
   var btn=document.createElement('button');
   btn.className='new-chat-btn';
   btn.title='새 채팅';
-  btn.innerHTML='<span class="new-chat-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.33333 2.66667H2.66667C2.31304 2.66667 1.97391 2.80714 1.72386 3.05719C1.47381 3.30724 1.33333 3.64638 1.33333 4V13.3333C1.33333 13.687 1.47381 14.0261 1.72386 14.2761C1.97391 14.5262 2.31304 14.6667 2.66667 14.6667H12C12.3536 14.6667 12.6928 14.5262 12.9428 14.2761C13.1929 14.0261 13.3333 13.687 13.3333 13.3333V8.66667M12.3333 1.66667C12.5986 1.40145 12.9583 1.25245 13.3333 1.25245C13.7084 1.25245 14.0681 1.40145 14.3333 1.66667C14.5986 1.93188 14.7475 2.29159 14.7475 2.66667C14.7475 3.04174 14.5986 3.40145 14.3333 3.66667L8 10L5.33333 10.6667L6 8L12.3333 1.66667Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>New chat</span>';
+  btn.innerHTML='<span class="new-chat-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.33333 2.66667H2.66667C2.31304 2.66667 1.97391 2.80714 1.72386 3.05719C1.47381 3.30724 1.33333 3.64638 1.33333 4V13.3333C1.33333 13.687 1.47381 14.0261 1.72386 14.2761C1.97391 14.5262 2.31304 14.6667 2.66667 14.6667H12C12.3536 14.6667 12.6928 14.5262 12.9428 14.2761C13.1929 14.0261 13.3333 13.687 13.3333 13.3333V8.66667M12.3333 1.66667C12.5986 1.40145 12.9583 1.25245 13.3333 1.25245C13.7084 1.25245 14.0681 1.40145 14.3333 1.66667C14.5986 1.93188 14.7475 2.29159 14.7475 2.66667C14.7475 3.04174 14.5986 3.40145 14.3333 3.66667L8 10L5.33333 10.6667L6 8L12.3333 1.66667Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>New chat</span>';
   document.body.appendChild(btn);
 
   var sidebarList=document.createElement('div');
@@ -331,7 +331,7 @@ var CONVOS={'온보딩 프로세스 3단계 설계':{user:'온보딩 프로세�
 })();
 </script>
 <style>
-.landing-hint{display:block;text-align:center;font-size:20px;color:#4E5054;margin-bottom:40px;line-height:1.5;pointer-events:none;}
+.landing-hint{display:block;text-align:center;font-size:20px;color:#4E5054;margin-bottom:56px;line-height:1.5;pointer-events:none;}
 .chat-view:not(.landing) .landing-hint{display:none;}
 </style>
 <script>
