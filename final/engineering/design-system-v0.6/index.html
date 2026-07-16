@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>습관 씨앗 정원 — 디자인 시스템 v0.6 (밤의 정원)</title>
+<link rel="icon" href="../../../favicon/favicon-32.png" />
+<link rel="apple-touch-icon" href="../../../favicon/apple-touch-icon.png" />
+<!-- Pretendard 가변 웹폰트 (OFL 라이선스, 상업적 사용 가능) — 화면에 쓰인 글자만 골라 불러오는 동적 서브셋 -->
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<link rel="stylesheet" href="./tokens.css" />
+<link rel="stylesheet" href="./motion.css" />
+<script src="./species.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: var(--font-family);
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 0%, var(--ambient-1) 0 14%, transparent 32%),
+      radial-gradient(circle at 90% 6%, var(--ambient-2) 0 12%, transparent 31%),
+      radial-gradient(circle at 88% 90%, var(--ambient-3) 0 16%, transparent 36%),
+      var(--bg);
+    padding:0 0 80px;
+  }
+  a{ color:var(--accent-link); }
+  code{ font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  .hero{ max-width:1080px; margin:0 auto; padding:56px 24px 20px; }
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--surface-pill); border:1px solid var(--surface-pill-border);
+    border-radius:var(--radius-pill); padding:6px 14px;
+    font-size:var(--text-sm); font-weight:800; color:var(--accent-link);
+    box-shadow:var(--shadow-card);
+  }
+  .hero h1{ font-size:32px; letter-spacing:-.03em; margin:16px 0 10px; background:linear-gradient(90deg,#b98cff,#ff79c8); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p{ color:var(--muted); max-width:640px; line-height:1.6; font-size:14.5px; margin:0 0 8px; }
+  .hero .source-note{ margin-top:18px; display:flex; flex-wrap:wrap; gap:10px; font-size:12.5px; }
+  .source-note a, .source-note span{
+    background:var(--surface-input); border:1px solid var(--line);
+    border-radius:var(--radius-pill); padding:7px 13px; text-decoration:none;
+    color:var(--text-body); font-weight:700;
+  }
+
+  main{ max-width:1080px; margin:0 auto; padding:0 24px; display:grid; gap:28px; }
+
+  section.card{
+    background:var(--paper); border:1px solid var(--line); border-radius:26px;
+    padding:28px 26px 30px; box-shadow:0 18px 46px rgba(0,0,0,.35); backdrop-filter: blur(6px);
+  }
+  section.card h2{ margin:0 0 4px; font-size:var(--text-title); letter-spacing:-.02em; display:flex; align-items:center; gap:10px; }
+  section.card h2 .num{
+    display:inline-grid; place-items:center; width:26px; height:26px; border-radius:9px;
+    background:linear-gradient(180deg,var(--accent-light),var(--accent-dark)); color:#fff; font-size:12px; font-weight:800;
+  }
+  section.card > p.lead{ margin:6px 0 20px; color:var(--muted); font-size:13px; line-height:1.6; max-width:720px; }
+
+  h3.sub{ font-size:13.5px; margin:22px 0 12px; color:var(--text-body); font-weight:800; }
+  h3.sub:first-of-type{ margin-top:0; }
+
+  .swatch-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:10px; }
+  .swatch{ border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--surface-input); }
+  .swatch .chip{ height:52px; }
+  .swatch .meta{ padding:8px 10px 10px; }
+  .swatch .meta code{ display:block; font-size:11px; color:var(--accent-link); font-weight:700; }
+  .swatch .meta .hex{ display:block; font-size:10.5px; color:var(--muted); margin-top:2px; word-break:break-all; }
+  .swatch .meta .desc{ display:block; font-size:10.5px; color:var(--text-soft); margin-top:4px; line-height:1.35; }
+
+  .chip.alpha{
+    background-image:
+      linear-gradient(45deg, rgba(255,255,255,.08) 25%, transparent 25%), linear-gradient(-45deg, rgba(255,255,255,.08) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(255,255,255,.08) 75%), linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.08) 75%);
+    background-size:16px 16px;
+    background-position:0 0, 0 8px, 8px -8px, -8px 0px;
+  }
+
+  .type-row{ display:flex; align-items:baseline; gap:16px; padding:12px 0; border-bottom:1px dashed var(--line); }
+  .type-row:last-child{ border-bottom:0; }
+  .type-row .label{ width:130px; flex-shrink:0; font-size:11px; color:var(--muted); }
+  .type-row .label code{ color:var(--accent-link); font-weight:700; display:block; }
+  .type-row .sample{ color:var(--ink); }
+
+  .scale-grid{ display:grid; gap:10px; }
+  .scale-row{ display:flex; align-items:center; gap:14px; }
+  .scale-row .label{ width:150px; font-size:12px; color:var(--muted); flex-shrink:0; }
+  .scale-row .label code{ color:var(--accent-link); font-weight:700; }
+  .scale-row .bar{ height:14px; background:var(--accent); border-radius:6px; }
+  .radius-demo{ display:flex; gap:16px; flex-wrap:wrap; }
+  .radius-demo div{ text-align:center; font-size:11px; color:var(--muted); }
+  .radius-demo .box{ width:64px; height:64px; background:linear-gradient(180deg,var(--accent-light),var(--accent-dark)); margin-bottom:6px; }
+
+  .shadow-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:22px; }
+  .shadow-demo{ text-align:center; }
+  .shadow-demo .box{ width:100%; height:70px; background:var(--surface-card); border-radius:16px; margin-bottom:10px; }
+  .shadow-demo code{ font-size:10.5px; color:var(--accent-link); font-weight:700; }
+
+  .ease-track{ position:relative; height:44px; background:var(--surface-input); border:1px solid var(--line); border-radius:999px; margin-top:10px; overflow:hidden; }
+  .ease-dot{ position:absolute; top:6px; left:6px; width:32px; height:32px; border-radius:50%; background:linear-gradient(180deg,var(--accent-light),var(--accent-dark)); box-shadow:0 0 14px rgba(185,140,255,.6); }
+  @keyframes ease-demo{ 0%,10%{ left:6px; } 50%,60%{ left:calc(100% - 38px); } 100%{ left:6px; } }
+  .ease-track.playing .ease-dot{ animation:ease-demo 2.6s var(--ease) infinite; }
+
+  .gallery{ display:flex; flex-wrap:wrap; gap:22px; align-items:flex-start; }
+  .gallery-item{ text-align:left; }
+  .gallery-item .tag{ display:block; font-size:11px; color:var(--muted); margin-bottom:8px; }
+  .stage-mini{ background:linear-gradient(165deg, var(--screen-grad-1) 0%, var(--screen-grad-2) 55%, var(--screen-grad-3) 100%); border:1px solid var(--screen-border); border-radius:18px; padding:16px; display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; }
+
+  .btn-primary-demo{
+    border-radius:var(--radius-md); background:linear-gradient(180deg,var(--accent-light),var(--accent-dark));
+    color:#fff; padding:12px 22px; font-weight:800; font-size:13px; box-shadow:var(--shadow-lift); border:0;
+  }
+  .btn-primary-demo[disabled]{ opacity:.4; box-shadow:none; }
+  .chip-demo{ border:1px solid var(--line); background:var(--surface-input); border-radius:var(--radius-pill); padding:9px 16px; color:var(--text-soft); font-size:12.5px; font-weight:600; }
+  .chip-demo.selected{ background:var(--accent-selected-bg); border-color:var(--accent-selected-border); color:var(--accent-link); font-weight:800; }
+  .input-demo{ border:1px solid var(--line); border-radius:var(--radius-md); background:var(--surface-input); padding:11px 14px; font-size:13px; color:var(--ink); width:200px; }
+  .input-demo:focus{ outline:none; border-color:var(--accent-focus-border); box-shadow:0 0 0 4px var(--accent-focus-ring); }
+
+  .notif-demo{ width:280px; background:var(--surface-elevated); border:1px solid var(--surface-elevated-border); box-shadow:var(--shadow-notif); border-radius:var(--radius-lg); padding:14px; }
+  .notif-demo .top{ display:flex; align-items:center; gap:8px; color:var(--muted); font-size:11px; margin-bottom:6px; font-weight:700; }
+  .notif-demo strong{ display:block; font-size:14px; margin-bottom:3px; color:var(--text-strong); }
+  .notif-demo span.desc{ color:var(--muted); font-size:12px; }
+  .notif-demo .actions{ display:flex; gap:8px; margin-top:11px; }
+  .notif-demo .actions button{ flex:1; border-radius:13px; padding:9px; font-weight:800; font-size:12.5px; border:0; }
+  .notif-demo .actions .done{ background:var(--accent-dark); color:#fff; }
+  .notif-demo .actions .later{ background:var(--btn-later-bg); color:var(--text-quiet); }
+
+  .toast-demo{ display:inline-block; background:var(--overlay-toast); color:#fff; border-radius:var(--radius-pill); padding:11px 18px; font-size:12.5px; }
+
+  .pill-name-demo{
+    display:inline-block; background:var(--surface-pill); border:1px solid var(--surface-pill-border);
+    color:var(--text-plant-label); border-radius:var(--radius-pill); padding:6px 12px;
+    font-size:11.5px; font-weight:700; box-shadow:var(--shadow-card);
+  }
+
+  .species-badge-row{ display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:10px; }
+  .species-badge{ display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 4px; border:1px solid var(--line); border-radius:16px; background:var(--surface-input); }
+  .species-badge .dot{ width:26px; height:26px; border-radius:50%; }
+  .species-badge span{ font-size:10.5px; color:var(--text-soft); font-weight:700; text-align:center; }
+
+  .growth-table{ width:100%; border-collapse:separate; border-spacing:6px; }
+  .growth-table th{ font-size:10.5px; color:var(--muted); font-weight:700; padding:4px; }
+  .growth-table td.sp-name{ font-size:11.5px; font-weight:800; color:var(--text-plant-label); white-space:nowrap; padding:4px 10px 4px 4px; }
+  .growth-table td.sp-name .habit{ display:block; font-size:9.5px; color:var(--muted); font-weight:500; margin-top:1px; }
+  .growth-cell-box{
+    background:linear-gradient(165deg, var(--screen-grad-1) 0%, var(--screen-grad-2) 55%, var(--screen-grad-3) 100%);
+    border:1px solid var(--screen-border); border-radius:14px; padding:6px; width:110px; height:72px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .growth-cell-box svg{ width:100px; height:64px; overflow:visible; }
+  .threshold-row td{ font-size:9.5px; color:var(--muted); text-align:center; padding-top:2px; }
+
+  .vitality-row{ margin-top:6px; }
+  .vitality-row .label{ font-size:10px; color:var(--muted); margin-bottom:6px; }
+  .vitality-faded svg{ opacity:.5; filter:saturate(.4); }
+  .vitality-normal svg{ opacity:.84; filter:saturate(.82); }
+  .vitality-vivid svg{ opacity:1; filter:saturate(1.12); }
+
+  table.token-table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  table.token-table th, table.token-table td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); }
+  table.token-table th{ color:var(--muted); font-weight:700; font-size:11px; }
+  table.token-table td code{ color:var(--accent-link); font-weight:700; }
+
+  footer.note{ max-width:1080px; margin:36px auto 0; padding:0 24px; color:var(--muted); font-size:12px; line-height:1.7; }
+
+  @media (max-width:860px){ .growth-table{ display:block; overflow-x:auto; } }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <span class="eyebrow">🌙 Design System v0.6 · 밤의 정원(Night Garden)</span>
+    <h1>습관 씨앗 정원 — 디자인 시스템</h1>
+    <p>v0.5(라이트·파스텔·식물 1종)를 대신하는 새 버전입니다. 사용자가 만든 "밤의 정원" 컨셉(다크 배경 + 발광 무드,
+    습관마다 다른 꽃 10종)을 반영해 <code>tokens.css</code>와 <code>species.js</code>를 새로 만들었습니다.
+    두 파일 모두 <code>prototype/index-v0.6.html</code>과 이 문서가 함께 불러와 씁니다 —
+    <strong>색은 tokens.css, 꽃의 모양(좌표)은 species.js만 고치면 두 화면에 동시에 반영됩니다.</strong>
+    (기존 <code>prototype/index.html</code>은 v0.5 그대로 두고, v0.6은 별도 파일로 새로 만들었습니다.)</p>
+    <div class="source-note">
+      <a href="../prototype/index-v0.6.html">→ 프로토타입 v0.6 보기</a>
+      <a href="./tokens.css">→ tokens.css 원본</a>
+      <a href="./species.js">→ species.js 원본</a>
+      <a href="../ct-docs.html">→ CT 방법론 문서</a>
+      <a href="../v.0.5-design-system/index.html">→ v0.5(이전 버전) 보기</a>
+      <span>같은 파일 참조 · 실시간 동기화</span>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ============ 1. Color ============ -->
+    <section class="card" id="color">
+      <h2><span class="num">1</span>색상 토큰</h2>
+      <p class="lead">모든 스와치는 tokens.css의 CSS 변수를 그대로 렌더링합니다. 값을 바꾸면 여기 색도 즉시 바뀝니다.</p>
+
+      <h3 class="sub">베이스 서페이스 &amp; 텍스트</h3>
+      <div class="swatch-grid" id="swatch-base"></div>
+
+      <h3 class="sub">브랜드 악센트 (보라 · 핑크 글로우)</h3>
+      <div class="swatch-grid" id="swatch-brand"></div>
+
+      <h3 class="sub">화면 배경 · 은은한 빛무리</h3>
+      <div class="swatch-grid" id="swatch-ambient"></div>
+
+      <h3 class="sub">서페이스 컴포넌트</h3>
+      <div class="swatch-grid" id="swatch-surface"></div>
+
+      <h3 class="sub">오버레이 &amp; 강조 상태</h3>
+      <div class="swatch-grid" id="swatch-state"></div>
+    </section>
+
+    <!-- ============ 2. Species colors ============ -->
+    <section class="card" id="species-colors">
+      <h2><span class="num">2</span>습관별 꽃 10종 — 배지 색</h2>
+      <p class="lead">씨앗을 심을 때 고르는 대표 색입니다. 각 꽃의 전체 색상 팔레트(꽃잎·잎·줄기 등)는 tokens.css의
+      <code>--sp-{종}-*</code> 토큰을 참고하세요. 아래 배지 색은 <code>species.js</code>의 <code>badge</code> 필드가 지정한 토큰입니다.</p>
+      <div class="species-badge-row" id="speciesBadges"></div>
+    </section>
+
+    <!-- ============ 3. Typography ============ -->
+    <section class="card" id="type">
+      <h2><span class="num">3</span>타이포그래피</h2>
+      <p class="lead">폰트는 <code>--font-family</code> (ui-rounded 계열) 하나만 사용합니다. 크기 스케일 6단계.</p>
+      <div id="type-scale"></div>
+    </section>
+
+    <!-- ============ 4. Spacing & Radius ============ -->
+    <section class="card" id="spacing">
+      <h2><span class="num">4</span>스페이싱 &amp; 반경</h2>
+      <p class="lead">여백은 4px 배수 스케일, 코너는 용도별 7단계로 구분합니다.</p>
+      <h3 class="sub">스페이싱 스케일</h3>
+      <div class="scale-grid" id="space-scale"></div>
+      <h3 class="sub">반경 스케일</h3>
+      <div class="radius-demo" id="radius-scale"></div>
+    </section>
+
+    <!-- ============ 5. Shadow & Motion ============ -->
+    <section class="card" id="motion">
+      <h2><span class="num">5</span>그림자 &amp; 모션</h2>
+      <p class="lead">그림자는 어두운 배경 위에서도 보이도록 보라 톤 글로우를 함께 씁니다.</p>
+      <h3 class="sub">그림자</h3>
+      <div class="shadow-grid" id="shadow-scale"></div>
+      <h3 class="sub">이징 &amp; 지속시간</h3>
+      <p style="font-size:12.5px;color:var(--muted);margin:0 0 4px">--ease: <code>cubic-bezier(.2,.85,.25,1)</code> · fast .2s / base .28s / slow .35s</p>
+      <div class="ease-track playing"><div class="ease-dot"></div></div>
+    </section>
+
+    <!-- ============ 6. Components ============ -->
+    <section class="card" id="components">
+      <h2><span class="num">6</span>컴포넌트</h2>
+      <p class="lead">프로토타입과 동일한 클래스 구조를 사용한 살아있는 예시입니다. 색은 위 토큰을 참조합니다.</p>
+
+      <h3 class="sub">버튼 &amp; 칩</h3>
+      <div class="gallery">
+        <div class="gallery-item"><span class="tag">primary-btn</span><button class="btn-primary-demo">심기</button></div>
+        <div class="gallery-item"><span class="tag">primary-btn:disabled</span><button class="btn-primary-demo" disabled>심기</button></div>
+        <div class="gallery-item"><span class="tag">chip-btn</span><button class="chip-demo">아침</button></div>
+        <div class="gallery-item"><span class="tag">chip-btn.selected</span><button class="chip-demo selected">저녁</button></div>
+      </div>
+
+      <h3 class="sub">입력창</h3>
+      <div class="gallery">
+        <div class="gallery-item"><span class="tag">input[type=text]</span><input class="input-demo" placeholder="예: 물 마시기" /></div>
+      </div>
+
+      <h3 class="sub">알림 배너 &amp; 토스트</h3>
+      <div class="gallery">
+        <div class="gallery-item">
+          <span class="tag">.mock-notification</span>
+          <div class="notif-demo">
+            <div class="top">🌙 Seed Garden · 알림</div>
+            <strong>물 마시기 씨앗이 기다려요</strong>
+            <span class="desc">오늘 이 습관에 물을 줬나요?</span>
+            <div class="actions"><button class="done">물을 줬어요</button><button class="later">나중에</button></div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <span class="tag">.notice (토스트)</span>
+          <div class="toast-demo">씨앗을 심었어요</div>
+        </div>
+        <div class="gallery-item">
+          <span class="tag">.plant-name (이름표)</span>
+          <div class="pill-name-demo">물 마시기</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. Growth stages per species ============ -->
+    <section class="card" id="growth">
+      <h2><span class="num">7</span>습관별 꽃 10종 × 5단계 성장</h2>
+      <p class="lead">누적 돌봄 횟수(totalCare)에 따라 모든 꽃이 5단계로 자랍니다. 형태는 <code>species.js</code>에서, 색은
+      <code>tokens.css</code>의 <code>--sp-*</code> 토큰에서 가져옵니다 — 이 표는 사용자가 만든 <code>growth_stages_sheet.svg</code> 원본과
+      동일한 좌표를 그대로 재생성한 것입니다.</p>
+      <div style="overflow-x:auto">
+        <table class="growth-table" id="growthTable"></table>
+      </div>
+
+      <div class="vitality-row" style="margin-top:20px">
+        <div class="label">생기 3단계 예시 (크로커스 · 묘목(소) 기준)</div>
+        <div class="gallery">
+          <div class="gallery-item vitality-faded"><span class="tag">faded · 0~24%</span><div id="vitality-faded"></div></div>
+          <div class="gallery-item vitality-normal"><span class="tag">normal · 25~69%</span><div id="vitality-normal"></div></div>
+          <div class="gallery-item vitality-vivid"><span class="tag">vivid · 70~100%</span><div id="vitality-vivid"></div></div>
+        </div>
+      </div>
+
+      <table class="token-table" style="margin-top:20px">
+        <tr><th>단계</th><th>totalCare (누적 돌봄)</th><th>변수</th></tr>
+        <tr><td>씨앗 seed</td><td>0 ~ 2회</td><td><code>totalCare &lt; 3</code></td></tr>
+        <tr><td>새싹 sprout</td><td>3 ~ 6회</td><td><code>totalCare &gt;= 3</code></td></tr>
+        <tr><td>묘목(소) small</td><td>7 ~ 13회</td><td><code>totalCare &gt;= 7</code></td></tr>
+        <tr><td>묘목(대) big</td><td>14 ~ 29회</td><td><code>totalCare &gt;= 14</code></td></tr>
+        <tr><td>만개 bloom</td><td>30회 이상</td><td><code>totalCare &gt;= 30</code></td></tr>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="note">
+    이 문서는 프로토타입(<code>../prototype/index-v0.6.html</code>)에서 실제 사용 중인 값만 추출해 만들었습니다. 새 화면을 추가할 때도
+    새 색을 직접 쓰지 말고, 여기 있는 토큰 중 의미가 맞는 것을 재사용하거나 <code>tokens.css</code>에 새 변수를 추가해 주세요.
+    꽃 종을 추가하려면 <code>species.js</code>의 <code>SPECIES</code> 배열에 새 항목을 추가하세요.
+  </footer>
+
+  <script>
+    function el(tag, cls, html){ const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; }
+    function readVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+    function swatch(container, varName, desc, isAlpha){
+      const wrap = el('div', 'swatch');
+      const chip = el('div', 'chip' + (isAlpha ? ' alpha' : ''));
+      chip.style.background = `var(${varName})`;
+      wrap.appendChild(chip);
+      const meta = el('div', 'meta', `<code>${varName}</code><span class="hex">${readVar(varName)}</span><span class="desc">${desc}</span>`);
+      wrap.appendChild(meta);
+      container.appendChild(wrap);
+    }
+
+    const baseTokens = [
+      ['--bg','앱 바깥 배경'], ['--paper','데모/카드 패널 배경', true], ['--ink','기본 글자'], ['--muted','보조 글자'],
+      ['--line','기본 테두리'], ['--text-strong','상태바 진한 글자'], ['--text-body','칩/버튼 본문 글자'],
+      ['--text-soft','칩 버튼 기본 글자'], ['--text-quiet','"나중에" 버튼 글자'], ['--text-plant-label','식물 이름표 글자'],
+      ['--accent-link','링크·라벨 강조']
+    ];
+    const brandTokens = [
+      ['--accent','기본 악센트'], ['--accent-light','버튼 그라디언트 상단'], ['--accent-dark','진한 악센트(강조)'],
+      ['--seed-grad-1','씨앗 아이콘 그라디언트 상'], ['--seed-grad-2','씨앗 아이콘 그라디언트 하'],
+      ['--seed-shadow-dark','씨앗 안쪽 그림자', true], ['--highlight-soft','씨앗 하이라이트', true]
+    ];
+    const ambientTokens = [
+      ['--ambient-1','배경 빛무리 1', true], ['--ambient-2','배경 빛무리 2', true], ['--ambient-3','배경 빛무리 3', true],
+      ['--screen-grad-1','화면 그라디언트 1'], ['--screen-grad-2','화면 그라디언트 2'], ['--screen-grad-3','화면 그라디언트 3'],
+      ['--screen-glow','화면 중앙 글로우', true]
+    ];
+    const surfaceTokens = [
+      ['--surface-frame-top','기기 프레임 상단'], ['--surface-frame-bottom','기기 프레임 하단'],
+      ['--surface-notch','노치'], ['--surface-card','하단 시트(작성 폼) 배경'],
+      ['--surface-elevated','알림 배너 배경', true], ['--surface-input','입력창·칩 배경'],
+      ['--surface-pill','식물 이름표 배경', true], ['--surface-pill-strong','씨앗 추가 버튼(축소) 배경', true],
+      ['--surface-chip-soft','오늘 칩 배경', true]
+    ];
+    const stateTokens = [
+      ['--overlay-backdrop','시트 뒤 딤 배경', true], ['--overlay-toast','토스트 배경', true],
+      ['--accent-selected-bg','선택된 칩 배경', true], ['--accent-selected-border','선택된 칩 테두리', true],
+      ['--accent-focus-ring','입력창 포커스 링', true], ['--btn-later-bg','"나중에" 버튼 배경', true]
+    ];
+
+    function fillGroup(id, tokens){
+      const c = document.getElementById(id);
+      tokens.forEach(([name, desc, alpha]) => swatch(c, name, desc, !!alpha));
+    }
+    fillGroup('swatch-base', baseTokens);
+    fillGroup('swatch-brand', brandTokens);
+    fillGroup('swatch-ambient', ambientTokens);
+    fillGroup('swatch-surface', surfaceTokens);
+    fillGroup('swatch-state', stateTokens);
+
+    // ---- species badges ----
+    const badgeWrap = document.getElementById('speciesBadges');
+    GardenSpecies.LIST.forEach(sp => {
+      const item = el('div', 'species-badge', `<span class="dot" style="background:var(${sp.badge})"></span><span>${sp.name}<br/><span style="color:var(--muted);font-weight:500">${sp.habit}</span></span>`);
+      badgeWrap.appendChild(item);
+    });
+
+    // ---- typography ----
+    const typeScale = [
+      ['--text-xs','11px','데모 보조 설명'], ['--text-sm','12px','라벨·보조 텍스트'],
+      ['--text-base','13px','본문 기본'], ['--text-md','14px','알림 제목'],
+      ['--text-lg','16px','시트 제목 · 모달/알럿 타이틀'], ['--text-title','19px','컴포저 강조 타이틀'],
+      ['--text-xl','22px','화면 헤딩']
+    ];
+    const typeWrap = document.getElementById('type-scale');
+    typeScale.forEach(([v, px, desc]) => {
+      const row = el('div','type-row', `<div class="label"><code>${v}</code>${px} · ${desc}</div><div class="sample" style="font-size:var(${v})">오늘도 씨앗에 물을 줬어요</div>`);
+      typeWrap.appendChild(row);
+    });
+
+    // ---- spacing ----
+    const spaceScale = [1,2,3,4,5,6,7].map(n => [`--space-${n}`, n*4]);
+    const spaceWrap = document.getElementById('space-scale');
+    spaceScale.forEach(([v, px]) => {
+      const row = el('div','scale-row', `<div class="label"><code>${v}</code> · ${px}px</div><div class="bar" style="width:var(${v})"></div>`);
+      spaceWrap.appendChild(row);
+    });
+
+    // ---- radius ----
+    const radiusScale = [
+      ['--radius-sm','상태 코드 칩'], ['--radius-base','모달 내 버튼·인풋'], ['--radius-md','입력창·버튼'], ['--radius-lg','알림·데모 패널'],
+      ['--radius-xl','하단 시트 상단'], ['--radius-2xl','스크린 코너'], ['--radius-pill','칩·배지']
+    ];
+    const radiusWrap = document.getElementById('radius-scale');
+    radiusScale.forEach(([v, desc]) => {
+      const item = el('div','', `<div class="box" style="border-radius:var(${v})"></div><code>${v}</code><br/>${desc}`);
+      radiusWrap.appendChild(item);
+    });
+
+    // ---- shadow ----
+    const shadowScale = [
+      ['--shadow-shell','기기 프레임'], ['--shadow-seed','큰 씨앗 아이콘'], ['--shadow-pill','씨앗 추가(축소) 버튼'],
+      ['--shadow-card','식물 이름표'], ['--shadow-composer','하단 시트'], ['--shadow-notif','알림 배너'], ['--shadow-lift','기본(악센트) 버튼']
+    ];
+    const shadowWrap = document.getElementById('shadow-scale');
+    shadowScale.forEach(([v, desc]) => {
+      const item = el('div','shadow-demo', `<div class="box" style="box-shadow:var(${v})"></div><code>${v}</code><br/><span style="color:var(--muted)">${desc}</span>`);
+      shadowWrap.appendChild(item);
+    });
+
+    // ---- growth table: 10 species x 5 stages, using species.js ----
+    const table = document.getElementById('growthTable');
+    const thead = document.createElement('tr');
+    thead.appendChild(el('th', '', ''));
+    GardenSpecies.STAGES.forEach(s => thead.appendChild(el('th', '', `${GardenSpecies.STAGE_LABEL[s]}`)));
+    table.appendChild(thead);
+
+    GardenSpecies.LIST.forEach(sp => {
+      const row = document.createElement('tr');
+      row.appendChild(el('td', 'sp-name', `${sp.name}<span class="habit">${sp.habit}</span>`));
+      GardenSpecies.STAGES.forEach((s, i) => {
+        const cell = document.createElement('td');
+        const box = el('div', 'growth-cell-box', GardenSpecies.renderStageSvg(sp.key, i));
+        cell.appendChild(box);
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+
+    const rangeRow = document.createElement('tr');
+    rangeRow.className = 'threshold-row';
+    rangeRow.appendChild(el('td', '', ''));
+    GardenSpecies.STAGES.forEach(s => rangeRow.appendChild(el('td', '', GardenSpecies.STAGE_RANGE[s])));
+    table.appendChild(rangeRow);
+
+    document.getElementById('vitality-faded').innerHTML = GardenSpecies.renderStageSvg('crocus', 2);
+    document.getElementById('vitality-normal').innerHTML = GardenSpecies.renderStageSvg('crocus', 2);
+    document.getElementById('vitality-vivid').innerHTML = GardenSpecies.renderStageSvg('crocus', 2);
+    document.querySelectorAll('#vitality-faded svg, #vitality-normal svg, #vitality-vivid svg').forEach(s => { s.style.width = '100px'; s.style.height='auto'; });
+  </script>
+</body>
+</html>

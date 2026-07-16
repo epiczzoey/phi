@@ -301,5 +301,31 @@ export const studies = [
         ]
       }
     ]
+  },
+  {
+    id: "engineering-final",
+    title: "Engineering-final",
+    tracks: [
+      {
+        id: "engineering",
+        title: "engineering",
+        items: [
+          {
+            id: "ct-note",
+            title: "CT note",
+            type: "page",
+            href: "./final/engineering/ct-note-v0.6/",
+            status: "ready"
+          },
+          {
+            id: "prototype",
+            title: "prototype",
+            type: "page",
+            href: "./final/engineering/prototype-v0.6/",
+            status: "ready"
+          }
+        ]
+      }
+    ]
   }
 ];

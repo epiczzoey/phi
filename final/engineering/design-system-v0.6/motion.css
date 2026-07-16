@@ -1,0 +1,159 @@
+/*
+  습관 씨앗 정원 — 식물 마이크로 인터렉션 모션 라이브러리 (v0.6, "밤의 정원")
+  ------------------------------------------------------------------------
+  species.js가 만드는 SVG 안에는 아래 클래스들이 이미 붙어 있습니다(좌표/딜레이도 함께 계산됨):
+    .sv-sway    성장 단계 전체(줄기+잎+꽃)를 감싸는 그룹 — 바람에 은은히 좌우로 흔들림
+    .sv-shine   꽃잎/열매 등의 하이라이트 레이어 — 강조 on/off 로 숨쉬듯 빛남
+    .sv-shade   그림자/음영 레이어 — 하이라이트와 반대 리듬으로 숨쉼(강조가 교차됨)
+    .sv-glow    만개(bloom) 단계의 글로우 헤일로 — 느리게 커지고 밝아짐
+    .sv-sparkle 반짝이는 별 장식 — 트윙클(반짝임)
+
+  species.js가 굽는 sv-shine/sv-shade/sv-glow/sv-sparkle의 animation-delay는
+  calc(기본딜레이 + var(--instance-dly, 0s)) 형태입니다 — 같은 종을 여러 개 심어도
+  좌표가 같아 기본딜레이가 동일하므로, 화면에 그려질 때 카드마다 --instance-dly를
+  다르게 지정해야 서로 다른 리듬으로 반짝입니다(prototype render() 참고).
+
+  이 파일은 "정지된 화면에서도 정원이 가꿔지는 느낌"을 위한 상시(idle) 애니메이션만 정의합니다.
+  성장 단계가 올라갈 때의 1회성 피드백(레벨업 버스트)은 이를 사용하는 화면(prototype 등)에서
+  각자 정의합니다 — 그 효과는 사용자 행동(물주기)에 반응하는 1회성 이벤트라 재사용 범위가 다릅니다.
+
+  prototype/index-v0.6.html, v.0.6-design-system/index.html, assets-preview/index.html
+  세 화면 모두 tokens.css 다음에 이 파일을 불러와 씁니다.
+*/
+
+.sv-sway {
+  transform: rotate(0deg);
+  animation: sv-sway-kf var(--sway-dur, 5s) ease-in-out infinite;
+  /* --instance-dly는 .plant-card마다 다르게 부여되는 시차값입니다(같은 종의 식물이
+     여러 개 심어져 있을 때 전부 똑같이 흔들리지 않도록). 종/단계별 기본 딜레이(--sway-delay)에
+     더해집니다. */
+  animation-delay: calc(var(--sway-delay, 0s) + var(--instance-dly, 0s));
+}
+@keyframes sv-sway-kf {
+  0%, 100% { transform: rotate(calc(var(--sway-amt, 2deg) * -1)); }
+  50%      { transform: rotate(var(--sway-amt, 2deg)); }
+}
+
+.sv-shine {
+  transform-origin: center;
+  animation: sv-shine-kf 3.4s ease-in-out infinite;
+}
+@keyframes sv-shine-kf {
+  0%, 100% { opacity: .32; }
+  50%      { opacity: 1; }
+}
+
+.sv-shade {
+  animation: sv-shade-kf 3.4s ease-in-out infinite;
+}
+@keyframes sv-shade-kf {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .38; }
+}
+
+.sv-glow {
+  transform-origin: center;
+  animation: sv-glow-kf 4.4s ease-in-out infinite;
+}
+@keyframes sv-glow-kf {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.14); }
+}
+
+/* 만개(bloom) 단계의 "글로우"는 더 이상 모든 종에 공통인 원이 아니라, 그 종 자신의
+   실루엣(꽃잎/캡/클러스터 모양 그대로)을 확대·블러 처리해 숨쉬듯 빛나게 한 것입니다.
+   → 크로커스는 별모양 꽃잎, 벨은 넓은 종 클러스터, 머쉬룸은 울퉁불퉁한 캡 무리처럼
+     종마다 실제 생김새를 따라 다르게 보입니다. transform-origin은 species.js가 각
+     실루엣의 중심점으로 인라인 지정합니다. */
+.sv-glow-shape {
+  filter: blur(4.5px);
+  animation: sv-glow-shape-kf 4.6s ease-in-out infinite;
+  animation-delay: var(--instance-dly, 0s);
+}
+@keyframes sv-glow-shape-kf {
+  0%, 100% { opacity: .34; transform: scale(1.06); }
+  50%      { opacity: .72; transform: scale(1.24); }
+}
+
+.sv-sparkle {
+  transform-origin: center;
+  animation: sv-sparkle-kf 2.8s ease-in-out infinite;
+}
+@keyframes sv-sparkle-kf {
+  0%, 40%  { opacity: .12; transform: scale(.45); }
+  55%      { opacity: 1; transform: scale(1.2); }
+  72%      { opacity: .55; transform: scale(.85); }
+  100%     { opacity: .12; transform: scale(.45); }
+}
+
+/* 접근성: 모션 최소화를 선호하는 사용자에게는 상시 애니메이션을 끕니다. */
+@media (prefers-reduced-motion: reduce) {
+  .sv-sway, .sv-shine, .sv-shade, .sv-glow, .sv-glow-shape, .sv-sparkle {
+    animation: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   성장 단계 업(레벨업) 피드백 — 물주기 등으로 stageIndex가 실제로 오를 때
+   .plant-card 에 .grow-burst, 내부 svg.plant-svg 에 .grow-burst 클래스를
+   JS에서 붙였다가 애니메이션 종료 후 제거합니다.
+--------------------------------------------------------------------- */
+svg.plant-svg.grow-burst {
+  animation: sv-grow-pop .82s cubic-bezier(.22,.86,.25,1);
+}
+@keyframes sv-grow-pop {
+  0%   { transform: scale(.8);  filter: drop-shadow(0 0 0 rgba(198,158,255,0)); }
+  38%  { transform: scale(1.2); filter: drop-shadow(0 0 20px rgba(198,158,255,.9)); }
+  68%  { transform: scale(.95); filter: drop-shadow(0 0 9px rgba(198,158,255,.5)); }
+  100% { transform: scale(1);   filter: drop-shadow(0 0 0 rgba(198,158,255,0)); }
+}
+
+.plant-card.grow-burst::before,
+.plant-card.grow-burst::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.plant-card.grow-burst::before {
+  width: 20px; height: 20px; margin: -10px 0 0 -10px;
+  background: radial-gradient(circle, rgba(255,216,107,.6), rgba(198,158,255,.28) 60%, transparent 76%);
+  animation: sv-grow-flash .7s ease-out;
+}
+.plant-card.grow-burst::after {
+  width: 14px; height: 14px; margin: -7px 0 0 -7px;
+  border: 2px solid rgba(198,158,255,.85);
+  box-shadow: 0 0 16px rgba(198,158,255,.5);
+  animation: sv-grow-ring .85s cubic-bezier(.22,.86,.25,1);
+}
+@keyframes sv-grow-flash {
+  0%   { opacity: 0; transform: scale(.4); }
+  30%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+@keyframes sv-grow-ring {
+  0%   { width: 14px; height: 14px; margin: -7px 0 0 -7px; opacity: .95; }
+  100% { width: 122px; height: 122px; margin: -61px 0 0 -61px; opacity: 0; }
+}
+
+.grow-spark {
+  position: absolute;
+  left: 50%; top: 40%;
+  width: 5px; height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sv-spark-fly .78s ease-out forwards;
+}
+@keyframes sv-spark-fly {
+  0%   { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--sx), var(--sy)) scale(.2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  svg.plant-svg.grow-burst { animation: none !important; }
+  .plant-card.grow-burst::before, .plant-card.grow-burst::after { animation: none !important; display: none !important; }
+  .grow-spark { display: none !important; }
+}

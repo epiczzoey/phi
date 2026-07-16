@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>습관 씨앗 정원 — CT 방법론 적용 문서</title>
-  <link rel="icon" href="./favicon/favicon-32.png" />
-  <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png" />
+  <link rel="icon" href="../../../favicon/favicon-32.png" />
+  <link rel="apple-touch-icon" href="../../../favicon/apple-touch-icon.png" />
   <style>
     :root{
       --bg:#f7f3ec;
@@ -106,7 +106,7 @@
       <a href="#pattern">2. 패턴 인식</a>
       <a href="#abstraction">3. 추상화</a>
       <a href="#flowchart">4. 플로우차트</a>
-      <a href="../prototype/">프로토타입 →</a>
+      <a href="../prototype-v0.6/">프로토타입 →</a>
     </nav>
 
     <section id="decomposition">
@@ -295,7 +295,7 @@ flowchart TD
       <div class="highlight"><b>실행 순서 조정</b>"vitality 갱신"(레벨 갱신)과 "성장 임계값 초과? → growthStage +1"은 서로 참조하는 값이 없는 독립적인 계산이다. 그래서 vitality 갱신을 판단보다 <b>먼저</b> 실행해 "레벨 갱신은 성장 여부와 상관없이 항상 일어난다"는 것을 시각적으로 분명히 하고, growthStage +1은 조건이 맞을 때만 실행된 뒤 같은 지점(Output 직전)에서 합류하도록 순서를 바꿨다. 두 순서 모두 최종 상태값은 동일하다.</div>
     </section>
 
-    <p class="footer">이 문서를 근거로 제작한 프로토타입 → <a href="../prototype/">prototype</a></p>
+    <p class="footer">이 문서를 근거로 제작한 프로토타입 → <a href="../prototype-v0.6/">prototype</a></p>
   </div>
 
   <script>

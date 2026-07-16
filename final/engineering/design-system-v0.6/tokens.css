@@ -1,0 +1,214 @@
+/*
+  습관 씨앗 정원 — "밤의 정원(Night Garden)" 디자인 토큰 v0.6 (Single Source of Truth)
+  ------------------------------------------------------------
+  이 파일은 prototype/index.html 과 v.0.6-design-system/index.html 이
+  동시에 참조합니다. 여기 값을 바꾸면 두 화면 모두 즉시 반영됩니다.
+  → 색상/그림자/타이포/모션을 "디벨롭"할 때는 이 파일만 고치면 됩니다.
+
+  v0.5(라이트·파스텔·식물 1종)에서 v0.6으로 오면서:
+  - 배경을 다크 + 은은한 발광(glow) 무드로 전환했습니다.
+  - 습관마다 다른 꽃 10종이 배정되도록 --sp-* 토큰을 추가했습니다
+    (형태는 v.0.6-design-system/species.js 에 고정, 색만 여기서 바꿉니다).
+  - 기존 --green* 토큰은 이 앱이 더 이상 초록 단일톤이 아니므로 --accent*로 이름을 바꿨습니다.
+
+  구조를 바꾸는 값(레이아웃 크기, px 위치 등)은 이 파일이 다루지 않습니다.
+  여기에는 "다시 칠할 수 있는" 값만 모아둡니다: 색, 반경, 그림자, 타이포, 모션.
+*/
+
+:root{
+  /* ============ 1. 베이스 서페이스 & 텍스트 ============ */
+  --bg:#090910;                 /* 앱 바깥 배경 */
+  --paper:rgba(20,18,30,.72);   /* 데모 도구 패널 배경 */
+  --ink:#ece7fb;                /* 기본 본문 글자색 */
+  --muted:#8f89a8;              /* 보조 설명 글자색 */
+  --line:rgba(255,255,255,.10); /* 기본 테두리선 */
+
+  --text-strong:#f1ecff;        /* 상태바 시계 등 진한 글자 */
+  --text-body:#d9d2f5;          /* 오늘 칩, 데모 버튼 본문 글자 */
+  --text-soft:#b9b0d9;          /* 칩 버튼 기본 글자 */
+  --text-quiet:#948bb8;         /* "나중에" 버튼 글자 */
+  --text-plant-label:#e7ddff;   /* 식물 이름표 글자 */
+  --accent-link:#c9a4ff;        /* 링크·데모 라벨 강조 글자 */
+
+  /* ============ 2. 브랜드 악센트 (구 --green*) ============ */
+  --accent:#b98cff;
+  --accent-light:#caa0ff;       /* 기본 버튼 그라디언트 상단 */
+  --accent-dark:#7c4fe0;        /* 기본 버튼 그라디언트 하단 · 강조 */
+
+  /* 씨앗 아이콘(정원이 비었을 때 큰 씨앗) 그라디언트 — 발광하는 씨앗 느낌 */
+  --seed-grad-1:#d9b8ff;
+  --seed-grad-2:#8a5cf0;
+  --seed-shadow-dark:rgba(60,30,110,.35);
+  --highlight-soft:rgba(255,255,255,.28); /* 씨앗 하이라이트 스트로크 */
+
+  /* 배경 은은한 빛무리(ambient blob) — growth_stages_sheet.svg 헤더 배경과 동일 톤 */
+  --ambient-1:rgba(185,140,255,.14);
+  --ambient-2:rgba(255,121,200,.10);
+  --ambient-3:rgba(255,216,107,.08);
+
+  /* 화면 안 그라디언트 */
+  --screen-grad-1:#14121f;
+  --screen-grad-2:#0e0c18;
+  --screen-grad-3:#0a0912;
+  --screen-glow:rgba(185,140,255,.16);
+  --glass-highlight:rgba(255,255,255,.05);
+  --glass-fade:rgba(255,255,255,0);
+  --screen-border:rgba(255,255,255,.08);
+
+  /* ============ 3. 표면(서페이스) 컴포넌트 색 ============ */
+  --surface-frame-top:#232135;
+  --surface-frame-bottom:#0e0c16;
+  --surface-frame-border:rgba(255,255,255,.08);
+  --surface-notch:#050409;
+  --surface-card:#14121f;              /* 하단 시트(작성 폼) 배경 */
+  --surface-elevated:rgba(28,25,42,.92); /* 알림 배너 배경 */
+  --surface-elevated-border:rgba(255,255,255,.10);
+  --surface-input:#1b1828;             /* 입력창 · 칩 기본 배경 */
+  --surface-chip-hover:rgba(255,255,255,.06);/* 닫기(x) 버튼 배경 */
+  --surface-chip-soft:rgba(255,255,255,.06);  /* 오늘 칩 배경 */
+  --surface-pill:rgba(255,255,255,.07);       /* 식물 이름표 배경 */
+  --surface-pill-strong:rgba(255,255,255,.10);/* 씨앗 추가(축소) 버튼 배경 */
+  --surface-pill-border:rgba(255,255,255,.14);
+  --dot-inactive:rgba(255,255,255,.14);   /* 스텝 표시 비활성 점 */
+
+  /* ============ 4. 오버레이 & 강조 상태 ============ */
+  --overlay-backdrop:rgba(4,3,8,.62);   /* 시트 뒤 배경 딤 */
+  --overlay-toast:rgba(20,17,30,.94);   /* 하단 토스트 배경 */
+
+  --accent-selected-bg:rgba(185,140,255,.18);  /* 선택된 칩 배경 */
+  --accent-selected-border:rgba(185,140,255,.55); /* 선택된 칩 테두리 */
+  --accent-focus-border:rgba(185,140,255,.6);  /* 입력창 포커스 테두리 */
+  --accent-focus-ring:rgba(185,140,255,.22);   /* 입력창 포커스 링 */
+  --btn-later-bg:rgba(255,255,255,.06);        /* "나중에" 버튼 배경 */
+
+  /* ============ 5. 그림자 (보라 톤 글로우) ============ */
+  --shadow-shell:0 30px 70px rgba(0,0,0,.55);      /* 기기 프레임 */
+  --shadow-seed:0 0 26px rgba(185,140,255,.45);    /* 큰 씨앗 아이콘 */
+  --shadow-pill:0 10px 26px rgba(0,0,0,.4);        /* 축소된 씨앗 추가 버튼 */
+  --shadow-card:0 8px 18px rgba(0,0,0,.35);        /* 식물 이름표 */
+  --shadow-composer:0 -20px 60px rgba(0,0,0,.5);   /* 하단 시트 */
+  --shadow-notif:0 20px 46px rgba(0,0,0,.5);       /* 알림 배너 */
+  --shadow-lift:0 10px 26px rgba(124,79,224,.45);  /* 기본 버튼 */
+
+  /* ============ 6. 반경(radius) 스케일 ============ */
+  --radius-sm:8px;     /* 상태 코드 칩 */
+  --radius-base:12px;  /* 모달 내 버튼·인풋 */
+  --radius-md:16px;    /* 입력창, 기본 버튼 */
+  --radius-lg:22px;    /* 알림 배너, 데모 패널 */
+  --radius-xl:28px;    /* 하단 시트 상단 */
+  --radius-2xl:40px;   /* 스크린 코너 */
+  --radius-frame:52px; /* 기기 프레임 코너 */
+  --radius-pill:999px; /* 칩·배지 전용 */
+
+  /* ============ 7. 스페이싱 스케일 ============ */
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:32px;
+
+  /* ============ 8. 타이포그래피 ============ */
+  --font-family: "Pretendard Variable", "Pretendard", ui-rounded, "SF Pro Rounded", "Apple SD Gothic Neo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-xs:11px;    /* 데모 보조 설명 */
+  --text-sm:12px;    /* 라벨, 보조 텍스트 */
+  --text-base:13px;  /* 본문 기본 */
+  --text-md:14px;    /* 알림 제목 */
+  --text-lg:16px;    /* 시트 제목 · 모달/알럿 타이틀 */
+  --text-title:19px; /* 컴포저 강조 타이틀 (lg~xl 중간값) */
+  --text-xl:22px;    /* 화면 헤딩 */
+
+  /* ============ 9. 모션 ============ */
+  --ease:cubic-bezier(.2,.85,.25,1);
+  --dur-fast:.2s;
+  --dur-base:.28s;
+  --dur-slow:.35s;
+
+  /* ============ 10. 밤의 정원(Night Garden) — 습관별 꽃 10종 색상 토큰 ============ */
+  /* 형태(좌표·경로)는 v.0.6-design-system/species.js 에 고정되어 있고, 색만 여기서 바꿀 수 있습니다. */
+  --soil-shadow: rgba(95,58,77,.35);
+  --sparkle-gold: #ffd86b;
+  --sparkle-pink: #ff9ad1;
+
+  /* 크로커스 · 매일 아침 물 한 잔 */
+  --sp-crocus-fill1: #6f39d6;
+  --sp-crocus-fill2: #8847e2;
+  --sp-crocus-stroke1: #1f4c4b;
+  --sp-crocus-fill3: #8fd0a0;
+  --sp-crocus-fill4: #a45cff;
+  --sp-crocus-fill5: #b768ff;
+  --sp-crocus-fill6: #6aa089;
+  --sp-crocus-fill7: #c97dff;
+
+  /* 클로버 · 5분 산책하기 */
+  --sp-clover-fill1: #b0d39c;
+  --sp-clover-fill2: #aacd98;
+  --sp-clover-stroke1: #244b43;
+  --sp-clover-fill3: #9cc88d;
+  --sp-clover-fill4: #8cbf82;
+  --sp-clover-fill5: #88bd7f;
+
+  /* 체커볼 · 할 일 1가지 완료하기 */
+  --sp-checker-fill1: #d7ad8f;
+  --sp-checker-fill2: rgba(255,255,255,.4);
+  --sp-checker-fill3: #84b87b;
+  --sp-checker-fill4: #caa486;
+  --sp-checker-fill5: #2d244d;
+  --sp-checker-stroke1: #305d51;
+  --sp-checker-fill6: #d2a783;
+  --sp-checker-fill7: #ffe0ab;
+  --sp-checker-fill8: #f2a56d;
+  --sp-checker-fill9: #f08ac0;
+
+  /* 베리 스프레이 · 물 1L 마시기 */
+  --sp-berry-fill1: #d45a96;
+  --sp-berry-fill2: #e369b5;
+  --sp-berry-stroke1: #254d4b;
+  --sp-berry-fill3: #b85acb;
+  --sp-berry-fill4: #6ea47f;
+  --sp-berry-fill5: #f2a2d2;
+
+  /* 스타 랜턴 · 감사한 일 3가지 쓰기 */
+  --sp-lantern-fill1: #f0a0ba;
+  --sp-lantern-fill2: #7ca98a;
+  --sp-lantern-fill3: #ffd1a9;
+  --sp-lantern-fill4: #6a3dd4;
+  --sp-lantern-stroke1: #2f5a51;
+  --sp-lantern-fill5: #ffaf89;
+  --sp-lantern-fill6: #ffb191;
+
+  /* 라이트 벨 · 스트레칭 10분 */
+  --sp-bell-fill1: #f26f9d;
+  --sp-bell-fill2: #79a791;
+  --sp-bell-stroke1: #29504f;
+
+  /* 튤립 · 독서 20분 */
+  --sp-tulip-fill1: #f06a8f;
+  --sp-tulip-fill2: #79a985;
+  --sp-tulip-stroke1: #29524f;
+  --sp-tulip-fill3: #ef7393;
+  --sp-tulip-fill4: #ee7598;
+
+  /* 데이지 · 명상 5분 */
+  --sp-daisy-fill1: #efc46d;
+  --sp-daisy-fill2: #79a890;
+  --sp-daisy-fill3: #f1dfd0;
+  --sp-daisy-fill4: #f0bf57;
+  --sp-daisy-stroke1: #2b5250;
+
+  /* 버섯 패밀리 · 일찍 잠들기 */
+  --sp-mushroom-fill1: #a965c7;
+  --sp-mushroom-fill2: #bc5d92;
+  --sp-mushroom-stroke1: #6a5b48;
+  --sp-mushroom-fill3: rgba(255,255,255,.35);
+  --sp-mushroom-fill4: #7ca388;
+
+  /* 클라우드 트리 · 심호흡 5회 */
+  --sp-cloud-fill1: #6f5845;
+  --sp-cloud-stroke1: #7a5f55;
+  --sp-cloud-fill2: #6fb184;
+  --sp-cloud-fill3: #7dbd8e;
+  --sp-cloud-fill4: #88c792;
+  --sp-cloud-fill5: #94cf9d;
+}
