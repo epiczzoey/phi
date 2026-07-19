@@ -48,6 +48,7 @@
       line-height:1.5;
     }
     .top-note a{color:var(--accent-link);font-weight:800;text-decoration:none}
+    .top-note strong{color:var(--accent-link);font-weight:800}
 
     /* 프로토타입 화면(.device)과 데모 도구(.demo-tools)를 나란히 배치하는 바깥 래퍼.
        화면이 좁아 나란히 둘 공간이 없으면(flex-wrap) 아래로 자연스럽게 떨어진다. */
@@ -505,11 +506,20 @@
       .mock-notification.show{ transform:translate(-50%,0); }
       .composer{ left:50%; right:auto; width:420px; border-radius:var(--radius-xl); transform:translate(-50%,102%); }
       .composer.open{ transform:translate(-50%,0); }
+
+      /* 데모 도구도 좁은 390px 세로 카드 대신, .device(960px)와 같은 폭의 가로 패널로 전환.
+         버튼·셀렉트 행(.demo-row)이 줄바꿈 없이 한 줄로 나란히 펼쳐진다. */
+      .demo-tools{
+        width:960px;
+        max-width:calc(100vw - 48px);
+        flex:0 1 960px;
+      }
+      .demo-row{ flex-wrap:nowrap; }
     }
   </style>
 </head>
 <body>
-    <p class="top-note">이 화면이 실제 앱의 전부입니다. 탭도 목록도 없이, 정원 하나만 존재해요.<br/>설계 근거는 <a href="../ct-note-v0.6/">CT 방법론 문서</a>를 참고하세요.</p>
+  <p class="top-note">습관 씨앗을 심고 <strong>하루 한 번 완료 체크</strong>를 하면 식물이 자라나요.<br/>식물 6개가 만개하면 <strong>정원 관리 단계</strong>로 넘어가요.</p>
 
   <div class="layout-row">
   <div class="device">
